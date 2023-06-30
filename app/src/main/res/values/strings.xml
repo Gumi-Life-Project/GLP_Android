@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Gumi-Life-Project</string>
+    <string name="app_name">Gumi-Insider</string>
+
+    <!-- home -->
+    <string name="home_subtitle">10기를 위한 싸피 가이드</string>
+    <string name="home_title">구미 캠퍼스</string>
+    <string name="home_weather_today">오늘의 날씨</string>
+    <string name="home_cross_walk">횡단 보도</string>
+    <string name="home_tip">꿀팁</string>
+    <string name="home_next_time">다음 시간</string>
+
+    <!-- cross work -->
+    <string name="cross_work_title1">1번 신호등</string>
+    <string name="cross_work_title2">2번 신호등</string>
+    <string name="cross_work_title3">3번 신호등</string>
+    <string name="cross_work_explain1">GS편의점과 SSAFY 교육장 사이의 \n 신호등 시간표입니다.</string>
+    <string name="cross_work_explain2">도미노피자와 SSAFY 교육장 사이의 \n 신호등 시간표입니다.</string>
+    <string name="cross_work_explain3">도미노피자와 ??? 사이의 \n 신호등 시간표입니다.</string>
 </resources>
