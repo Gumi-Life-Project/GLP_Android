@@ -1,5 +1,7 @@
 package com.ssafy.gumi_life_project.di.module
 
+import com.ssafy.gumi_life_project.data.repository.home.HomeRepository
+import com.ssafy.gumi_life_project.data.repository.home.HomeRepositoryImpl
 import com.ssafy.gumi_life_project.data.repository.main.MainRepository
 import com.ssafy.gumi_life_project.data.repository.main.MainRepositoryImpl
 import dagger.Binds
@@ -14,4 +16,9 @@ abstract class RepositoryModule {
     abstract fun bindsMainRepository(
         repositoryImpl: MainRepositoryImpl
     ): MainRepository
+
+    @Binds
+    abstract fun bindsHomeRepository(
+        repositoryImpl: HomeRepositoryImpl
+    ): HomeRepository
 }
