@@ -20,7 +20,7 @@ class CrossWorkBottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.bottom_sheet_cross_work, container, false)
-        recyclerView = view.findViewById(R.id.recyclerViewMemos)
+        recyclerView = view.findViewById(R.id.recyclerview_memos)
         return view
     }
 
