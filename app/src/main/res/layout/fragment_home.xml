@@ -24,6 +24,90 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:gravity="center"
+                android:background="@drawable/border_main_background"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textview_today_weather_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/HomeMiddleTitleTextStyle"
+                    android:layout_weight="1"
+                    android:text="@string/home_weather_today"/>
+                <ImageView
+                    android:id="@+id/imageview_today_weather_img"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icon_rainy"
+                    android:layout_marginEnd="4dp"/>
+                <TextView
+                    android:id="@+id/textview_today_weather_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/HomeWeatherTextStyle"
+                    android:text="19º"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:paddingStart="18dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:background="@drawable/border_main_background"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textview_shuttle_time_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/HomeMiddleTitleTextStyle"
+                    android:layout_weight="1"
+                    android:text="@string/home_shuttle_time"/>
+
+                <TextView
+                    android:id="@+id/textview_shuttle_time_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/HomeMiddleContentTextStyle"
+                    android:text="구미역 7시"/>
+
+                <ImageButton
+                    android:id="@+id/imagebutton_home_to_shuttle"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/icon_right" />
+           </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:background="@drawable/border_main_background"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textview_tip_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/HomeMiddleTitleTextStyle"
+                    android:layout_weight="1"
+                    android:text="@string/home_tip"/>
+
+                <TextView
+                    android:id="@+id/textview_tip_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/HomeMiddleContentTextStyle"
+                    android:text="마이구미는 맛있다."/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/linearlayout_map"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
