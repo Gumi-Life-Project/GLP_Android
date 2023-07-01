@@ -43,6 +43,8 @@ class ShuttleBusLineAdapter(
             shuttleBusStopAdapter.itemClickListener =
                 object : ShuttleBusStopAdapter.ItemClickListener {
                     override fun onitemClicked(shuttleBusStop: ShuttleBusStop) {
+                        val dialog = ShuttleBusDialog(binding.root.context, shuttleBusStop)
+                        dialog.show(fragmentManager, "shuttleBusDialog")
                     }
                 }
             binding.recyclerviewShuttleBusStop.adapter = shuttleBusStopAdapter
