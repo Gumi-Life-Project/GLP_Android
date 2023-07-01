@@ -9,6 +9,7 @@
     <string name="home_subtitle">10기를 위한 싸피 가이드</string>
     <string name="home_title">구미 캠퍼스</string>
     <string name="home_weather_today">오늘의 날씨</string>
+    <string name="home_shuttle_time">셔틀 시간</string>
     <string name="home_cross_walk">횡단 보도</string>
     <string name="home_tip">꿀팁</string>
     <string name="home_next_time">다음 시간</string>
