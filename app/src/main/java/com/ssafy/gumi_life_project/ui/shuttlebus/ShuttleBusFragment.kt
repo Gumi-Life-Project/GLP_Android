@@ -59,8 +59,10 @@ class ShuttleBusFragment : BaseFragment<FragmentShuttleBusBinding>(
             ): Boolean {
                 if (isItemOpen) {
                     shuttleBusStoprecyclerView.visibility = View.GONE
+                    expandButton.rotation = 0f
                 } else {
                     shuttleBusStoprecyclerView.visibility = View.VISIBLE
+                    expandButton.rotation = 180f
                 }
                 return !isItemOpen
             }
