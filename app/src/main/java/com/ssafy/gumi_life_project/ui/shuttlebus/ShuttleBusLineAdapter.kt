@@ -24,7 +24,7 @@ class ShuttleBusLineAdapter(
         fun onExpandButtonClicked(
             isItemOpen: Boolean,
             shuttleBusStoprecyclerView: RecyclerView,
-            expandButton : ImageView
+            expandButton: ImageView
         ): Boolean
     }
 
@@ -48,7 +48,6 @@ class ShuttleBusLineAdapter(
                     }
                 }
             binding.recyclerviewShuttleBusStop.adapter = shuttleBusStopAdapter
-            binding.buttonExpand
             binding.recyclerviewShuttleBusStop.visibility = View.GONE
             binding.buttonExpand.setOnClickListener {
                 isItemOpen = itemClickListener.onExpandButtonClicked(
