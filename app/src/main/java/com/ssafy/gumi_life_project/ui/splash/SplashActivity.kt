@@ -1,13 +1,10 @@
 package com.ssafy.gumi_life_project.ui.splash
 
 
-import android.animation.ValueAnimator
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.core.content.ContextCompat
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.ActivitySplashBinding
 import com.ssafy.gumi_life_project.ui.main.MainActivity
@@ -28,7 +25,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         val handler = Handler(Looper.getMainLooper())
         val runnable = object : Runnable {
             var currentImageViewIndex = 0
-            val imageViews = listOf(binding.imageviewSplash1, binding.imageviewSplash2, binding.imageviewSplash3, binding.imageviewSplash4, binding.imageviewSplash5)
+            val imageViews = listOf(
+                binding.imageviewSplash1,
+                binding.imageviewSplash2,
+                binding.imageviewSplash3,
+                binding.imageviewSplash4,
+                binding.imageviewSplash5
+            )
 
             override fun run() {
                 // 현재 이미지 뷰를 아이콘2 상태로 변경
@@ -56,9 +59,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         }
 
         handler.post(runnable)
-
-
-
     }
 
     private fun moveToMainActivity() {
