@@ -8,30 +8,24 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewTreeLifecycleOwner
 
 abstract class BaseFragment<B : ViewDataBinding>(
-    @LayoutRes val layoutId: Int
+    @LayoutRes private val layoutId: Int
 ) : Fragment() {
 
     private var _binding : B? = null
-    protected val binding : B?
-        get() = _binding
+    protected val binding get() = _binding
 
     abstract fun onCreateBinding(inflater: LayoutInflater, container: ViewGroup?): B
     abstract fun init()
-
-    private var toast : Toast? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return onCreateBinding(inflater, container)
-            .also { _binding = it}
-            .root
-            .also { ViewTreeLifecycleOwner.set(it, viewLifecycleOwner)}
+    ): View {
+        _binding = onCreateBinding(inflater, container)
+        return requireNotNull(_binding).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,25 +33,15 @@ abstract class BaseFragment<B : ViewDataBinding>(
         init()
     }
 
-    protected fun requireDataBinding(): B {
-        if (_binding == null) {
-            throw IllegalStateException(
-                "BaseFragment $this did not return a Binding from onCreateview"
-            )
-        }
-        return _binding!!
-    }
+    protected val bindingNonNull: B
+        get() = requireNotNull(_binding)
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-
     protected fun showToast(msg: String) {
-        if (toast == null) {
-            toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT)
-        } else toast?.setText(msg)
-        toast?.show()
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }
