@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ssafy.gumi_life_project.ui.home.HomeViewModel" />
@@ -24,8 +25,97 @@
             android:id="@+id/linearlayout_home"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@drawable/border_main_background"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp">
+
+                <TextView
+                    android:id="@+id/textview_today_weather_title"
+                    style="@style/HomeMiddleTitleTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/home_weather_today" />
+
+                <ImageView
+                    android:id="@+id/imageview_today_weather_img"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/icon_rainy" />
+
+                <TextView
+                    android:id="@+id/textview_today_weather_temperature"
+                    style="@style/HomeWeatherTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19º" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/border_main_background"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="18dp">
+
+                <TextView
+                    android:id="@+id/textview_shuttle_time_title"
+                    style="@style/HomeMiddleTitleTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/home_shuttle_time" />
+
+                <TextView
+                    android:id="@+id/textview_shuttle_time_content"
+                    style="@style/HomeMiddleContentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="구미역 7시" />
+
+                <ImageButton
+                    android:id="@+id/imagebutton_home_to_shuttle"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/icon_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/border_main_background"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp">
+
+                <TextView
+                    android:id="@+id/textview_tip_title"
+                    style="@style/HomeMiddleTitleTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/home_tip" />
+
+                <TextView
+                    android:id="@+id/textview_tip_content"
+                    style="@style/HomeMiddleContentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="마이구미는 맛있다." />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearlayout_map"
@@ -34,11 +124,11 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/LayoutTitleTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/LayoutTitleTextStyle"
-                    android:text="@string/home_cross_walk"
-                    android:layout_marginStart="7dp"/>
+                    android:layout_marginStart="7dp"
+                    android:text="@string/home_cross_walk" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

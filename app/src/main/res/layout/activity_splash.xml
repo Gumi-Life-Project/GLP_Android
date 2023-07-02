@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/SplashSloganTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_slogan" />
+
+        <TextView
+            style="@style/SplashTitleTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_title"
+            android:textColor="@color/main" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/icon_grape" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="200dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageview_splash_1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:padding="2dp"
+                android:src="@drawable/icon_splash_light" />
+
+            <ImageView
+                android:id="@+id/imageview_splash_2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:padding="2dp"
+                android:src="@drawable/icon_splash_light" />
+
+            <ImageView
+                android:id="@+id/imageview_splash_3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:padding="2dp"
+                android:src="@drawable/icon_splash_light" />
+
+            <ImageView
+                android:id="@+id/imageview_splash_4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:padding="2dp"
+                android:src="@drawable/icon_splash_light" />
+
+            <ImageView
+                android:id="@+id/imageview_splash_5"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:padding="2dp"
+                android:src="@drawable/icon_splash_light" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
