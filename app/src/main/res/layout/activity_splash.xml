@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/splash_title"
-            android:textColor="@color/main" />
+            android:textColor="@color/main_color" />
 
         <ImageView
             android:layout_width="80dp"

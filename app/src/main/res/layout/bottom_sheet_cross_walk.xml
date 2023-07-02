@@ -20,18 +20,18 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/black"
-            tools:text="@string/cross_work_title1" />
+            android:text="@string/cross_walk_title1" />
 
         <TextView
             android:id="@+id/textview_cross_work_explain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            tools:text="@string/cross_work_explain1" />
+            android:text="@string/cross_walk_explain1" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_memos"
+            android:id="@+id/recyclerview_times"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="15dp"

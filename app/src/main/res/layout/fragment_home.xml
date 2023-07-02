@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.ssafy.gumi_life_project.ui.home.HomeViewModel" />
+
+        <variable
+            name="signalLight"
+            type="com.ssafy.gumi_life_project.data.model.SignalLight" />
     </data>
 
     <ScrollView
@@ -131,10 +135,11 @@
                     android:layout_height="300dp"
                     android:background="@drawable/image_crosswalk">
 
-                    <com.ssafy.gumi_life_project.ui.home.CrossWorkTimeView
-                        android:id="@+id/crossWorkTimeView"
+                    <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
+                        android:id="@+id/cross_work_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_1)}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.058"
@@ -143,9 +148,11 @@
                         app:layout_constraintVertical_bias="0.551"
                         app:timeText="07:00" />
 
-                    <com.ssafy.gumi_life_project.ui.home.CrossWorkTimeView
+                    <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
+                        android:id="@+id/cross_work_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_3)}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.908"
@@ -154,9 +161,11 @@
                         app:layout_constraintVertical_bias="0.502"
                         app:timeText="07:00" />
 
-                    <com.ssafy.gumi_life_project.ui.home.CrossWorkTimeView
+                    <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
+                        android:id="@+id/cross_work_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_2)}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.466"
