@@ -13,7 +13,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes private val layoutId: Int
 ) : Fragment() {
 
-    private var _binding : B? = null
+    private var _binding: B? = null
     protected val binding get() = _binding
 
     abstract fun onCreateBinding(inflater: LayoutInflater, container: ViewGroup?): B

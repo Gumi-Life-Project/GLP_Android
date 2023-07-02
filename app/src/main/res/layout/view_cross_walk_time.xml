@@ -10,14 +10,14 @@
     android:paddingEnd="30dp">
 
     <TextView
-        style="@style/CrossWorkTimeTextStyle"
+        style="@style/CrossWalkTimeTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_next_time" />
 
     <TextView
         android:id="@+id/textview_time"
-        style="@style/CrossWorkTimeTextStyle"
+        style="@style/CrossWalkTimeTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="07:00" />

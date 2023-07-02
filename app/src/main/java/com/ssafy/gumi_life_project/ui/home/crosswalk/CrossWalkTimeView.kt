@@ -1,4 +1,4 @@
-package com.ssafy.gumi_life_project.ui.home
+package com.ssafy.gumi_life_project.ui.home.crosswalk
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.ViewCrossworkTimeBinding
 
-class CrossWorkTimeView @JvmOverloads constructor(
+class CrossWalkTimeView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
@@ -18,7 +18,7 @@ class CrossWorkTimeView @JvmOverloads constructor(
     )
 
     init {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CrossWorkTimeView)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CrossWalkTimeView)
         val timeText = typedArray.getString(R.styleable.CrossWorkTimeView_timeText)
         typedArray.recycle()
 

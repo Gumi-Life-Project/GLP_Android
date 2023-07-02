@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentHomeBinding
+import com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWorkBottomSheet
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
