@@ -3,6 +3,7 @@ package com.ssafy.gumi_life_project.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ssafy.gumi_life_project.data.model.Event
+import com.ssafy.gumi_life_project.data.model.SignalLight
 import com.ssafy.gumi_life_project.data.repository.home.HomeRepository
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +16,9 @@ class HomeViewModel @Inject constructor(
 
     private val _msg = MutableLiveData<Event<String>>()
     val errorMsg: LiveData<Event<String>> = _msg
+
+    private val _showBottomSheetEvent = MutableLiveData<Event<SignalLight>>()
+    val showBottomSheetEvent: LiveData<Event<SignalLight>> = _showBottomSheetEvent
 
 
     private fun postValueEvent(value: Int, type: String) {
@@ -29,5 +33,9 @@ class HomeViewModel @Inject constructor(
             1 -> _msg.postValue(Event(msgArrayList[1]))
             2 -> _msg.postValue(Event(msgArrayList[2]))
         }
+    }
+
+    fun onCrossWorkTimeViewClicked(signalLight: SignalLight) {
+        _showBottomSheetEvent.value = Event(signalLight)
     }
 }
