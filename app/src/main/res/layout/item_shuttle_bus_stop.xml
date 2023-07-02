@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="shuttleBusStop"
+            type="com.ssafy.gumi_life_project.data.model.ShuttleBusStop" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp">
+
+        <TextView
+            style="@style/ShuttleBusStopTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{shuttleBusStop.stopName}"
+            tools:text="구미역" />
+
+        <TextView
+            style="@style/ShuttleBusStopTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="@{shuttleBusStop.arrivalTime}"
+            tools:text="07:50" />
+
+        <ImageView
+            android:id="@+id/image_view_mark"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_star"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+    </LinearLayout>
+</layout>
