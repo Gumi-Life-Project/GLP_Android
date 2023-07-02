@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.gumi_life_project.R
@@ -56,14 +55,14 @@ class ShuttleBusFragment : BaseFragment<FragmentShuttleBusBinding>(
         adapter.itemClickListener = object : ShuttleBusLineAdapter.ItemClickListener {
             override fun onExpandButtonClicked(
                 isItemOpen: Boolean,
-                shuttleBusStoprecyclerView: RecyclerView,
+                shuttleBusStopRecyclerView: RecyclerView,
                 expandButton: ImageView
             ): Boolean {
                 if (isItemOpen) {
-                    shuttleBusStoprecyclerView.visibility = View.GONE
+                    shuttleBusStopRecyclerView.visibility = View.GONE
                     expandButton.rotation = 0f
                 } else {
-                    shuttleBusStoprecyclerView.visibility = View.VISIBLE
+                    shuttleBusStopRecyclerView.visibility = View.VISIBLE
                     expandButton.rotation = 180f
                 }
                 return !isItemOpen

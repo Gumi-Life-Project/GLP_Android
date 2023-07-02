@@ -11,7 +11,7 @@ class ShuttleBusStopAdapter(private val shuttleBusStopList: List<ShuttleBusStop>
     RecyclerView.Adapter<ShuttleBusStopAdapter.ViewHolder>() {
 
     interface ItemClickListener {
-        fun onitemClicked(
+        fun onBusStopClicked(
             shuttleBusStop: ShuttleBusStop
         )
     }
@@ -27,7 +27,7 @@ class ShuttleBusStopAdapter(private val shuttleBusStopList: List<ShuttleBusStop>
                 binding.imageViewMark.visibility = View.VISIBLE
             }
             binding.root.setOnClickListener {
-                itemClickListener.onitemClicked(item)
+                itemClickListener.onBusStopClicked(item)
             }
         }
     }

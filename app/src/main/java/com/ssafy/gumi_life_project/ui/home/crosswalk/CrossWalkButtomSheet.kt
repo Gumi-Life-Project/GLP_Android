@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.CrossWalk
-import com.ssafy.gumi_life_project.databinding.BottomSheetCrossWorkBinding
+import com.ssafy.gumi_life_project.databinding.BottomSheetCrossWalkBinding
 
 class CrossWorkBottomSheet(private val title: String, private val content: String) :
     BottomSheetDialogFragment() {
 
-    private lateinit var binding: BottomSheetCrossWorkBinding
+    private lateinit var binding: BottomSheetCrossWalkBinding
     private lateinit var adapter: CrossWalkTimeListAdapter
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class CrossWorkBottomSheet(private val title: String, private val content: Strin
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = BottomSheetCrossWorkBinding.inflate(inflater, container, false)
+        binding = BottomSheetCrossWalkBinding.inflate(inflater, container, false)
         return binding.root
     }
 

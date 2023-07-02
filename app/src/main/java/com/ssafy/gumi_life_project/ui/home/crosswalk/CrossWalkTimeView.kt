@@ -5,13 +5,13 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.databinding.ViewCrossworkTimeBinding
+import com.ssafy.gumi_life_project.databinding.ViewCrossWalkTimeBinding
 
 class CrossWalkTimeView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private val binding: ViewCrossworkTimeBinding = ViewCrossworkTimeBinding.inflate(
+    private val binding: ViewCrossWalkTimeBinding = ViewCrossWalkTimeBinding.inflate(
         LayoutInflater.from(context),
         this,
         true
@@ -19,7 +19,7 @@ class CrossWalkTimeView @JvmOverloads constructor(
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CrossWalkTimeView)
-        val timeText = typedArray.getString(R.styleable.CrossWorkTimeView_timeText)
+        val timeText = typedArray.getString(R.styleable.CrossWalkTimeView_timeText)
         typedArray.recycle()
 
         binding.apply {

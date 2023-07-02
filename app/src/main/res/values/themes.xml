@@ -60,6 +60,7 @@
     <style name="SplashTitleTextStyle">
         <item name="android:textColor">#5B62FF</item>
         <item name="android:textSize">28sp</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
     </style>
     <style name="ShuttleBusGuidanceTextStyle">
         <item name="android:textColor">#242424</item>

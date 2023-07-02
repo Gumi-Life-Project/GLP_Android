@@ -1,17 +1,13 @@
 package com.ssafy.gumi_life_project.ui.shuttlebus
 
-import android.app.Dialog
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
-import com.ssafy.gumi_life_project.databinding.DialogShuttleBusBinding
 import com.ssafy.gumi_life_project.databinding.ItemShuttleBusLineBinding
 
 class ShuttleBusLineAdapter(
@@ -23,7 +19,7 @@ class ShuttleBusLineAdapter(
     interface ItemClickListener {
         fun onExpandButtonClicked(
             isItemOpen: Boolean,
-            shuttleBusStoprecyclerView: RecyclerView,
+            shuttleBusStopRecyclerView: RecyclerView,
             expandButton: ImageView
         ): Boolean
     }
@@ -42,7 +38,7 @@ class ShuttleBusLineAdapter(
             shuttleBusStopAdapter = ShuttleBusStopAdapter(item.stopList)
             shuttleBusStopAdapter.itemClickListener =
                 object : ShuttleBusStopAdapter.ItemClickListener {
-                    override fun onitemClicked(shuttleBusStop: ShuttleBusStop) {
+                    override fun onBusStopClicked(shuttleBusStop: ShuttleBusStop) {
                         val dialog = ShuttleBusDialog(binding.root.context, shuttleBusStop)
                         dialog.show(fragmentManager, "shuttleBusDialog")
                     }
