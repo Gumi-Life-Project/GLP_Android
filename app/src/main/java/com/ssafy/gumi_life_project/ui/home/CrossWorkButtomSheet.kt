@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.data.model.CrossWorkTime
+import com.ssafy.gumi_life_project.data.model.CrossWork
+import com.ssafy.gumi_life_project.databinding.BottomSheetCrossWorkBinding
 
-class CrossWorkBottomSheet : BottomSheetDialogFragment() {
+class CrossWorkBottomSheet(private val title: String, private val content: String) : BottomSheetDialogFragment() {
 
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: BottomSheetCrossWorkBinding
     private lateinit var adapter: CrossWorkTimeListAdapter
 
     override fun onCreateView(
@@ -19,9 +19,8 @@ class CrossWorkBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.bottom_sheet_cross_work, container, false)
-        recyclerView = view.findViewById(R.id.recyclerview_memos)
-        return view
+        binding = BottomSheetCrossWorkBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,14 +29,19 @@ class CrossWorkBottomSheet : BottomSheetDialogFragment() {
         val crossWorkTimeList = getCrossWorkTimeList()
 
         adapter = CrossWorkTimeListAdapter(crossWorkTimeList)
-        recyclerView.adapter = adapter
+        binding.recyclerviewMemos.adapter = adapter
+
+        binding.textviewCrossWorkTitle.text = title
+        binding.textviewCrossWorkExplain.text = content
     }
 
-    private fun getCrossWorkTimeList(): List<CrossWorkTime> {
-        val list = mutableListOf<CrossWorkTime>()
-        list.add(CrossWorkTime("10:00 AM"))
-        list.add(CrossWorkTime("12:30 PM"))
-        list.add(CrossWorkTime("3:15 PM"))
+    private fun getCrossWorkTimeList(): List<CrossWork> {
+        val list = mutableListOf<CrossWork>()
+        list.add(CrossWork("10:00 AM"))
+        list.add(CrossWork("12:30 PM"))
+        list.add(CrossWork("3:15 PM"))
         return list
     }
+
+    override fun getTheme(): Int = R.style.BottomSheetDialog
 }
