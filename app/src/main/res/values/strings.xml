@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">Gumi-Insider</string>
 
+    <!-- splash -->
+    <string name="splash_slogan">싸피 생활을 더 편하고 즐겁게</string>
+    <string name="splash_title">구미 인사이더</string>
+
     <!-- home -->
     <string name="home_subtitle">10기를 위한 싸피 가이드</string>
     <string name="home_title">구미 캠퍼스</string>
     <string name="home_weather_today">오늘의 날씨</string>
+    <string name="home_shuttle_time">셔틀 시간</string>
     <string name="home_cross_walk">횡단 보도</string>
     <string name="home_tip">꿀팁</string>
     <string name="home_next_time">다음 시간</string>
