@@ -8,6 +8,9 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ssafy.gumi_life_project.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home">
-    </fragment>
+        tools:layout="@layout/fragment_home"></fragment>
+    <fragment
+        android:id="@+id/shuttleBusFragment"
+        android:name="com.ssafy.gumi_life_project.ui.shuttlebus.ShuttleBusFragment"
+        tools:layout="@layout/fragment_shuttle_bus" />
 </navigation>

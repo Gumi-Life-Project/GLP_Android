@@ -12,7 +12,9 @@ import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
 import com.ssafy.gumi_life_project.databinding.FragmentShuttleBusBinding
 import com.ssafy.gumi_life_project.util.template.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ShuttleBusFragment : BaseFragment<FragmentShuttleBusBinding>(
     R.layout.fragment_shuttle_bus
 ) {
