@@ -56,4 +56,11 @@
         <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
     </style>
 
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_top_corners</item>
+    </style>
 </resources>
