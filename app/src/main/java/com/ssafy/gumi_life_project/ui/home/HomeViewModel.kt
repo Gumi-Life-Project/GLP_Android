@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ssafy.gumi_life_project.data.model.Event
-import com.ssafy.gumi_life_project.data.model.SignalLight
-import com.ssafy.gumi_life_project.data.model.Tip
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.data.repository.home.HomeRepository
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
@@ -14,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val TAG = "HomeViewModel_구미"
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: HomeRepository
@@ -27,6 +26,9 @@ class HomeViewModel @Inject constructor(
 
     private val _tip = MutableLiveData<Event<List<Tip>>>()
     val tip: LiveData<Event<List<Tip>>> = _tip
+    
+    private val _weather = MutableLiveData<Event<WeatherResponse>>()
+    val weather: LiveData<Event<WeatherResponse>> = _weather
 
 
     fun getAllTipList() {
@@ -50,6 +52,33 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
+        hideProgress()
+    }
+    
+    fun getNowWeather() {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.getNowWeather()
+            Log.d(TAG, "getNowWeather: $response")
+
+            val type = "정보 조회에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _weather.value = Event(response.body)
+                    Log.d(TAG, "getNowWeather: ${weather.value}")
+                }
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+        }
+        hideProgress()
     }
 
     private fun postValueEvent(value: Int, type: String) {

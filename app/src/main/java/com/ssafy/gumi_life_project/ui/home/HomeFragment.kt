@@ -29,6 +29,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     override fun init() {
         observeData()
+        viewModel.getNowWeather()
     }
 
     private fun observeData() {
@@ -56,6 +57,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 event.getContentIfNotHandled()?.let {
                     Log.d(TAG, "observeData: $it")
                 }
+            }
+            
+            weather.observe(viewLifecycleOwner) { event ->
+                event.getContentIfNotHandled()?.let {
+                    Log.d(TAG, "observeData: $it")
+                }
+                
             }
 
         }
