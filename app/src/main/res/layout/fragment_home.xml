@@ -146,7 +146,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.551"
-                        app:timeText="@{viewModel.timeText1.remainingTimeString}" />
+                        app:timeText="@{viewModel.timeText1.remainingTimeString}"
+                        app:timeColor="@{viewModel.timeText1.getCurrentColorRes()}"/>
 
                     <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
                         android:id="@+id/cross_walk_3"
@@ -159,7 +160,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.502"
-                        app:timeText="@{viewModel.timeText3.remainingTimeString}" />
+                        app:timeText="@{viewModel.timeText3.remainingTimeString}"
+                        app:timeColor="@{viewModel.timeText3.getCurrentColorRes()}"/>
 
                     <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
                         android:id="@+id/cross_work_2"
@@ -172,7 +174,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.028"
-                        app:timeText="@{viewModel.timeText2.remainingTimeString}" />
+                        app:timeText="@{viewModel.timeText2.remainingTimeString}"
+                        app:timeColor="@{viewModel.timeText2.getCurrentColorRes()}"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

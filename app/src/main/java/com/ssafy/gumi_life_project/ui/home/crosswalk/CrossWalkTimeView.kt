@@ -30,4 +30,8 @@ class CrossWalkTimeView @JvmOverloads constructor(
     fun setTime(time: String) {
         binding.textviewTime.text = time
     }
+
+    fun setTimeColor(color: Int) {
+        binding.textviewTime.setTextColor(color)
+    }
 }

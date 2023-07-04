@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.data.model
 
+import androidx.annotation.ColorRes
 import com.ssafy.gumi_life_project.R
 
 data class CrossWalk(val time: String)
@@ -12,6 +13,11 @@ data class LightTime(val currentColor: Color, val remainingTime: Long) {
             val seconds = remainingTime % 60
             return String.format("%02d:%02d", minutes, seconds)
         }
+
+    @ColorRes
+    fun getCurrentColorRes(): Int {
+        return currentColor.colorRes
+    }
 }
 
 data class TriggerTime(
@@ -23,9 +29,9 @@ data class TriggerTime(
     val second: Int
 )
 
-enum class Color {
-    GREEN,
-    RED
+enum class Color(@ColorRes val colorRes: Int) {
+    GREEN(R.color.green),
+    RED(R.color.red)
 }
 
 enum class SignalLight(
