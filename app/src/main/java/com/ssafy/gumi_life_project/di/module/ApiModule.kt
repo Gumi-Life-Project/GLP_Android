@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private const val baseUrl = "http://127.0.0.1:9999"
+    private const val baseUrl = "https://gumiinsider-ea09851d1f47.herokuapp.com/"
 
     @Provides
     @Singleton
