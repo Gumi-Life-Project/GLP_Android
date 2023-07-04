@@ -6,7 +6,7 @@ import com.ssafy.gumi_life_project.R
 data class CrossWalk(val time: String)
 
 //currentColor 현재 신호등 색, remainingTime 다음 신호등 색까지 남은 시간
-data class LightTime(val currentColor: Color, val remainingTime: Long) {
+data class LightTime(val currentTrafficLightColor: TrafficLightColor, val remainingTime: Long) {
     val remainingTimeString: String
         get() {
             val minutes = remainingTime / 60
@@ -16,7 +16,7 @@ data class LightTime(val currentColor: Color, val remainingTime: Long) {
 
     @ColorRes
     fun getCurrentColorRes(): Int {
-        return currentColor.colorRes
+        return currentTrafficLightColor.colorRes
     }
 }
 
@@ -29,7 +29,7 @@ data class TriggerTime(
     val second: Int
 )
 
-enum class Color(@ColorRes val colorRes: Int) {
+enum class TrafficLightColor(@ColorRes val colorRes: Int) {
     GREEN(R.color.green),
     RED(R.color.red)
 }
@@ -51,11 +51,11 @@ enum class SignalLight(
 
         return if (remainingTimeMillis > greenDuration * 1000) {
             LightTime(
-                Color.RED,
+                TrafficLightColor.RED,
                 (redDuration * 1000 - (remainingTimeMillis - greenDuration * 1000)) / 1000
             )
         } else {
-            LightTime(Color.GREEN, (greenDuration * 1000 - remainingTimeMillis) / 1000)
+            LightTime(TrafficLightColor.GREEN, (greenDuration * 1000 - remainingTimeMillis) / 1000)
         }
     }
 
