@@ -85,4 +85,7 @@ dependencies {
     //SSA를 위한 navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
