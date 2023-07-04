@@ -26,4 +26,8 @@ class CrossWalkTimeView @JvmOverloads constructor(
             textviewTime.text = timeText ?: "00:00"
         }
     }
+
+    fun setTime(time: String) {
+        binding.textviewTime.text = time
+    }
 }
