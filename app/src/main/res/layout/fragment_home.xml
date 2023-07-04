@@ -136,7 +136,7 @@
                     android:background="@drawable/image_crosswalk">
 
                     <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
-                        android:id="@+id/cross_work_1"
+                        android:id="@+id/cross_walk_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_1)}"
@@ -146,10 +146,10 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.551"
-                        app:timeText="07:00" />
+                        app:timeText="08:00" />
 
                     <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
-                        android:id="@+id/cross_work_3"
+                        android:id="@+id/cross_walk_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_3)}"
