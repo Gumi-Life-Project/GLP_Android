@@ -18,6 +18,7 @@ class App : Application() {
         shuttleBusPrefs = AppPreferences.openShuttleBusSharedPreference(applicationContext)
         if (shuttleBusPrefs.getBoolean(AppPreferences.APP_RUN_STATE, true)) {
             AppPreferences.updateAppRunState()
+            AppPreferences.initShuttleBusInfo()
         }
 
         super.onCreate()
