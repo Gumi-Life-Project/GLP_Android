@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.ui.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -9,6 +10,7 @@ import com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWorkBottomSheet
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "HomeFragment_구미"
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home
@@ -49,6 +51,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     bottomSheetDialogFragment.show(childFragmentManager, "CrossWorkBottomSheet")
                 }
             }
+
+            tip.observe(viewLifecycleOwner) { event ->
+                event.getContentIfNotHandled()?.let {
+                    Log.d(TAG, "observeData: $it")
+                }
+            }
+
         }
     }
 }
