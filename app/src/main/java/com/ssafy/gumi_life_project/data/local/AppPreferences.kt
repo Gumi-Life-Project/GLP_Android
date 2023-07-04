@@ -12,7 +12,7 @@ object AppPreferences {
     private const val SHUTTLE_BUS_INFO_PREFERENCE = "shuttle_bus_info_preference"
 
     const val APP_RUN_STATE = "app_run_state"
-    private const val SHUTTLE_BUS_INFO_KEY = "shuttle_bus_info_key"
+    private const val SHUTTLE_BUS_INFO = "shuttle_bus_info"
 
     private lateinit var preferences: SharedPreferences
     private val gson = GsonBuilder().create()
@@ -254,12 +254,12 @@ object AppPreferences {
         busLineList.add(ShuttleBusLine("시지 칠곡 노선", shijiChilgokLine))
 
         val shuttleBusInfo = gson.toJson(busLineList, ArrayList::class.java)
-        preferences.edit().putString(SHUTTLE_BUS_INFO_KEY, shuttleBusInfo).commit()
+        preferences.edit().putString(SHUTTLE_BUS_INFO, shuttleBusInfo).commit()
 
     }
 
     fun getShuttleBusInfo(): ArrayList<ShuttleBusLine> {
-        val jsonData = preferences.getString(SHUTTLE_BUS_INFO_KEY, "")
+        val jsonData = preferences.getString(SHUTTLE_BUS_INFO, "")
         val lineListType = object : TypeToken<ArrayList<ShuttleBusLine>>() {}.type
 
         return gson.fromJson(jsonData, lineListType)
