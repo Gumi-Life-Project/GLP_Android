@@ -40,9 +40,9 @@ enum class SignalLight(
     private val greenDuration: Int,
     private val redDuration: Int
 ) {
-    SIGNAL_LIGHT_1(R.string.cross_walk_title1, R.string.cross_walk_explain1, 23, 98),
-    SIGNAL_LIGHT_2(R.string.cross_walk_title2, R.string.cross_walk_explain2, 24, 106),
-    SIGNAL_LIGHT_3(R.string.cross_walk_title3, R.string.cross_walk_explain3, 17, 143);
+    SIGNAL_LIGHT_1(R.string.cross_walk_title1, R.string.cross_walk_explain1, 25, 155),
+    SIGNAL_LIGHT_2(R.string.cross_walk_title2, R.string.cross_walk_explain2, 35, 145),
+    SIGNAL_LIGHT_3(R.string.cross_walk_title3, R.string.cross_walk_explain3, 30, 150);
 
     fun calculateRemainingTime(triggerTimeMillis: Long): LightTime {
         val currentTimeMillis = System.currentTimeMillis()
