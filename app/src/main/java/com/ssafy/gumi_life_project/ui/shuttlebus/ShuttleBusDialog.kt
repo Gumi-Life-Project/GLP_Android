@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
 import com.ssafy.gumi_life_project.databinding.DialogShuttleBusBinding
@@ -16,6 +17,7 @@ import net.daum.mf.map.api.MapView
 
 class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusStop) :
     DialogFragment() {
+    private val viewModel by activityViewModels<ShuttleBusViewModel>()
     private lateinit var binding: DialogShuttleBusBinding
     private lateinit var mapView: MapView
     private val MARKER_NAME = "탑승위치"
@@ -38,12 +40,13 @@ class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusS
             dialog?.window?.setLayout(size, ViewGroup.LayoutParams.WRAP_CONTENT)
             dialog?.window?.setBackgroundDrawableResource(R.drawable.rounded_all_corners)
             setMap()
+            setListener()
         } catch (exception: Exception) {
             exception.printStackTrace()
         }
     }
 
-    fun setMap() {
+    private fun setMap() {
         mapView = MapView(context)
         mapView.setMapCenterPoint(
             mapPointWithGeoCoord(
@@ -64,5 +67,11 @@ class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusS
         mapView.addPOIItem(marker)
 
         binding.mapView.addView(mapView)
+    }
+
+    private fun setListener() {
+        binding.buttonMark.setOnClickListener {
+            viewModel.updateShuttleBusLineList(shuttleBusStop)
+        }
     }
 }

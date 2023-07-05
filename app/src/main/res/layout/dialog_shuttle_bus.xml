@@ -40,6 +40,7 @@
             android:layout_gravity="center" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_mark"
             style="@style/ButtonTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

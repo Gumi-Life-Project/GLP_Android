@@ -4,18 +4,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
+import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 
 class ShuttleBusViewModel : BaseViewModel() {
-    private val _shuttleBusLineList: MutableLiveData<MutableList<ShuttleBusLine>> =
+    private var shuttleBusLineList: MutableList<ShuttleBusLine> = mutableListOf()
+    private val _shuttleBusLineListLiveData: MutableLiveData<MutableList<ShuttleBusLine>> =
         MutableLiveData()
-    val shuttleBusLineList: LiveData<MutableList<ShuttleBusLine>>
-        get() = _shuttleBusLineList
+    val shuttleBusLineListLiveData: LiveData<MutableList<ShuttleBusLine>>
+        get() = _shuttleBusLineListLiveData
 
     fun getShuttleBusLineList() {
-        val lineList = AppPreferences.getShuttleBusInfo()
-        _shuttleBusLineList.postValue(lineList)
+        shuttleBusLineList = AppPreferences.getShuttleBusInfo()
+        _shuttleBusLineListLiveData.postValue(shuttleBusLineList)
     }
 
-
+    fun updateShuttleBusLineList(shuttleBusStop: ShuttleBusStop) {
+        shuttleBusLineList.forEach { shuttleBusLine ->
+            shuttleBusLine.stopList.forEach { oldShuttleBusStop ->
+                if (shuttleBusStop === oldShuttleBusStop) {
+                    oldShuttleBusStop.isMarked = true
+                } else if (oldShuttleBusStop.isMarked == true) {
+                    oldShuttleBusStop.isMarked = false
+                }
+            }
+        }
+        _shuttleBusLineListLiveData.postValue(shuttleBusLineList)
+    }
 }

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ShuttleBusFragment : BaseFragment<FragmentShuttleBusBinding>(
     R.layout.fragment_shuttle_bus
 ) {
-    private val viewModel by viewModels<ShuttleBusViewModel>()
+    private val viewModel by activityViewModels<ShuttleBusViewModel>()
     private lateinit var adapter: ShuttleBusLineAdapter
     private lateinit var busLineList: MutableList<ShuttleBusLine>
 
@@ -64,7 +64,7 @@ class ShuttleBusFragment : BaseFragment<FragmentShuttleBusBinding>(
     }
 
     private fun initObserver() {
-        viewModel.shuttleBusLineList.observe(viewLifecycleOwner) {
+        viewModel.shuttleBusLineListLiveData.observe(viewLifecycleOwner) {
             busLineList.clear()
             busLineList.addAll(it)
             adapter.notifyDataSetChanged()
