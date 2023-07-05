@@ -6,7 +6,4 @@ import com.ssafy.gumi_life_project.data.model.WeatherResponse
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
 
 interface HomeRepository {
-    suspend fun getAllTipList() : NetworkResponse<List<Tip>, ErrorResponse>
-
-    suspend fun getNowWeather() : NetworkResponse<WeatherResponse, ErrorResponse>
 }

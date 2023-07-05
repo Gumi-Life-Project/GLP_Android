@@ -1,24 +1,43 @@
 package com.ssafy.gumi_life_project.ui.splash
 
-
 import android.content.Intent
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.databinding.ActivitySplashBinding
+import com.ssafy.gumi_life_project.databinding.FragmentHomeBinding
+import com.ssafy.gumi_life_project.databinding.FragmentSplashBinding
 import com.ssafy.gumi_life_project.ui.main.MainActivity
-import com.ssafy.gumi_life_project.util.template.BaseActivity
+import com.ssafy.gumi_life_project.ui.main.MainViewModel
+import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class SplashFragment : BaseFragment<FragmentSplashBinding>(
+    R.layout.fragment_splash
+)  {
+    private val activityViewModel by activityViewModels<MainViewModel>()
 
+    override fun onCreateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentSplashBinding {
+        return FragmentSplashBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
+    }
+
+    override fun init() {
+        with(activityViewModel) {
+            getAllTipList()
+            getNowWeather()
+        }
         animateLoading()
-        moveToMainActivity()
-
+        moveToHomeFragment()
     }
 
     private fun animateLoading() {
@@ -26,11 +45,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         val runnable = object : Runnable {
             var currentImageViewIndex = 0
             val imageViews = listOf(
-                binding.imageviewSplash1,
-                binding.imageviewSplash2,
-                binding.imageviewSplash3,
-                binding.imageviewSplash4,
-                binding.imageviewSplash5
+                bindingNonNull.imageviewSplash1,
+                bindingNonNull.imageviewSplash2,
+                bindingNonNull.imageviewSplash3,
+                bindingNonNull.imageviewSplash4,
+                bindingNonNull.imageviewSplash5
             )
 
             override fun run() {
@@ -61,12 +80,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         handler.post(runnable)
     }
 
-    private fun moveToMainActivity() {
-        // 1초 후에 다른 Activity로 이동
+    private fun moveToHomeFragment() {
+        // 1.5초 후에 HomeFragment로 이동
         Handler(Looper.getMainLooper()).postDelayed({
-            intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 1000)
+            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+        }, 1500)
     }
+
 }

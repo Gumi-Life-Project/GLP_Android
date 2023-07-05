@@ -24,63 +24,6 @@ class HomeViewModel @Inject constructor(
     private val _showBottomSheetEvent = MutableLiveData<Event<SignalLight>>()
     val showBottomSheetEvent: LiveData<Event<SignalLight>> = _showBottomSheetEvent
 
-    private val _tip = MutableLiveData<Event<List<Tip>>>()
-    val tip: LiveData<Event<List<Tip>>> = _tip
-    
-    private val _weather = MutableLiveData<Event<WeatherResponse>>()
-    val weather: LiveData<Event<WeatherResponse>> = _weather
-
-
-    fun getAllTipList() {
-        showProgress()
-        viewModelScope.launch {
-            val response = repository.getAllTipList()
-
-            val type = "정보 조회에"
-            when (response) {
-                is NetworkResponse.Success -> {
-                    _tip.value = Event(response.body)
-                }
-                is NetworkResponse.ApiError -> {
-                    postValueEvent(0, type)
-                }
-                is NetworkResponse.NetworkError -> {
-                    postValueEvent(1, type)
-                }
-                is NetworkResponse.UnknownError -> {
-                    postValueEvent(2, type)
-                }
-            }
-        }
-        hideProgress()
-    }
-    
-    fun getNowWeather() {
-        showProgress()
-        viewModelScope.launch {
-            val response = repository.getNowWeather()
-            Log.d(TAG, "getNowWeather: $response")
-
-            val type = "정보 조회에"
-            when (response) {
-                is NetworkResponse.Success -> {
-                    _weather.value = Event(response.body)
-                    Log.d(TAG, "getNowWeather: ${weather.value}")
-                }
-                is NetworkResponse.ApiError -> {
-                    postValueEvent(0, type)
-                }
-                is NetworkResponse.NetworkError -> {
-                    postValueEvent(1, type)
-                }
-                is NetworkResponse.UnknownError -> {
-                    postValueEvent(2, type)
-                }
-            }
-        }
-        hideProgress()
-    }
-
     private fun postValueEvent(value: Int, type: String) {
         val msgArrayList = arrayOf(
             "Api 오류 : $type 실패했습니다.",
@@ -98,4 +41,5 @@ class HomeViewModel @Inject constructor(
     fun onCrossWorkTimeViewClicked(signalLight: SignalLight) {
         _showBottomSheetEvent.value = Event(signalLight)
     }
+
 }

@@ -10,6 +10,10 @@
             type="com.ssafy.gumi_life_project.ui.home.HomeViewModel" />
 
         <variable
+            name="mainViewModel"
+            type="com.ssafy.gumi_life_project.ui.main.MainViewModel" />
+
+        <variable
             name="signalLight"
             type="com.ssafy.gumi_life_project.data.model.SignalLight" />
     </data>

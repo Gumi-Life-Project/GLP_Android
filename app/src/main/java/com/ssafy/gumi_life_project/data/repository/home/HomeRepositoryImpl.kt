@@ -10,12 +10,4 @@ import javax.inject.Inject
 class HomeRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : HomeRepository {
-    override suspend fun getAllTipList(): NetworkResponse<List<Tip>, ErrorResponse> {
-        return apiService.getAllTipList()
-    }
-
-    override suspend fun getNowWeather(): NetworkResponse<WeatherResponse, ErrorResponse> {
-        return apiService.getNowWeather()
-    }
-
 }
