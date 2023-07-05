@@ -1,17 +1,13 @@
 package com.ssafy.gumi_life_project.ui.splash
 
-import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.databinding.FragmentHomeBinding
 import com.ssafy.gumi_life_project.databinding.FragmentSplashBinding
-import com.ssafy.gumi_life_project.ui.main.MainActivity
 import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(
     R.layout.fragment_splash
-)  {
+) {
     private val activityViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateBinding(

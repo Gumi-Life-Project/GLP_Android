@@ -1,9 +1,7 @@
 package com.ssafy.gumi_life_project.ui.home
 
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -17,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
 
 private const val TAG = "HomeFragment_구미"
+
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home
@@ -68,7 +67,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     bindingNonNull.textviewTipContent.text = limitStringLength(randomTip.subject)
 
                     bindingNonNull.linearlayoutTip.setOnClickListener {
-                        val bottomSheetDialogFragment = TipBottomSheet(randomTip.subject, randomTip.description)
+                        val bottomSheetDialogFragment =
+                            TipBottomSheet(randomTip.subject, randomTip.description)
                         bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
                     }
 
@@ -87,7 +87,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
     }
 
-    private fun getRandomTip(tips : List<Tip>) : Tip {
+    private fun getRandomTip(tips: List<Tip>): Tip {
         return if (tips.isNotEmpty()) tips[Random.nextInt(tips.size)] else Tip()
     }
 

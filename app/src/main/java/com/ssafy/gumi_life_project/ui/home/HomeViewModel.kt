@@ -1,18 +1,15 @@
 package com.ssafy.gumi_life_project.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.ssafy.gumi_life_project.data.model.*
+import com.ssafy.gumi_life_project.data.model.Event
+import com.ssafy.gumi_life_project.data.model.SignalLight
 import com.ssafy.gumi_life_project.data.repository.home.HomeRepository
-import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "HomeViewModel_구미"
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: HomeRepository

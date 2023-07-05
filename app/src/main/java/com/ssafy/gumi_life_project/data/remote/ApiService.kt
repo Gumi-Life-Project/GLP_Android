@@ -8,8 +8,8 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("/tip/list")
-    suspend fun getAllTipList() : NetworkResponse<List<Tip>, ErrorResponse>
+    suspend fun getAllTipList(): NetworkResponse<List<Tip>, ErrorResponse>
 
     @GET("/weather/")
-    suspend fun getNowWeather() : NetworkResponse<WeatherResponse, ErrorResponse>
+    suspend fun getNowWeather(): NetworkResponse<WeatherResponse, ErrorResponse>
 }

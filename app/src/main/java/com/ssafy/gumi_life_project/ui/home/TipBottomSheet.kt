@@ -9,8 +9,9 @@ import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.BottomSheetTipBinding
 
 
-class TipBottomSheet(private val subject: String?, private val description: String?) : BottomSheetDialogFragment(){
-    lateinit var binding : BottomSheetTipBinding
+class TipBottomSheet(private val subject: String?, private val description: String?) :
+    BottomSheetDialogFragment() {
+    lateinit var binding: BottomSheetTipBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
