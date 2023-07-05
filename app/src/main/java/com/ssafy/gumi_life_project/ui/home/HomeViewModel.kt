@@ -9,6 +9,7 @@ import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: HomeRepository
@@ -19,7 +20,6 @@ class HomeViewModel @Inject constructor(
 
     private val _showBottomSheetEvent = MutableLiveData<Event<SignalLight>>()
     val showBottomSheetEvent: LiveData<Event<SignalLight>> = _showBottomSheetEvent
-
 
     private fun postValueEvent(value: Int, type: String) {
         val msgArrayList = arrayOf(
@@ -38,4 +38,5 @@ class HomeViewModel @Inject constructor(
     fun onCrossWorkTimeViewClicked(signalLight: SignalLight) {
         _showBottomSheetEvent.value = Event(signalLight)
     }
+
 }
