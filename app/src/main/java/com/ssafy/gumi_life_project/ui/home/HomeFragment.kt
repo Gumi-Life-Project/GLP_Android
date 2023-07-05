@@ -6,12 +6,8 @@ import androidx.fragment.app.viewModels
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentHomeBinding
 import com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkBottomSheet
-import com.ssafy.gumi_life_project.util.CrossWorkTimeList
-import com.ssafy.gumi_life_project.util.setCrossWorkTimeList
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
@@ -31,7 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     override fun init() {
         observeData()
-        setCrossWorkTimeList()
+        viewModel.loadAndSetTriggerTimes()
     }
 
     private fun observeData() {
@@ -50,7 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     val title = getString(titleResId)
                     val content = getString(contentResId)
 
-                    val bottomSheetDialogFragment = CrossWalkBottomSheet(title, content)
+                    val bottomSheetDialogFragment = CrossWalkBottomSheet(signalLight, title, content)
                     bottomSheetDialogFragment.show(childFragmentManager, "CrossWorkBottomSheet")
                 }
             }
