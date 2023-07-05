@@ -2,8 +2,8 @@ package com.ssafy.gumi_life_project.data.model
 
 import androidx.annotation.ColorRes
 import com.ssafy.gumi_life_project.R
+import java.util.*
 
-data class CrossWalk(val time: String)
 
 //currentColor 현재 신호등 색, remainingTime 다음 신호등 색까지 남은 시간
 data class LightTime(val currentTrafficLightColor: TrafficLightColor, val remainingTime: Long) {
@@ -21,9 +21,6 @@ data class LightTime(val currentTrafficLightColor: TrafficLightColor, val remain
 }
 
 data class TriggerTime(
-    val year: Int,
-    val month: Int,
-    val day: Int,
     val hour: Int,
     val minute: Int,
     val second: Int
@@ -37,15 +34,16 @@ enum class TrafficLightColor(@ColorRes val colorRes: Int) {
 enum class SignalLight(
     val titleResId: Int,
     val contentResId: Int,
-    private val greenDuration: Int,
-    private val redDuration: Int
+    val greenDuration: Int,
+    val redDuration: Int
 ) {
     SIGNAL_LIGHT_1(R.string.cross_walk_title1, R.string.cross_walk_explain1, 25, 155),
     SIGNAL_LIGHT_2(R.string.cross_walk_title2, R.string.cross_walk_explain2, 35, 145),
     SIGNAL_LIGHT_3(R.string.cross_walk_title3, R.string.cross_walk_explain3, 30, 150);
 
-    fun calculateRemainingTime(triggerTimeMillis: Long): LightTime {
+    fun calculateRemainingTime(triggerTime: TriggerTime): LightTime {
         val currentTimeMillis = System.currentTimeMillis()
+        val triggerTimeMillis = getTimeInMillis(triggerTime)
         val elapsedTimeMillis = currentTimeMillis - triggerTimeMillis
         val remainingTimeMillis = elapsedTimeMillis % ((greenDuration + redDuration) * 1000)
 
@@ -57,6 +55,15 @@ enum class SignalLight(
         } else {
             LightTime(TrafficLightColor.GREEN, (greenDuration * 1000 - remainingTimeMillis) / 1000)
         }
+    }
+
+    private fun getTimeInMillis(triggerTime: TriggerTime): Long {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, triggerTime.hour)
+        calendar.set(Calendar.MINUTE, triggerTime.minute)
+        calendar.set(Calendar.SECOND, triggerTime.second)
+        calendar.set(Calendar.MILLISECOND, 0)
+        return calendar.timeInMillis
     }
 
 }
