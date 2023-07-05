@@ -123,12 +123,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    style="@style/LayoutTitleTextStyle"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:text="@string/home_cross_walk" />
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/LayoutTitleTextStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="7dp"
+                        android:text="@string/home_cross_walk" />
+
+                    <ImageView
+                        android:id="@+id/image_refresh"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="5dp"
+                        android:onClick="@{() -> viewModel.loadAndSetTriggerTimes()}"
+                        android:layout_gravity="center"
+                        android:src="@drawable/baseline_refresh_24"/>
+                </LinearLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

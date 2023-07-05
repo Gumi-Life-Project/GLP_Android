@@ -33,11 +33,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_times"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="250dp"
             android:layout_margin="15dp"
-            android:layout_weight="1"
             android:background="@drawable/border_cross_work_table"
             android:padding="15dp"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_cross_walk_time"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>
