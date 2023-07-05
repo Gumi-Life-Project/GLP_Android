@@ -2,13 +2,16 @@ package com.ssafy.gumi_life_project.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.Event
 import com.ssafy.gumi_life_project.data.model.LightTime
 import com.ssafy.gumi_life_project.data.model.SignalLight
 import com.ssafy.gumi_life_project.data.repository.home.HomeRepository
+import com.ssafy.gumi_life_project.util.CrossWorkTimeList
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,10 +28,6 @@ class HomeViewModel @Inject constructor(
     val timeText1 = MutableLiveData<LightTime>()
     val timeText2 = MutableLiveData<LightTime>()
     val timeText3 = MutableLiveData<LightTime>()
-
-    init {
-        loadAndSetTriggerTimes()
-    }
 
     private fun postValueEvent(value: Int, type: String) {
         val msgArrayList = arrayOf(
@@ -48,10 +47,15 @@ class HomeViewModel @Inject constructor(
         _showBottomSheetEvent.value = Event(signalLight)
     }
 
-    private fun loadAndSetTriggerTimes() {
-        val triggerTimes = AppPreferences.loadTriggerTimes()
-        timeText1.value = SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
-        timeText2.value = SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
-        timeText3.value = SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
+    fun loadAndSetTriggerTimes() {
+        showProgress()
+        viewModelScope.launch {
+            val triggerTimes = CrossWorkTimeList.getTriggerTimes()
+            timeText1.value = SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
+            timeText2.value = SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
+            timeText3.value = SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
+
+            hideProgress()
+        }
     }
 }

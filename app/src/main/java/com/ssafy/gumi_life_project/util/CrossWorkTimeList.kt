@@ -1,23 +1,44 @@
 package com.ssafy.gumi_life_project.util
 
-object CrossWorkTimeList {
-    private val timeList: MutableList<String> = mutableListOf()
+import com.ssafy.gumi_life_project.data.model.SignalLight
+import com.ssafy.gumi_life_project.data.model.TriggerTime
 
-    fun setTimeList(list: List<String>) {
-        timeList.clear()
-        timeList.addAll(list)
+object CrossWorkTimeList {
+    private val triggerTimes = setTriggerTimes()
+    private val signalLight1TimeList = generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_1, triggerTimes[0])
+    private val signalLight2TimeList = generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_2, triggerTimes[1])
+    private val signalLight3TimeList = generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_3, triggerTimes[2])
+
+    fun getSignalLight1TimeList(): List<String> {
+        return signalLight1TimeList
     }
 
-    fun getTimeList(): List<String> {
-        return timeList
+    fun getSignalLight2TimeList(): List<String> {
+        return signalLight2TimeList
+    }
+
+    fun getSignalLight3TimeList(): List<String> {
+        return signalLight3TimeList
+    }
+
+    fun setTriggerTimes() : List<TriggerTime> {
+        val list = mutableListOf<TriggerTime>()
+        list.add(TriggerTime(18, 55, 16))
+        list.add(TriggerTime(18, 59, 29))
+        list.add(TriggerTime(19, 1, 55))
+        return list
+    }
+
+    fun getTriggerTimes(): List<TriggerTime> {
+        return triggerTimes
     }
 }
 
-private fun generateCrossWorkTimeList(): List<String> {
-    val baseTime = 6 * 3600 + 55 * 60 + 16
-    val interval = 3 * 60
-    val greenDuration = 25
-    val redDuration = 155
+private fun generateCrossWorkTimeList(signalLight: SignalLight, time : TriggerTime): List<String> {
+    val baseTime = time.hour * 3600 + time.minute * 60 + time.second
+    val greenDuration = signalLight.greenDuration
+    val redDuration = signalLight.redDuration
+    val interval = greenDuration + redDuration
 
     val timeList = mutableListOf<String>()
     for (i in 0 until 24 * 60 * 60) {
@@ -34,8 +55,12 @@ private fun generateCrossWorkTimeList(): List<String> {
     return timeList
 }
 
-fun getCrossWorkTimeListWithRecentTime(currentTime: String): List<String> {
-    val timeList = CrossWorkTimeList.getTimeList()
+fun getCrossWorkTimeListWithRecentTime(signalLight: SignalLight, currentTime: String): List<String> {
+    val timeList = when(signalLight) {
+        SignalLight.SIGNAL_LIGHT_1 -> CrossWorkTimeList.getSignalLight1TimeList()
+        SignalLight.SIGNAL_LIGHT_2 -> CrossWorkTimeList.getSignalLight2TimeList()
+        SignalLight.SIGNAL_LIGHT_3 -> CrossWorkTimeList.getSignalLight3TimeList()
+    }
     var currentIndex = 0
     for (index in 1 until timeList.size) {
         if (timeList[index - 1] <= currentTime && timeList[index] >= currentTime) {
@@ -50,10 +75,6 @@ fun getCrossWorkTimeListWithRecentTime(currentTime: String): List<String> {
     return timeList.subList(currentIndex, endIndex + 1)
 }
 
-fun setCrossWorkTimeList() {
-    val timeList = generateCrossWorkTimeList()
-    CrossWorkTimeList.setTimeList(timeList)
-}
 
 private fun formatTime(seconds: Int): String {
     val hours = seconds / 3600
