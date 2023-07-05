@@ -77,7 +77,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             
             weather.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
+                    val weather = it.data
                     Log.d(TAG, "observeData: $it")
+                    bindingNonNull.textviewTodayWeatherTemperature.text = weather.temperature + "º"
+                    makeWeatherIcon(weather.precipitationType)
                 }
                 
             }
@@ -91,6 +94,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     private fun limitStringLength(input: String, maxLength: Int = 23): String {
         return if (input.length > maxLength) input.substring(0, maxLength) + "..." else input
+    }
+
+    private fun makeWeatherIcon(type: String) {
+        when (type) {
+            "없음" -> bindingNonNull.imageviewTodayWeatherImg.setImageResource(R.drawable.icon_sunny)
+            "비" -> bindingNonNull.imageviewTodayWeatherImg.setImageResource(R.drawable.icon_rainy)
+            "눈" -> bindingNonNull.imageviewTodayWeatherImg.setImageResource(R.drawable.icon_snow)
+        }
     }
 
 }
