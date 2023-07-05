@@ -10,6 +10,10 @@
             type="com.ssafy.gumi_life_project.ui.home.HomeViewModel" />
 
         <variable
+            name="mainViewModel"
+            type="com.ssafy.gumi_life_project.ui.main.MainViewModel" />
+
+        <variable
             name="signalLight"
             type="com.ssafy.gumi_life_project.data.model.SignalLight" />
     </data>
@@ -47,8 +51,8 @@
 
                 <ImageView
                     android:id="@+id/imageview_today_weather_img"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
                     android:layout_marginEnd="4dp"
                     android:src="@drawable/icon_rainy" />
 
@@ -92,6 +96,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearlayout_tip"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="12dp"
@@ -101,19 +106,21 @@
                 android:paddingStart="18dp"
                 android:paddingEnd="18dp">
 
+
                 <TextView
                     android:id="@+id/textview_tip_title"
                     style="@style/HomeMiddleTitleTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="4"
                     android:text="@string/home_tip" />
 
                 <TextView
                     android:id="@+id/textview_tip_content"
                     style="@style/HomeMiddleContentTextStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="마이구미는 맛있다." />
             </LinearLayout>
 

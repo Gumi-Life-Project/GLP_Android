@@ -3,7 +3,6 @@ package com.ssafy.gumi_life_project.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.Event
 import com.ssafy.gumi_life_project.data.model.LightTime
 import com.ssafy.gumi_life_project.data.model.SignalLight
@@ -13,6 +12,7 @@ import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(

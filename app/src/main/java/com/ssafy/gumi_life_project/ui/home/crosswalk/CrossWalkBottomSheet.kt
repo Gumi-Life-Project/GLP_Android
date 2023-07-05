@@ -12,7 +12,11 @@ import com.ssafy.gumi_life_project.util.getCrossWorkTimeListWithRecentTime
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CrossWalkBottomSheet(private val signalLight: SignalLight, private val title: String, private val content: String) :
+class CrossWalkBottomSheet(
+    private val signalLight: SignalLight,
+    private val title: String,
+    private val content: String
+) :
     BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetCrossWalkBinding

@@ -5,9 +5,12 @@ import com.ssafy.gumi_life_project.data.model.TriggerTime
 
 object CrossWorkTimeList {
     private val triggerTimes = setTriggerTimes()
-    private val signalLight1TimeList = generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_1, triggerTimes[0])
-    private val signalLight2TimeList = generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_2, triggerTimes[1])
-    private val signalLight3TimeList = generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_3, triggerTimes[2])
+    private val signalLight1TimeList =
+        generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_1, triggerTimes[0])
+    private val signalLight2TimeList =
+        generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_2, triggerTimes[1])
+    private val signalLight3TimeList =
+        generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_3, triggerTimes[2])
 
     fun getSignalLight1TimeList(): List<String> {
         return signalLight1TimeList
@@ -21,7 +24,7 @@ object CrossWorkTimeList {
         return signalLight3TimeList
     }
 
-    fun setTriggerTimes() : List<TriggerTime> {
+    fun setTriggerTimes(): List<TriggerTime> {
         val list = mutableListOf<TriggerTime>()
         list.add(TriggerTime(18, 55, 16))
         list.add(TriggerTime(18, 59, 29))
@@ -34,7 +37,7 @@ object CrossWorkTimeList {
     }
 }
 
-private fun generateCrossWorkTimeList(signalLight: SignalLight, time : TriggerTime): List<String> {
+private fun generateCrossWorkTimeList(signalLight: SignalLight, time: TriggerTime): List<String> {
     val baseTime = time.hour * 3600 + time.minute * 60 + time.second
     val greenDuration = signalLight.greenDuration
     val redDuration = signalLight.redDuration
@@ -55,8 +58,11 @@ private fun generateCrossWorkTimeList(signalLight: SignalLight, time : TriggerTi
     return timeList
 }
 
-fun getCrossWorkTimeListWithRecentTime(signalLight: SignalLight, currentTime: String): List<String> {
-    val timeList = when(signalLight) {
+fun getCrossWorkTimeListWithRecentTime(
+    signalLight: SignalLight,
+    currentTime: String
+): List<String> {
+    val timeList = when (signalLight) {
         SignalLight.SIGNAL_LIGHT_1 -> CrossWorkTimeList.getSignalLight1TimeList()
         SignalLight.SIGNAL_LIGHT_2 -> CrossWorkTimeList.getSignalLight2TimeList()
         SignalLight.SIGNAL_LIGHT_3 -> CrossWorkTimeList.getSignalLight3TimeList()

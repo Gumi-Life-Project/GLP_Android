@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -17,4 +17,12 @@
         android:id="@+id/shuttleBusFragment"
         android:name="com.ssafy.gumi_life_project.ui.shuttlebus.ShuttleBusFragment"
         tools:layout="@layout/fragment_shuttle_bus" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.ssafy.gumi_life_project.ui.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
