@@ -49,6 +49,7 @@
             android:id="@+id/recyclerview_shuttle_bus_stop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>

@@ -1,7 +1,6 @@
 package com.ssafy.gumi_life_project.ui.shuttlebus
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.FragmentManager
@@ -44,7 +43,6 @@ class ShuttleBusLineAdapter(
                     }
                 }
             binding.recyclerviewShuttleBusStop.adapter = shuttleBusStopAdapter
-            binding.recyclerviewShuttleBusStop.visibility = View.GONE
             binding.buttonExpand.setOnClickListener {
                 isItemOpen = itemClickListener.onExpandButtonClicked(
                     isItemOpen,
