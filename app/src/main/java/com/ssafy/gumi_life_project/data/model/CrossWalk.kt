@@ -3,6 +3,7 @@ package com.ssafy.gumi_life_project.data.model
 import androidx.annotation.ColorRes
 import com.ssafy.gumi_life_project.R
 import java.util.*
+import kotlin.math.abs
 
 
 //currentColor 현재 신호등 색, remainingTime 다음 신호등 색까지 남은 시간
@@ -44,16 +45,16 @@ enum class SignalLight(
     fun calculateRemainingTime(triggerTime: TriggerTime): LightTime {
         val currentTimeMillis = System.currentTimeMillis()
         val triggerTimeMillis = getTimeInMillis(triggerTime)
-        val elapsedTimeMillis = currentTimeMillis - triggerTimeMillis
+        val elapsedTimeMillis = abs(currentTimeMillis - triggerTimeMillis)
         val remainingTimeMillis = elapsedTimeMillis % ((greenDuration + redDuration) * 1000)
 
         return if (remainingTimeMillis > greenDuration * 1000) {
             LightTime(
                 TrafficLightColor.RED,
-                (redDuration * 1000 - (remainingTimeMillis - greenDuration * 1000)) / 1000
+                (remainingTimeMillis - greenDuration * 1000) / 1000
             )
         } else {
-            LightTime(TrafficLightColor.GREEN, (greenDuration * 1000 - remainingTimeMillis) / 1000)
+            LightTime(TrafficLightColor.GREEN, remainingTimeMillis / 1000)
         }
     }
 
@@ -62,7 +63,6 @@ enum class SignalLight(
         calendar.set(Calendar.HOUR_OF_DAY, triggerTime.hour)
         calendar.set(Calendar.MINUTE, triggerTime.minute)
         calendar.set(Calendar.SECOND, triggerTime.second)
-        calendar.set(Calendar.MILLISECOND, 0)
         return calendar.timeInMillis
     }
 

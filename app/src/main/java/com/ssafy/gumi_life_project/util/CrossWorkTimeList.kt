@@ -24,7 +24,7 @@ object CrossWorkTimeList {
         return signalLight3TimeList
     }
 
-    fun setTriggerTimes(): List<TriggerTime> {
+    private fun setTriggerTimes(): List<TriggerTime> {
         val list = mutableListOf<TriggerTime>()
         list.add(TriggerTime(18, 55, 16))
         list.add(TriggerTime(18, 59, 29))
