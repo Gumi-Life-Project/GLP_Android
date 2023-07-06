@@ -6,19 +6,27 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/textview_subtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="180dp"
             style="@style/SplashSloganTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/splash_slogan" />
 
         <TextView
+            android:id="@+id/textview_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="210dp"
             style="@style/SplashTitleTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,12 +34,19 @@
             android:textColor="@color/main_color" />
 
         <ImageView
+            android:id="@+id/imageview_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_title"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/icon_grape" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageview_logo"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="200dp"
@@ -43,6 +58,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:padding="2dp"
+                android:layout_weight="1"
                 android:src="@drawable/icon_splash_light" />
 
             <ImageView
@@ -50,6 +66,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:padding="2dp"
+                android:layout_weight="1"
                 android:src="@drawable/icon_splash_light" />
 
             <ImageView
@@ -57,6 +74,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:padding="2dp"
+                android:layout_weight="1"
                 android:src="@drawable/icon_splash_light" />
 
             <ImageView
@@ -64,6 +82,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:padding="2dp"
+                android:layout_weight="1"
                 android:src="@drawable/icon_splash_light" />
 
             <ImageView
@@ -71,8 +90,9 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:padding="2dp"
+                android:layout_weight="1"
                 android:src="@drawable/icon_splash_light" />
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
