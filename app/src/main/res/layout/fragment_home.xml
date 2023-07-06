@@ -143,6 +143,15 @@
                         android:text="@string/home_cross_walk" />
 
                     <ImageView
+                        android:id="@+id/image_start"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="5dp"
+                        android:onClick="@{() -> viewModel.startOrStopPeriodicTask()}"
+                        android:layout_gravity="center"
+                        app:isRunning="@{viewModel.isRunning}"/>
+
+                    <ImageView
                         android:id="@+id/image_refresh"
                         android:layout_width="40dp"
                         android:layout_height="40dp"

@@ -1,5 +1,7 @@
 package com.ssafy.gumi_life_project.ui.home
 
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -29,6 +31,10 @@ class HomeViewModel @Inject constructor(
     val timeText2 = MutableLiveData<LightTime>()
     val timeText3 = MutableLiveData<LightTime>()
 
+    private var _isRunning = MutableLiveData<Boolean>(false)
+    val isRunning: LiveData<Boolean>
+        get() = _isRunning
+
     private fun postValueEvent(value: Int, type: String) {
         val msgArrayList = arrayOf(
             "Api 오류 : $type 실패했습니다.",
@@ -57,5 +63,37 @@ class HomeViewModel @Inject constructor(
 
             hideProgress()
         }
+    }
+
+
+    private val handler = Handler(Looper.getMainLooper())
+    private val runnableCode: Runnable = object : Runnable {
+        override fun run() {
+            loadAndSetTriggerTimes()
+            handler.postDelayed(this, 1000)
+        }
+    }
+
+    fun startOrStopPeriodicTask() {
+        if(_isRunning.value == true) {
+            stopPeriodicTask()
+        } else {
+            startPeriodicTask()
+        }
+    }
+
+    private fun startPeriodicTask() {
+        handler.post(runnableCode)
+        _isRunning.postValue(true)
+    }
+
+    private fun stopPeriodicTask() {
+        handler.removeCallbacks(runnableCode)
+        _isRunning.postValue(false)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        handler.removeCallbacks(runnableCode)
     }
 }
