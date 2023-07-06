@@ -11,34 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_top_corners"
+        android:padding="12dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textview_cross_work_title"
+            android:id="@+id/textview_tip_subject"
             style="@style/BottomSheetTitleTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/black"
-            android:text="@string/cross_walk_title1" />
+            android:text="@string/home_tip" />
 
         <TextView
-            android:id="@+id/textview_cross_work_explain"
+            android:id="@+id/textview_tip_description"
+            style="@style/HomeMiddleContentGrayTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/cross_walk_explain1" />
+            android:text="slkdfjlskdjflksd"
+            android:gravity="center"/>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_times"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/border_cross_work_table"
-            android:padding="15dp"
-            tools:itemCount="10"
-            tools:listitem="@layout/item_cross_walk_time"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>

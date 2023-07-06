@@ -1,20 +1,17 @@
 package com.ssafy.gumi_life_project.ui.home.crosswalk
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.data.model.CrossWalk
+import com.ssafy.gumi_life_project.databinding.ItemCrossWalkTimeBinding
 
-class CrossWalkTimeListAdapter(private val crossWalkTimeList: List<CrossWalk>) :
+class CrossWalkTimeListAdapter(private val crossWalkTimeList: List<String>) :
     RecyclerView.Adapter<CrossWalkTimeListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_cross_walk_time, parent, false)
-        return ViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemCrossWalkTimeBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -26,11 +23,12 @@ class CrossWalkTimeListAdapter(private val crossWalkTimeList: List<CrossWalk>) :
         return crossWalkTimeList.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val timeTextView: TextView = itemView.findViewById(R.id.textview_time)
+    inner class ViewHolder(private val binding: ItemCrossWalkTimeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(crossWalkTime: CrossWalk) {
-            timeTextView.text = crossWalkTime.time
+        fun bind(crossWalkTime: String) {
+            binding.crossWalkTime = crossWalkTime
+            binding.executePendingBindings()
         }
     }
 }

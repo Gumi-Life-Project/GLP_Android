@@ -11,4 +11,6 @@
     <color name="main_color">#5B62FF</color>
     <color name="splash_gray">#909090</color>
 
+    <color name="green">#2D8B00</color>
+    <color name="red">#FF0000</color>
 </resources>

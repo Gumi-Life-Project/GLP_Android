@@ -6,19 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.data.model.CrossWalk
+import com.ssafy.gumi_life_project.data.model.SignalLight
 import com.ssafy.gumi_life_project.databinding.BottomSheetCrossWalkBinding
+import com.ssafy.gumi_life_project.util.getCrossWorkTimeListWithRecentTime
+import java.text.SimpleDateFormat
+import java.util.*
 
-class CrossWorkBottomSheet(private val title: String, private val content: String) :
+class CrossWalkBottomSheet(
+    private val signalLight: SignalLight,
+    private val title: String,
+    private val content: String
+) :
     BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetCrossWalkBinding
     private lateinit var adapter: CrossWalkTimeListAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = BottomSheetCrossWalkBinding.inflate(inflater, container, false)
         return binding.root
@@ -27,21 +32,18 @@ class CrossWorkBottomSheet(private val title: String, private val content: Strin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val crossWorkTimeList = getCrossWorkTimeList()
+        val crossWorkTimeList = getCrossWorkTimeListWithRecentTime(signalLight, getCurrentTime())
 
         adapter = CrossWalkTimeListAdapter(crossWorkTimeList)
         binding.recyclerviewTimes.adapter = adapter
-
         binding.textviewCrossWorkTitle.text = title
         binding.textviewCrossWorkExplain.text = content
     }
 
-    private fun getCrossWorkTimeList(): List<CrossWalk> {
-        val list = mutableListOf<CrossWalk>()
-        list.add(CrossWalk("10:00 AM"))
-        list.add(CrossWalk("12:30 PM"))
-        list.add(CrossWalk("3:15 PM"))
-        return list
+    private fun getCurrentTime(): String {
+        val currentTime = Calendar.getInstance().time
+        val format = SimpleDateFormat("HH:mm", Locale.getDefault())
+        return format.format(currentTime)
     }
 
     override fun getTheme(): Int = R.style.BottomSheetDialog

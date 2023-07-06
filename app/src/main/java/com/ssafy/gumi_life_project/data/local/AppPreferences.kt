@@ -6,6 +6,9 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
+import com.ssafy.gumi_life_project.App
+import com.ssafy.gumi_life_project.data.model.TriggerTime
+import java.util.*
 
 object AppPreferences {
     private const val LOGIN_SESSION = "login.session"
@@ -18,7 +21,7 @@ object AppPreferences {
     private lateinit var preferences: SharedPreferences
     private val gson = GsonBuilder().create()
 
-    fun openSharedPrep(context: Context): SharedPreferences {
+     fun openSharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(LOGIN_SESSION, Context.MODE_PRIVATE)
     }
 

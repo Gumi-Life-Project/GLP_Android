@@ -13,7 +13,7 @@ class App : Application() {
     }
 
     override fun onCreate() {
-        prefs = AppPreferences.openSharedPrep(applicationContext)
+        prefs = AppPreferences.openSharedPreferences(applicationContext)
 
         shuttleBusPrefs = AppPreferences.openShuttleBusSharedPreference(applicationContext)
         if (shuttleBusPrefs.getBoolean(AppPreferences.APP_RUN_STATE, true)) {
