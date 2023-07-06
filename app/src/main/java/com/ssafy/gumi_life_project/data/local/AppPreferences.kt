@@ -106,8 +106,8 @@ object AppPreferences {
         daeguJungbuLine.add(
             ShuttleBusStop(
                 "범어역 1번출구(설명한의원 앞)",
-                36.859466,
-                128.623174,
+                35.859618,
+                128.622844,
                 "07:10",
                 false
             )

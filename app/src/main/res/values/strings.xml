@@ -24,7 +24,7 @@
     <string name="cross_walk_explain3">도미노피자와 홍게마트 사이의 \n 신호등 시간표입니다.</string>
 
     <!-- shuttle bus -->
-    <string name="shuttle_bus_guidance">장소명을 클릭하면 정확한 탑승 위치가 나타납니다.\n탑승 시각은 도로상황에 따라 지연될 수 있습니다.</string>
+    <string name="shuttle_bus_guidance">장소명을 클릭하면 탑승 위치가 나타납니다.\n탑승 시각은 도로상황에 따라 지연될 수 있습니다.</string>
     <string name="shuttle_bus_mark_button">즐겨찾기 설정</string>
     <string name="shuttle_bus_dialog_title">%s 탑승위치</string>
     <string name="shuttle_bus_mark_button_cancel">즐겨찾기 취소</string>
