@@ -26,9 +26,9 @@ object CrossWorkTimeList {
 
     private fun setTriggerTimes(): List<TriggerTime> {
         val list = mutableListOf<TriggerTime>()
-        list.add(TriggerTime(18, 55, 16))
-        list.add(TriggerTime(18, 59, 29))
-        list.add(TriggerTime(19, 1, 55))
+        list.add(TriggerTime(18, 55, 15))
+        list.add(TriggerTime(18, 59, 28))
+        list.add(TriggerTime(19, 1, 53))
         return list
     }
 
@@ -44,18 +44,13 @@ private fun generateCrossWorkTimeList(signalLight: SignalLight, time: TriggerTim
     val interval = greenDuration + redDuration
 
     val timeList = mutableListOf<String>()
-    for (i in 0 until 24 * 60 * 60) {
+    for (i in 0 until 480) {
         val elapsedSeconds = i * interval
         val greenTime = baseTime + elapsedSeconds
-        var redTime = greenTime + greenDuration
-        if (redTime % interval == 0) {
-            redTime -= interval
-        }
-        val formattedTime = formatTime(redTime % (24 * 60 * 60))
+        val formattedTime = formatTime(greenTime % (24 * 60 * 60))
         timeList.add(formattedTime)
     }
-
-    return timeList
+    return timeList.sorted()
 }
 
 fun getCrossWorkTimeListWithRecentTime(
@@ -69,10 +64,10 @@ fun getCrossWorkTimeListWithRecentTime(
     }
     var currentIndex = 0
     for (index in 1 until timeList.size) {
-        if (timeList[index - 1] <= currentTime && timeList[index] >= currentTime) {
+        if (timeList[index] == currentTime) {
             currentIndex = index
             break
-        } else if (timeList[index] == currentTime) {
+        } else if (timeList[index - 1] <= currentTime && timeList[index] >= currentTime) {
             currentIndex = index
             break
         }
