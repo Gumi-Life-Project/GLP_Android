@@ -6,8 +6,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
-import com.ssafy.gumi_life_project.App
-import com.ssafy.gumi_life_project.data.model.TriggerTime
 import java.util.*
 
 object AppPreferences {
@@ -21,7 +19,7 @@ object AppPreferences {
     private lateinit var preferences: SharedPreferences
     private val gson = GsonBuilder().create()
 
-     fun openSharedPreferences(context: Context): SharedPreferences {
+    fun openSharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(LOGIN_SESSION, Context.MODE_PRIVATE)
     }
 
@@ -262,11 +260,6 @@ object AppPreferences {
         updateShuttleBusStopMark(ShuttleBusStop("", 0.0, 0.0, "", false))
     }
 
-    fun updateShuttleBusStopMark(shuttleBusStopMark: ShuttleBusStop) {
-        val shuttleBusStopMarkJson = gson.toJson(shuttleBusStopMark, ShuttleBusStop::class.java)
-        preferences.edit().putString(SHUTTLE_BUS_STOP_MARKED, shuttleBusStopMarkJson).commit()
-    }
-
     fun getShuttleBusInfo(): ArrayList<ShuttleBusLine> {
         val jsonData = preferences.getString(SHUTTLE_BUS_INFO, "")
         val lineListType = object : TypeToken<ArrayList<ShuttleBusLine>>() {}.type
@@ -278,6 +271,18 @@ object AppPreferences {
         preferences.edit().remove(SHUTTLE_BUS_INFO)
         val newShuttleBusInfo = gson.toJson(busLineList, MutableList::class.java)
         preferences.edit().putString(SHUTTLE_BUS_INFO, newShuttleBusInfo).commit()
+    }
+
+    fun updateShuttleBusStopMark(shuttleBusStopMark: ShuttleBusStop) {
+        val shuttleBusStopMarkJson = gson.toJson(shuttleBusStopMark, ShuttleBusStop::class.java)
+        preferences.edit().putString(SHUTTLE_BUS_STOP_MARKED, shuttleBusStopMarkJson).commit()
+    }
+
+    fun getShuttleBusStopMark(): ShuttleBusStop {
+        val jsonData = preferences.getString(SHUTTLE_BUS_STOP_MARKED, "")
+        val shuttleBusStopType = object : TypeToken<ShuttleBusStop>() {}.type
+
+        return gson.fromJson(jsonData, shuttleBusStopType)
     }
 
 }

@@ -10,14 +10,15 @@ import androidx.fragment.app.activityViewModels
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
 import com.ssafy.gumi_life_project.databinding.DialogShuttleBusBinding
+import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
 
-
 class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusStop) :
     DialogFragment() {
-    private val viewModel by activityViewModels<ShuttleBusViewModel>()
+    private val shuttleBusViewModel by activityViewModels<ShuttleBusViewModel>()
+    private val mainViewModel by activityViewModels<MainViewModel>()
     private lateinit var binding: DialogShuttleBusBinding
     private lateinit var mapView: MapView
     private val MARKER_NAME = "탑승위치"
@@ -72,7 +73,9 @@ class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusS
 
     private fun setListener() {
         binding.buttonMark.setOnClickListener {
-            viewModel.updateShuttleBusStopMark(shuttleBusStop)
+            val shuttleBusStopMarkState = !shuttleBusStop.isMarked
+            shuttleBusViewModel.updateShuttleBusStopList(shuttleBusStop)
+            mainViewModel.updateShuttleBusStopMark(shuttleBusStop, shuttleBusStopMarkState)
             dismiss()
         }
     }
