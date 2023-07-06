@@ -134,31 +134,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         style="@style/LayoutTitleTextStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="7dp"
+                        android:layout_weight="1"
                         android:text="@string/home_cross_walk" />
 
                     <ImageView
                         android:id="@+id/image_start"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:padding="5dp"
-                        android:onClick="@{() -> viewModel.startOrStopPeriodicTask()}"
                         android:layout_gravity="center"
-                        app:isRunning="@{viewModel.isRunning}"/>
+                        android:onClick="@{() -> viewModel.startOrStopPeriodicTask()}"
+                        android:padding="5dp"
+                        app:isRunning="@{viewModel.isRunning}" />
 
                     <ImageView
                         android:id="@+id/image_refresh"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:padding="5dp"
-                        android:onClick="@{() -> viewModel.loadAndSetTriggerTimes()}"
                         android:layout_gravity="center"
-                        android:src="@drawable/baseline_refresh_24"/>
+                        android:onClick="@{() -> viewModel.loadAndSetTriggerTimes()}"
+                        android:padding="5dp"
+                        android:src="@drawable/baseline_refresh_24" />
                 </LinearLayout>
 
 
@@ -178,8 +179,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.551"
-                        app:timeText="@{viewModel.timeText1.remainingTimeString}"
-                        app:timeColor="@{viewModel.timeText1.getCurrentColorRes()}"/>
+                        app:timeColor="@{viewModel.timeText1.getCurrentColorRes()}"
+                        app:timeText="@{viewModel.timeText1.remainingTimeString}" />
 
                     <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
                         android:id="@+id/cross_walk_3"
@@ -192,8 +193,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.502"
-                        app:timeText="@{viewModel.timeText3.remainingTimeString}"
-                        app:timeColor="@{viewModel.timeText3.getCurrentColorRes()}"/>
+                        app:timeColor="@{viewModel.timeText3.getCurrentColorRes()}"
+                        app:timeText="@{viewModel.timeText3.remainingTimeString}" />
 
                     <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
                         android:id="@+id/cross_work_2"
@@ -206,8 +207,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.028"
-                        app:timeText="@{viewModel.timeText2.remainingTimeString}"
-                        app:timeColor="@{viewModel.timeText2.getCurrentColorRes()}"/>
+                        app:timeColor="@{viewModel.timeText2.getCurrentColorRes()}"
+                        app:timeText="@{viewModel.timeText2.remainingTimeString}" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

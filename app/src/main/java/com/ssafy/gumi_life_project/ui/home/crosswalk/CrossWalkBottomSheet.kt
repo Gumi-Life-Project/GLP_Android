@@ -9,7 +9,6 @@ import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.SignalLight
 import com.ssafy.gumi_life_project.databinding.BottomSheetCrossWalkBinding
 import com.ssafy.gumi_life_project.util.getCrossWorkTimeListWithRecentTime
-import java.text.SimpleDateFormat
 import java.util.*
 
 class CrossWalkBottomSheet(
@@ -32,7 +31,8 @@ class CrossWalkBottomSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val crossWorkTimeList = getCrossWorkTimeListWithRecentTime(signalLight, getCurrentTimeInSeconds())
+        val crossWorkTimeList =
+            getCrossWorkTimeListWithRecentTime(signalLight, getCurrentTimeInSeconds())
 
         adapter = CrossWalkTimeListAdapter(crossWorkTimeList)
         binding.recyclerviewTimes.adapter = adapter

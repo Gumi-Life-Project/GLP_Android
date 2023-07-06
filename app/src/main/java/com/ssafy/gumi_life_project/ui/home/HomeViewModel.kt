@@ -27,13 +27,13 @@ class HomeViewModel @Inject constructor(
     private val _showBottomSheetEvent = MutableLiveData<Event<SignalLight>>()
     val showBottomSheetEvent: LiveData<Event<SignalLight>> = _showBottomSheetEvent
 
-    val timeText1 = MutableLiveData<LightTime>()
-    val timeText2 = MutableLiveData<LightTime>()
-    val timeText3 = MutableLiveData<LightTime>()
-
     private var _isRunning = MutableLiveData<Boolean>(false)
     val isRunning: LiveData<Boolean>
         get() = _isRunning
+
+    val timeText1 = MutableLiveData<LightTime>()
+    val timeText2 = MutableLiveData<LightTime>()
+    val timeText3 = MutableLiveData<LightTime>()
 
     private fun postValueEvent(value: Int, type: String) {
         val msgArrayList = arrayOf(
@@ -57,6 +57,7 @@ class HomeViewModel @Inject constructor(
         showProgress()
         viewModelScope.launch {
             val triggerTimes = CrossWorkTimeList.getTriggerTimes()
+
             timeText1.value = SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
             timeText2.value = SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
             timeText3.value = SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
@@ -75,7 +76,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun startOrStopPeriodicTask() {
-        if(_isRunning.value == true) {
+        if (_isRunning.value == true) {
             stopPeriodicTask()
         } else {
             startPeriodicTask()
