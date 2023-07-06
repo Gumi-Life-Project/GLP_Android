@@ -28,4 +28,5 @@
     <string name="shuttle_bus_mark_button">즐겨찾기 설정</string>
     <string name="shuttle_bus_dialog_title">%s 탑승위치</string>
     <string name="shuttle_bus_mark_button_cancel">즐겨찾기 취소</string>
+    <string name="shuttle_bus_tool_bar_title">셔틀정보</string>
 </resources>
