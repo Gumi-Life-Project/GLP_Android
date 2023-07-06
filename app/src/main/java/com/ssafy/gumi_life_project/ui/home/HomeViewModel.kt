@@ -27,13 +27,17 @@ class HomeViewModel @Inject constructor(
     private val _showBottomSheetEvent = MutableLiveData<Event<SignalLight>>()
     val showBottomSheetEvent: LiveData<Event<SignalLight>> = _showBottomSheetEvent
 
-    private var _isRunning = MutableLiveData<Boolean>(false)
-    val isRunning: LiveData<Boolean>
-        get() = _isRunning
+    private var _isRunning = MutableLiveData(false)
+    val isRunning: LiveData<Boolean> = _isRunning
 
-    val timeText1 = MutableLiveData<LightTime>()
-    val timeText2 = MutableLiveData<LightTime>()
-    val timeText3 = MutableLiveData<LightTime>()
+    private val _timeText1 = MutableLiveData<LightTime>()
+    val timeText1: LiveData<LightTime> = _timeText1
+
+    private val _timeText2 = MutableLiveData<LightTime>()
+    val timeText2: LiveData<LightTime> = _timeText2
+
+    private val _timeText3 = MutableLiveData<LightTime>()
+    val timeText3: LiveData<LightTime> = _timeText3
 
     private fun postValueEvent(value: Int, type: String) {
         val msgArrayList = arrayOf(
@@ -50,7 +54,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onCrossWorkTimeViewClicked(signalLight: SignalLight) {
-        _showBottomSheetEvent.value = Event(signalLight)
+        _showBottomSheetEvent.postValue(Event(signalLight))
     }
 
     fun loadAndSetTriggerTimes() {
@@ -58,9 +62,9 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val triggerTimes = CrossWorkTimeList.getTriggerTimes()
 
-            timeText1.value = SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
-            timeText2.value = SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
-            timeText3.value = SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
+            _timeText1.value = SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
+            _timeText2.value = SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
+            _timeText3.value = SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
 
             hideProgress()
         }
