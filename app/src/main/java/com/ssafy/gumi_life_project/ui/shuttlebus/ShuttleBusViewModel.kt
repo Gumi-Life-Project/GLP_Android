@@ -19,16 +19,18 @@ class ShuttleBusViewModel : BaseViewModel() {
         _shuttleBusLineListLiveData.postValue(shuttleBusLineList)
     }
 
-    fun updateShuttleBusLineList(shuttleBusStop: ShuttleBusStop) {
+    fun updateShuttleBusStopMark(shuttleBusStop: ShuttleBusStop) {
         shuttleBusLineList.forEach { shuttleBusLine ->
             shuttleBusLine.stopList.forEach { oldShuttleBusStop ->
                 if (shuttleBusStop === oldShuttleBusStop) {
-                    oldShuttleBusStop.isMarked = true
+                    oldShuttleBusStop.isMarked = !oldShuttleBusStop.isMarked
                 } else if (oldShuttleBusStop.isMarked == true) {
                     oldShuttleBusStop.isMarked = false
                 }
             }
         }
         _shuttleBusLineListLiveData.postValue(shuttleBusLineList)
+        AppPreferences.updateShuttleBusInfo(shuttleBusLineList)
+        AppPreferences.updateShuttleBusStopMark(shuttleBusStop)
     }
 }

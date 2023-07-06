@@ -13,6 +13,7 @@ object AppPreferences {
 
     const val APP_RUN_STATE = "app_run_state"
     private const val SHUTTLE_BUS_INFO = "shuttle_bus_info"
+    private const val SHUTTLE_BUS_STOP_MARKED = "shuttle_bus_stop_marked"
 
     private lateinit var preferences: SharedPreferences
     private val gson = GsonBuilder().create()
@@ -28,7 +29,7 @@ object AppPreferences {
     }
 
     fun updateAppRunState() {//앱 최초 실행이 아님을 표시
-        preferences.edit().putBoolean(APP_RUN_STATE, false)
+        preferences.edit().putBoolean(APP_RUN_STATE, false).commit()
     }
 
     fun initShuttleBusInfo() {//셔틀 정보 초기화
@@ -255,7 +256,12 @@ object AppPreferences {
 
         val shuttleBusInfo = gson.toJson(busLineList, ArrayList::class.java)
         preferences.edit().putString(SHUTTLE_BUS_INFO, shuttleBusInfo).commit()
+        updateShuttleBusStopMark(ShuttleBusStop("", 0.0, 0.0, "", false))
+    }
 
+    fun updateShuttleBusStopMark(shuttleBusStopMark: ShuttleBusStop) {
+        val shuttleBusStopMarkJson = gson.toJson(shuttleBusStopMark, ShuttleBusStop::class.java)
+        preferences.edit().putString(SHUTTLE_BUS_STOP_MARKED, shuttleBusStopMarkJson).commit()
     }
 
     fun getShuttleBusInfo(): ArrayList<ShuttleBusLine> {
@@ -263,6 +269,12 @@ object AppPreferences {
         val lineListType = object : TypeToken<ArrayList<ShuttleBusLine>>() {}.type
 
         return gson.fromJson(jsonData, lineListType)
+    }
+
+    fun updateShuttleBusInfo(busLineList: MutableList<ShuttleBusLine>) {
+        preferences.edit().remove(SHUTTLE_BUS_INFO)
+        val newShuttleBusInfo = gson.toJson(busLineList, MutableList::class.java)
+        preferences.edit().putString(SHUTTLE_BUS_INFO, newShuttleBusInfo).commit()
     }
 
 }

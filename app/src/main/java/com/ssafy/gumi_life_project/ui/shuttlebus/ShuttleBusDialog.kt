@@ -41,6 +41,7 @@ class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusS
             dialog?.window?.setBackgroundDrawableResource(R.drawable.rounded_all_corners)
             setMap()
             setListener()
+            setButtonState()
         } catch (exception: Exception) {
             exception.printStackTrace()
         }
@@ -71,7 +72,14 @@ class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusS
 
     private fun setListener() {
         binding.buttonMark.setOnClickListener {
-            viewModel.updateShuttleBusLineList(shuttleBusStop)
+            viewModel.updateShuttleBusStopMark(shuttleBusStop)
+            dismiss()
+        }
+    }
+
+    private fun setButtonState() {
+        if (shuttleBusStop.isMarked) {
+            binding.buttonMark.text = resources.getString(R.string.shuttle_bus_mark_button_cancel)
         }
     }
 }
