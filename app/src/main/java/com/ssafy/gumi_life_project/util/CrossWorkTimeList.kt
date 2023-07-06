@@ -80,5 +80,5 @@ fun getCrossWorkTimeListWithRecentTime(
 private fun formatTime(seconds: Int): String {
     val hours = seconds / 3600
     val minutes = (seconds % 3600) / 60
-    return String.format("%02d:%02d", hours, minutes)
+    return String.format("%02d시 %02d분", hours, minutes)
 }
