@@ -32,7 +32,7 @@ class CrossWalkBottomSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val crossWorkTimeList = getCrossWorkTimeListWithRecentTime(signalLight, getCurrentTime())
+        val crossWorkTimeList = getCrossWorkTimeListWithRecentTime(signalLight, getCurrentTimeInSeconds())
 
         adapter = CrossWalkTimeListAdapter(crossWorkTimeList)
         binding.recyclerviewTimes.adapter = adapter
@@ -40,10 +40,11 @@ class CrossWalkBottomSheet(
         binding.textviewCrossWorkExplain.text = content
     }
 
-    private fun getCurrentTime(): String {
-        val currentTime = Calendar.getInstance().time
-        val format = SimpleDateFormat("HH:mm", Locale.getDefault())
-        return format.format(currentTime)
+    private fun getCurrentTimeInSeconds(): Int {
+        val currentTime = Calendar.getInstance()
+        return currentTime.get(Calendar.HOUR_OF_DAY) * 3600 +
+                currentTime.get(Calendar.MINUTE) * 60 +
+                currentTime.get(Calendar.SECOND)
     }
 
     override fun getTheme(): Int = R.style.BottomSheetDialog
