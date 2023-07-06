@@ -3,5 +3,6 @@
 
     <declare-styleable name="CrossWalkTimeView">
         <attr name="timeText" format="string"/>
+        <attr name="timeColor" format="color"/>
     </declare-styleable>
 </resources>
