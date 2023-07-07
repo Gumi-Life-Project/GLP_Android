@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tool_bar_back_button"
     android:layout_width="match_parent"
-    android:layout_height="55dp">
+    android:layout_height="70dp">
 
     <ImageView
         android:id="@+id/button_go_back"
