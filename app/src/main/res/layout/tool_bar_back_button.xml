@@ -16,6 +16,6 @@
         style="@style/ToolBarTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
         tools:text="@string/shuttle_bus_tool_bar_title" />
 </androidx.appcompat.widget.Toolbar>

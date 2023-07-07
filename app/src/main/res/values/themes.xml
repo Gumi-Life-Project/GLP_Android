@@ -103,7 +103,7 @@
     <!-- Tool bar -->
     <style name="ToolBarTitleTextStyle">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/noto_sans_kr_black</item>
     </style>
 
@@ -115,7 +115,7 @@
 
     <style name="HomeToolBarTitleTextStyle">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/noto_sans_kr_black</item>
     </style>
 </resources>
