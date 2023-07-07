@@ -1,6 +1,7 @@
 package com.ssafy.gumi_life_project.ui.home.crosswalk
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.ssafy.gumi_life_project.databinding.BottomSheetCrossWalkBinding
 import com.ssafy.gumi_life_project.util.getCrossWorkTimeListWithRecentTime
 import java.util.*
 
+private const val TAG = "CrossWalkBottomSheet"
 class CrossWalkBottomSheet(
     private val signalLight: SignalLight,
     private val title: String,
@@ -31,19 +33,8 @@ class CrossWalkBottomSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val signalLightType = if(isAfternoon()) {
-            when(signalLight) {
-                SignalLight.SIGNAL_LIGHT_1 -> SignalLight.SIGNAL_LIGHT_4
-                SignalLight.SIGNAL_LIGHT_2 -> SignalLight.SIGNAL_LIGHT_5
-                SignalLight.SIGNAL_LIGHT_3 -> SignalLight.SIGNAL_LIGHT_6
-                else -> signalLight
-            }
-        } else {
-            signalLight
-        }
-
         val crossWorkTimeList =
-            getCrossWorkTimeListWithRecentTime(signalLightType, getCurrentTimeInSeconds())
+            getCrossWorkTimeListWithRecentTime(signalLight, getCurrentTimeInSeconds())
 
         adapter = CrossWalkTimeListAdapter(crossWorkTimeList)
         binding.recyclerviewTimes.adapter = adapter
@@ -51,11 +42,6 @@ class CrossWalkBottomSheet(
         binding.textviewCrossWorkExplain.text = content
     }
 
-    private fun isAfternoon(): Boolean {
-        val calendar = Calendar.getInstance()
-        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
-        return currentHour >= 12
-    }
 
     private fun getCurrentTimeInSeconds(): Int {
         val currentTime = Calendar.getInstance()

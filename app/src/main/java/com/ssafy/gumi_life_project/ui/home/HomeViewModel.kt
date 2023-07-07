@@ -31,6 +31,9 @@ class HomeViewModel @Inject constructor(
     private var _isRunning = MutableLiveData(false)
     val isRunning: LiveData<Boolean> = _isRunning
 
+    private var _isInServiceTime = MutableLiveData(false)
+    val isInServiceTime: LiveData<Boolean> = _isInServiceTime
+
     private val _timeText1 = MutableLiveData<LightTime>()
     val timeText1: LiveData<LightTime> = _timeText1
 
@@ -58,36 +61,25 @@ class HomeViewModel @Inject constructor(
 
     fun loadAndSetTriggerTimes() {
         showProgress()
+
+        _isInServiceTime.postValue(isInServiceTime())
+
         viewModelScope.launch {
             val triggerTimes = CrossWorkTimeList.getTriggerTimes()
 
-            _timeText1.value = if (isAfternoon()) {
-                SignalLight.SIGNAL_LIGHT_4.calculateRemainingTime(triggerTimes[3])
-            } else {
-                SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
-            }
-            _timeText2.value = if (isAfternoon()) {
-                SignalLight.SIGNAL_LIGHT_5.calculateRemainingTime(triggerTimes[4])
-            } else {
-                SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
-            }
-            _timeText3.value = if (isAfternoon()) {
-                SignalLight.SIGNAL_LIGHT_6.calculateRemainingTime(triggerTimes[5])
-            } else {
-                SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
-            }
+            _timeText1.value = SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
+            _timeText2.value = SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
+            _timeText3.value = SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
 
             hideProgress()
         }
     }
 
-
-    private fun isAfternoon(): Boolean {
+    private fun isInServiceTime(): Boolean {
         val calendar = Calendar.getInstance()
         val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
-        return currentHour >= 12
+        return currentHour == 8
     }
-
 
     private val handler = Handler(Looper.getMainLooper())
     private val runnableCode: Runnable = object : Runnable {
