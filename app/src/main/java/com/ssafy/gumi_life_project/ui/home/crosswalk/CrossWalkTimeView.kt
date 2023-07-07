@@ -23,7 +23,7 @@ class CrossWalkTimeView @JvmOverloads constructor(
         typedArray.recycle()
 
         binding.apply {
-            textviewTime.text = timeText ?: "00:00"
+            textviewTime.text = timeText ?: "00시 00분"
         }
     }
 

@@ -5,8 +5,8 @@ import com.ssafy.gumi_life_project.R
 import java.util.*
 
 
-//currentColor 현재 신호등 색, remainingTime 다음 신호등 색까지 남은 시간
 data class LightTime(val currentTrafficLightColor: TrafficLightColor, val remainingTime: Long) {
+    //currentColor 현재 신호등 색, remainingTime 다음 신호등 색까지 남은 시간
     val remainingTimeString: String
         get() {
             val minutes = remainingTime / 60
@@ -37,9 +37,9 @@ enum class SignalLight(
     val greenDuration: Int,
     val redDuration: Int
 ) {
-    SIGNAL_LIGHT_1(R.string.cross_walk_title1, R.string.cross_walk_explain1, 25, 155),
-    SIGNAL_LIGHT_2(R.string.cross_walk_title2, R.string.cross_walk_explain2, 35, 145),
-    SIGNAL_LIGHT_3(R.string.cross_walk_title3, R.string.cross_walk_explain3, 30, 150);
+    SIGNAL_LIGHT_1(R.string.cross_walk_title1, R.string.cross_walk_explain1, 25, 175),
+    SIGNAL_LIGHT_2(R.string.cross_walk_title2, R.string.cross_walk_explain2, 35, 165),
+    SIGNAL_LIGHT_3(R.string.cross_walk_title3, R.string.cross_walk_explain3, 30, 170);
 
     fun calculateRemainingTime(triggerTime: TriggerTime): LightTime {
         val currentTimeMillis = System.currentTimeMillis()
@@ -57,7 +57,10 @@ enum class SignalLight(
                 ((greenDuration * 1000 + redDuration * 1000) - remainingTimeMillis) / 1000
             )
         } else {
-            LightTime(TrafficLightColor.GREEN, ((greenDuration * 1000) - remainingTimeMillis) / 1000)
+            LightTime(
+                TrafficLightColor.GREEN,
+                ((greenDuration * 1000) - remainingTimeMillis) / 1000
+            )
         }
     }
 
@@ -68,5 +71,4 @@ enum class SignalLight(
         calendar.set(Calendar.SECOND, triggerTime.second)
         return calendar.timeInMillis
     }
-
 }

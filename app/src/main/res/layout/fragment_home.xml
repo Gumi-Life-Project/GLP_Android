@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.ssafy.gumi_life_project.ui.home.HomeViewModel" />
@@ -16,6 +18,11 @@
         <variable
             name="signalLight"
             type="com.ssafy.gumi_life_project.data.model.SignalLight" />
+
+        <variable
+            name="isServiceTime"
+            type="boolean" />
+
     </data>
 
     <ScrollView
@@ -154,12 +161,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
                         <TextView
                             style="@style/LayoutTitleTextStyle"
                             android:layout_width="0dp"
@@ -167,6 +172,15 @@
                             android:layout_marginStart="7dp"
                             android:layout_weight="1"
                             android:text="@string/home_cross_walk" />
+                        <ImageView
+                            android:id="@+id/image_start"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:onClick="@{() -> viewModel.startOrStopPeriodicTask()}"
+                            android:padding="5dp"
+                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
+                            app:isRunning="@{viewModel.isRunning}" />
 
                         <ImageView
                             android:id="@+id/image_refresh"
@@ -180,14 +194,34 @@
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraint_map"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:alpha="@{viewModel.isInServiceTime() ? 1F : 0.5F}"
                         android:background="@drawable/image_crosswalk">
+
+                        <TextView
+                            android:id="@+id/textview_service_unavailable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="1"
+                            android:gravity="center"
+                            android:text="@string/service_unavailable"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+
+                            android:visibility="@{viewModel.isInServiceTime() ? View.GONE : View.VISIBLE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="서비스 제공 시간이 아닙니다." />
 
                         <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
                             android:id="@+id/cross_walk_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_1)}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -197,11 +231,11 @@
                             app:layout_constraintVertical_bias="0.551"
                             app:timeColor="@{viewModel.timeText1.getCurrentColorRes()}"
                             app:timeText="@{viewModel.timeText1.remainingTimeString}" />
-
                         <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
                             android:id="@+id/cross_walk_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_3)}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -213,9 +247,10 @@
                             app:timeText="@{viewModel.timeText3.remainingTimeString}" />
 
                         <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
-                            android:id="@+id/cross_work_2"
+                            android:id="@+id/cross_walk_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_2)}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -225,11 +260,9 @@
                             app:layout_constraintVertical_bias="0.028"
                             app:timeColor="@{viewModel.timeText2.getCurrentColorRes()}"
                             app:timeText="@{viewModel.timeText2.remainingTimeString}" />
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
 </layout>

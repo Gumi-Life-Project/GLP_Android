@@ -47,6 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 }
             }
 
+
             showBottomSheetEvent.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let { signalLight ->
                     val titleResId = signalLight.titleResId
@@ -77,6 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             weather.observe(viewLifecycleOwner) { weather ->
                 bindingNonNull.textviewTodayWeatherTemperature.text = weather.data.temperature + "º"
                 makeWeatherIcon(weather.data.precipitationType)
+
             }
 
             shuttleBusStopMark.observe(viewLifecycleOwner) { shuttleBusStopMark ->
