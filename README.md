@@ -1,4 +1,4 @@
-#  GUMI INSIDER <img src="https://github.com/jinyoungMango/ssafy/assets/123930169/100b7286-1b58-4006-a5b0-6d0f4bb1351f" height="80px">
+#  GUMI INSIDER <img src="https://github.com/Gumi-Life-Project/GLP_Android/assets/123930169/5422111f-c072-447c-9af4-65c9bce4ae3a" height="80px">
 
 > 싸피 생활을 더 편하고 즐겁게! <br>
 > 10기들을 위한 싸피 가이드 모바일 애플리케이션
