@@ -65,17 +65,16 @@
 
                     <ImageView
                         android:id="@+id/imageview_today_weather_img"
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginEnd="4dp"
-                        android:src="@drawable/icon_rainy" />
+                        tools:src="@drawable/icon_rainy" />
 
                     <TextView
                         android:id="@+id/textview_today_weather_temperature"
                         style="@style/HomeWeatherTextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="19º" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -154,8 +153,7 @@
                         style="@style/HomeMiddleContentTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="마이구미는 맛있다." />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <LinearLayout

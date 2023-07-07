@@ -15,6 +15,7 @@ import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
 
+
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     R.layout.fragment_home
@@ -63,26 +64,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
 
         with(activityViewModel) {
-            tip.observe(viewLifecycleOwner) { event ->
-                event.getContentIfNotHandled()?.let {
-                    val randomTip = getRandomTip(it)
-                    bindingNonNull.textviewTipContent.text = limitStringLength(randomTip.subject)
+            tip.observe(viewLifecycleOwner) { tip ->
+                val randomTip = getRandomTip(tip)
+                bindingNonNull.textviewTipContent.text = limitStringLength(randomTip.subject)
 
-                    bindingNonNull.linearlayoutTip.setOnClickListener {
-                        val bottomSheetDialogFragment =
-                            TipBottomSheet(randomTip.subject, randomTip.description)
-                        bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
-                    }
-
+                bindingNonNull.linearlayoutTip.setOnClickListener {
+                    val bottomSheetDialogFragment =
+                        TipBottomSheet(randomTip.subject, randomTip.description)
+                    bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
                 }
             }
 
-            weather.observe(viewLifecycleOwner) { event ->
-                event.getContentIfNotHandled()?.let {
-                    val weather = it.data
-                    bindingNonNull.textviewTodayWeatherTemperature.text = weather.temperature + "º"
-                    makeWeatherIcon(weather.precipitationType)
-                }
+            weather.observe(viewLifecycleOwner) { weather ->
+                bindingNonNull.textviewTodayWeatherTemperature.text = weather.data.temperature + "º"
+                makeWeatherIcon(weather.data.precipitationType)
 
             }
 
