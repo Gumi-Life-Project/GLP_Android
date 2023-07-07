@@ -12,23 +12,15 @@ object CrossWorkTimeList {
     private val signalLight3TimeList =
         generateCrossWorkTimeList(SignalLight.SIGNAL_LIGHT_3, triggerTimes[2])
 
-    fun getSignalLight1TimeList(): List<String> {
-        return signalLight1TimeList
-    }
-
-    fun getSignalLight2TimeList(): List<String> {
-        return signalLight2TimeList
-    }
-
-    fun getSignalLight3TimeList(): List<String> {
-        return signalLight3TimeList
-    }
+    fun getSignalLight1TimeList() = signalLight1TimeList
+    fun getSignalLight2TimeList() = signalLight2TimeList
+    fun getSignalLight3TimeList() = signalLight3TimeList
 
     private fun setTriggerTimes(): List<TriggerTime> {
         val list = mutableListOf<TriggerTime>()
-        list.add(TriggerTime(18, 55, 15))
-        list.add(TriggerTime(18, 59, 28))
-        list.add(TriggerTime(19, 1, 53))
+        list.add(TriggerTime(8, 51, 51))
+        list.add(TriggerTime(8, 59, 42))
+        list.add(TriggerTime(8, 52, 28))
         return list
     }
 
@@ -37,25 +29,24 @@ object CrossWorkTimeList {
     }
 }
 
-private fun generateCrossWorkTimeList(signalLight: SignalLight, time: TriggerTime): List<String> {
+private fun generateCrossWorkTimeList(signalLight: SignalLight, time: TriggerTime): List<Int> {
     val baseTime = time.hour * 3600 + time.minute * 60 + time.second
     val greenDuration = signalLight.greenDuration
     val redDuration = signalLight.redDuration
     val interval = greenDuration + redDuration
 
-    val timeList = mutableListOf<String>()
+    val timeList = mutableListOf<Int>()
     for (i in 0 until 480) {
         val elapsedSeconds = i * interval
         val greenTime = baseTime + elapsedSeconds
-        val formattedTime = formatTime(greenTime % (24 * 60 * 60))
-        timeList.add(formattedTime)
+        timeList.add(greenTime % (24 * 60 * 60))
     }
     return timeList.sorted()
 }
 
 fun getCrossWorkTimeListWithRecentTime(
     signalLight: SignalLight,
-    currentTime: String
+    currentTime: Int
 ): List<String> {
     val timeList = when (signalLight) {
         SignalLight.SIGNAL_LIGHT_1 -> CrossWorkTimeList.getSignalLight1TimeList()
@@ -73,12 +64,12 @@ fun getCrossWorkTimeListWithRecentTime(
         }
     }
     val endIndex = minOf(currentIndex + 10, timeList.size - 1)
-    return timeList.subList(currentIndex, endIndex + 1)
+    return timeList.subList(currentIndex, endIndex + 1).map { formatTime(it) }
 }
 
 
 private fun formatTime(seconds: Int): String {
     val hours = seconds / 3600
     val minutes = (seconds % 3600) / 60
-    return String.format("%02d:%02d", hours, minutes)
+    return String.format("%02d시 %02d분", hours, minutes)
 }
