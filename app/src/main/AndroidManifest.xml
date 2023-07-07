@@ -13,7 +13,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.GumiLifeProject"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="${MAP_API_KEY}" />
+
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tool_bar_back_button"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+
+    <ImageView
+        android:id="@+id/button_go_back"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/icon_back" />
+
+    <TextView
+        android:id="@+id/tool_bar_back_button_titile"
+        style="@style/ToolBarTitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:text="@string/shuttle_bus_tool_bar_title" />
+</androidx.appcompat.widget.Toolbar>
