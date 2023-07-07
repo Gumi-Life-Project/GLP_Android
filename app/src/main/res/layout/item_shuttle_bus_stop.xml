@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="shuttleBusStop"
+            type="com.ssafy.gumi_life_project.data.model.ShuttleBusStop" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="6dp"
+        android:paddingEnd="2dp">
+
+        <TextView
+            style="@style/ShuttleBusStopTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{shuttleBusStop.stopName}"/>
+
+        <TextView
+            style="@style/ShuttleBusStopTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@{shuttleBusStop.arrivalTime}" />
+
+        <ImageView
+            android:id="@+id/image_view_mark"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/icon_star"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+    </LinearLayout>
+</layout>
