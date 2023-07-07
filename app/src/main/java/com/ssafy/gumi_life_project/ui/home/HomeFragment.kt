@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.ui.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
@@ -14,7 +13,6 @@ import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
 
-private const val TAG = "HomeFragment_구미"
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
@@ -63,9 +61,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
 
         with(activityViewModel) {
-            tip.observe(viewLifecycleOwner) { event ->
-                event.getContentIfNotHandled()?.let {
-                    val randomTip = getRandomTip(it)
+            tip.observe(viewLifecycleOwner) { tip ->
+                    val randomTip = getRandomTip(tip)
                     bindingNonNull.textviewTipContent.text = limitStringLength(randomTip.subject)
 
                     bindingNonNull.linearlayoutTip.setOnClickListener {
@@ -73,18 +70,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                             TipBottomSheet(randomTip.subject, randomTip.description)
                         bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
                     }
-
-                }
             }
 
-            weather.observe(viewLifecycleOwner) { event ->
-                event.getContentIfNotHandled()?.let {
-                    val weather = it.data
-                    Log.d(TAG, "observeData: $it")
-                    bindingNonNull.textviewTodayWeatherTemperature.text = weather.temperature + "º"
-                    makeWeatherIcon(weather.precipitationType)
-                }
-
+            weather.observe(viewLifecycleOwner) { weather ->
+                    bindingNonNull.textviewTodayWeatherTemperature.text = weather.data.temperature + "º"
+                    makeWeatherIcon(weather.data.precipitationType)
             }
         }
     }
@@ -104,5 +94,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             "눈" -> bindingNonNull.imageviewTodayWeatherImg.setImageResource(R.drawable.icon_snow)
         }
     }
-
 }

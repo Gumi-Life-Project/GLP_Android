@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "MainViewModel_구미"
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: MainRepository
@@ -23,11 +21,11 @@ class MainViewModel @Inject constructor(
     private val _msg = MutableLiveData<Event<String>>()
     val errorMsg : LiveData<Event<String>> = _msg
 
-    private val _tip = MutableLiveData<Event<List<Tip>>>()
-    val tip: LiveData<Event<List<Tip>>> = _tip
+    private val _tip = MutableLiveData<List<Tip>>()
+    val tip: LiveData<List<Tip>> = _tip
 
-    private val _weather = MutableLiveData<Event<WeatherResponse>>()
-    val weather: LiveData<Event<WeatherResponse>> = _weather
+    private val _weather = MutableLiveData<WeatherResponse>()
+    val weather: LiveData<WeatherResponse> = _weather
 
     fun getAllTipList() {
         showProgress()
@@ -37,7 +35,7 @@ class MainViewModel @Inject constructor(
             val type = "정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    _tip.value = Event(response.body)
+                    _tip.postValue(response.body)
                 }
                 is NetworkResponse.ApiError -> {
                     postValueEvent(0, type)
@@ -57,13 +55,11 @@ class MainViewModel @Inject constructor(
         showProgress()
         viewModelScope.launch {
             val response = repository.getNowWeather()
-            Log.d(TAG, "getNowWeather: $response")
 
             val type = "정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    _weather.value = Event(response.body)
-                    Log.d(TAG, "getNowWeather: ${weather.value}")
+                    _weather.postValue(response.body)
                 }
                 is NetworkResponse.ApiError -> {
                     postValueEvent(0, type)
