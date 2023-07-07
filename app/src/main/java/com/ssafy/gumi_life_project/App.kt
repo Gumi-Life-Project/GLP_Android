@@ -8,11 +8,19 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class App : Application() {
     companion object {
-        lateinit var prefs : SharedPreferences
+        lateinit var prefs: SharedPreferences
+        lateinit var shuttleBusPrefs: SharedPreferences
     }
 
     override fun onCreate() {
         prefs = AppPreferences.openSharedPreferences(applicationContext)
+
+        shuttleBusPrefs = AppPreferences.openShuttleBusSharedPreference(applicationContext)
+        if (shuttleBusPrefs.getBoolean(AppPreferences.APP_RUN_STATE, true)) {
+            AppPreferences.updateAppRunState()
+            AppPreferences.initShuttleBusInfo()
+        }
+
         super.onCreate()
     }
 }

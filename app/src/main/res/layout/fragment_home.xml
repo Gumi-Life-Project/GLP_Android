@@ -65,6 +65,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearlayout_shuttle_bus"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="12dp"
@@ -82,13 +83,32 @@
                     android:text="@string/home_shuttle_time" />
 
                 <TextView
-                    android:id="@+id/textview_shuttle_time_content"
+                    android:id="@+id/textview_shuttle_no_mark"
                     style="@style/HomeMiddleContentTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="구미역 7시" />
+                    android:visibility="gone"
+                    android:text="@string/home_shuttle_no_mark" />
 
-                <ImageButton
+                <TextView
+                    android:id="@+id/textview_shuttle_bus_stop_name"
+                    style="@style/HomeMiddleContentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:maxEms="6"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="구미역" />
+
+                <TextView
+                    android:id="@+id/textview_shuttle_bus_stop_time"
+                    style="@style/HomeMiddleContentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="07:00" />
+
+                <ImageView
                     android:id="@+id/imagebutton_home_to_shuttle"
                     android:layout_width="48dp"
                     android:layout_height="48dp"

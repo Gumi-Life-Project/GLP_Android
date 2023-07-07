@@ -2,9 +2,11 @@ package com.ssafy.gumi_life_project.ui.home
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.Tip
 import com.ssafy.gumi_life_project.databinding.FragmentHomeBinding
@@ -85,6 +87,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     makeWeatherIcon(weather.precipitationType)
                 }
 
+            }
+
+            shuttleBusStopMark.observe(viewLifecycleOwner) { shuttleBusStopMark ->
+                if (shuttleBusStopMark.stopName == "") {
+                    bindingNonNull.textviewShuttleBusStopName.visibility = View.GONE
+                    bindingNonNull.textviewShuttleBusStopTime.visibility = View.GONE
+                    bindingNonNull.textviewShuttleNoMark.visibility = View.VISIBLE
+                } else {
+                    bindingNonNull.textviewShuttleBusStopName.visibility = View.VISIBLE
+                    bindingNonNull.textviewShuttleBusStopTime.visibility = View.VISIBLE
+                    bindingNonNull.textviewShuttleNoMark.visibility = View.GONE
+                    bindingNonNull.textviewShuttleBusStopName.text = shuttleBusStopMark.stopName
+                    bindingNonNull.textviewShuttleBusStopTime.text = shuttleBusStopMark.arrivalTime
+                }
+                bindingNonNull.linearlayoutShuttleBus.setOnClickListener {
+                    findNavController().navigate(R.id.action_homeFragment_to_shuttleBusFragment)
+                }
             }
         }
     }

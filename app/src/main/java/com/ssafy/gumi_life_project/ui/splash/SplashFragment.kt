@@ -31,6 +31,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
         with(activityViewModel) {
             getAllTipList()
             getNowWeather()
+            getShuttleBusStopMark()
         }
         animateLoading()
         moveToHomeFragment()
