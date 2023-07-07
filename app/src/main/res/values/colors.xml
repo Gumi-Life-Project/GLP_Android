@@ -13,6 +13,4 @@
 
     <color name="green">#2D8B00</color>
     <color name="red">#FF0000</color>
-    <color name="weather_red">#FF1616</color>
-    <color name="weather_blue">#2146FF</color>
 </resources>
