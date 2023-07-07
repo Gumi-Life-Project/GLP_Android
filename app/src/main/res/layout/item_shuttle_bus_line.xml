@@ -11,6 +11,7 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/layout_shuttle_bus_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
