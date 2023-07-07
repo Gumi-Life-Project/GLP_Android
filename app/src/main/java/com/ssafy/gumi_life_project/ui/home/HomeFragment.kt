@@ -1,7 +1,6 @@
 package com.ssafy.gumi_life_project.ui.home
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -12,7 +11,6 @@ import com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkBottomSheet
 import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Calendar
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -103,5 +101,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             "눈" -> bindingNonNull.imageviewTodayWeatherImg.setImageResource(R.drawable.icon_snow)
         }
     }
-
 }

@@ -1,7 +1,6 @@
 package com.ssafy.gumi_life_project.ui.home.crosswalk
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.ssafy.gumi_life_project.databinding.BottomSheetCrossWalkBinding
 import com.ssafy.gumi_life_project.util.getCrossWorkTimeListWithRecentTime
 import java.util.*
 
-private const val TAG = "CrossWalkBottomSheet"
 class CrossWalkBottomSheet(
     private val signalLight: SignalLight,
     private val title: String,
@@ -25,7 +23,7 @@ class CrossWalkBottomSheet(
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = BottomSheetCrossWalkBinding.inflate(inflater, container, false)
         return binding.root
     }
