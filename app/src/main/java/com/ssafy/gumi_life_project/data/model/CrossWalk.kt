@@ -44,16 +44,20 @@ enum class SignalLight(
     fun calculateRemainingTime(triggerTime: TriggerTime): LightTime {
         val currentTimeMillis = System.currentTimeMillis()
         val triggerTimeMillis = getTimeInMillis(triggerTime)
-        val elapsedTimeMillis = currentTimeMillis - triggerTimeMillis
+        val elapsedTimeMillis = if (currentTimeMillis > triggerTimeMillis) {
+            currentTimeMillis - triggerTimeMillis
+        } else {
+            (24 * 60 * 60 * 1000) - (triggerTimeMillis - currentTimeMillis)
+        }
         val remainingTimeMillis = elapsedTimeMillis % ((greenDuration + redDuration) * 1000)
 
         return if (remainingTimeMillis > greenDuration * 1000) {
             LightTime(
                 TrafficLightColor.RED,
-                (redDuration * 1000 - (remainingTimeMillis - greenDuration * 1000)) / 1000
+                ((greenDuration * 1000 + redDuration * 1000) - remainingTimeMillis) / 1000
             )
         } else {
-            LightTime(TrafficLightColor.GREEN, (greenDuration * 1000 - remainingTimeMillis) / 1000)
+            LightTime(TrafficLightColor.GREEN, ((greenDuration * 1000) - remainingTimeMillis) / 1000)
         }
     }
 
@@ -62,7 +66,6 @@ enum class SignalLight(
         calendar.set(Calendar.HOUR_OF_DAY, triggerTime.hour)
         calendar.set(Calendar.MINUTE, triggerTime.minute)
         calendar.set(Calendar.SECOND, triggerTime.second)
-        calendar.set(Calendar.MILLISECOND, 0)
         return calendar.timeInMillis
     }
 

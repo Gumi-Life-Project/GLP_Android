@@ -12,9 +12,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="6dp"
-        android:paddingRight="6dp">
+        android:paddingRight="2dp">
 
         <TextView
             style="@style/ShuttleBusStopTextStyle"
@@ -28,15 +29,16 @@
             style="@style/ShuttleBusStopTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@{shuttleBusStop.arrivalTime}"
             tools:text="07:50" />
 
         <ImageView
             android:id="@+id/image_view_mark"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_vertical"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|right"
             android:src="@drawable/icon_star"
             android:visibility="invisible"
             tools:visibility="visible" />

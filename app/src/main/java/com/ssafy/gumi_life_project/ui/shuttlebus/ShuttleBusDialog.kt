@@ -1,21 +1,26 @@
 package com.ssafy.gumi_life_project.ui.shuttlebus
 
-import android.app.Dialog
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
 import com.ssafy.gumi_life_project.databinding.DialogShuttleBusBinding
+import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
+import net.daum.mf.map.api.MapView
+
 
 class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusStop) :
     DialogFragment() {
+    private val viewModel by activityViewModels<ShuttleBusViewModel>()
     private lateinit var binding: DialogShuttleBusBinding
+    private lateinit var mapView: MapView
+    private val MARKER_NAME = "탑승위치"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +39,47 @@ class ShuttleBusDialog(context: Context, private val shuttleBusStop: ShuttleBusS
             val size = parentWidth - (parentWidth / 6)
             dialog?.window?.setLayout(size, ViewGroup.LayoutParams.WRAP_CONTENT)
             dialog?.window?.setBackgroundDrawableResource(R.drawable.rounded_all_corners)
+            setMap()
+            setListener()
+            setButtonState()
         } catch (exception: Exception) {
             exception.printStackTrace()
+        }
+    }
+
+    private fun setMap() {
+        mapView = MapView(context)
+        mapView.setMapCenterPoint(
+            mapPointWithGeoCoord(
+                shuttleBusStop.latitude,
+                shuttleBusStop.longitude
+            ), true
+        )
+        mapView.setZoomLevel(1, true)
+
+        val marker = MapPOIItem()
+        marker.apply {
+            itemName = MARKER_NAME
+            tag = 0
+            mapPoint = mapPointWithGeoCoord(shuttleBusStop.latitude, shuttleBusStop.longitude)
+            markerType = MapPOIItem.MarkerType.RedPin
+        }
+
+        mapView.addPOIItem(marker)
+
+        binding.mapView.addView(mapView)
+    }
+
+    private fun setListener() {
+        binding.buttonMark.setOnClickListener {
+            viewModel.updateShuttleBusStopMark(shuttleBusStop)
+            dismiss()
+        }
+    }
+
+    private fun setButtonState() {
+        if (shuttleBusStop.isMarked) {
+            binding.buttonMark.text = resources.getString(R.string.shuttle_bus_mark_button_cancel)
         }
     }
 }
