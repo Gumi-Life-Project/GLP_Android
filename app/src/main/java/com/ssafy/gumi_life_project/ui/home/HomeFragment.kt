@@ -64,19 +64,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
         with(activityViewModel) {
             tip.observe(viewLifecycleOwner) { tip ->
-                    val randomTip = getRandomTip(tip)
-                    bindingNonNull.textviewTipContent.text = limitStringLength(randomTip.subject)
+                val randomTip = getRandomTip(tip)
+                bindingNonNull.textviewTipContent.text = limitStringLength(randomTip.subject)
 
-                    bindingNonNull.linearlayoutTip.setOnClickListener {
-                        val bottomSheetDialogFragment =
-                            TipBottomSheet(randomTip.subject, randomTip.description)
-                        bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
-                    }
+                bindingNonNull.linearlayoutTip.setOnClickListener {
+                    val bottomSheetDialogFragment =
+                        TipBottomSheet(randomTip.subject, randomTip.description)
+                    bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
+                }
             }
 
             weather.observe(viewLifecycleOwner) { weather ->
-                    bindingNonNull.textviewTodayWeatherTemperature.text = weather.data.temperature + "º"
-                    makeWeatherIcon(weather.data.precipitationType)
+                bindingNonNull.textviewTodayWeatherTemperature.text = weather.data.temperature + "º"
+                makeWeatherIcon(weather.data.precipitationType)
             }
 
             shuttleBusStopMark.observe(viewLifecycleOwner) { shuttleBusStopMark ->
