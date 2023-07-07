@@ -43,7 +43,7 @@ class ShuttleBusLineAdapter(
                     }
                 }
             binding.recyclerviewShuttleBusStop.adapter = shuttleBusStopAdapter
-            binding.buttonExpand.setOnClickListener {
+            binding.layoutShuttleBusLine.setOnClickListener {
                 isItemOpen = itemClickListener.onExpandButtonClicked(
                     isItemOpen,
                     binding.recyclerviewShuttleBusStop,
