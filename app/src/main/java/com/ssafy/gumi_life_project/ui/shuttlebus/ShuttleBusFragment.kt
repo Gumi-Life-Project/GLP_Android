@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
@@ -31,12 +32,21 @@ class ShuttleBusFragment : BaseFragment<FragmentShuttleBusBinding>(
 
     override fun init() {
         bindingNonNull.viewModel = viewModel
+        initToolBar()
         initData()
         initRecyclerView()
         initObserver()
     }
 
-    fun initData() {
+    private fun initToolBar() {
+        bindingNonNull.toolBar.toolBarBackButtonTitile.text =
+            resources.getString(R.string.shuttle_bus_tool_bar_title)
+        bindingNonNull.toolBar.toolBarBackButton.setOnClickListener {
+            findNavController().navigate(R.id.action_shuttleBusFragment_to_homeFragment)
+        }
+    }
+
+    private fun initData() {
         viewModel.getShuttleBusLineList()
     }
 

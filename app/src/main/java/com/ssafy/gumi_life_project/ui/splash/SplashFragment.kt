@@ -28,8 +28,11 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
     }
 
     override fun init() {
-        activityViewModel.getAllTipList()
-        activityViewModel.getNowWeather()
+        with(activityViewModel) {
+            getAllTipList()
+            getNowWeather()
+            getShuttleBusStopMark()
+        }
         animateLoading()
         moveToHomeFragment()
     }

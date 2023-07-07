@@ -15,6 +15,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar_back_button" />
+
         <TextView
             style="@style/ShuttleBusGuidanceTextStyle"
             android:layout_width="wrap_content"

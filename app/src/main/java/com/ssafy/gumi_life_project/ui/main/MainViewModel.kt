@@ -3,7 +3,9 @@ package com.ssafy.gumi_life_project.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.Event
+import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
 import com.ssafy.gumi_life_project.data.model.Tip
 import com.ssafy.gumi_life_project.data.model.WeatherResponse
 import com.ssafy.gumi_life_project.data.repository.main.MainRepository
@@ -26,6 +28,9 @@ class MainViewModel @Inject constructor(
 
     private val _weather = MutableLiveData<WeatherResponse>()
     val weather: LiveData<WeatherResponse> = _weather
+
+    private val _shuttleBusStopMark =MutableLiveData<ShuttleBusStop>()
+    val shuttleBusStopMark : LiveData<ShuttleBusStop> = _shuttleBusStopMark
 
     fun getAllTipList() {
         showProgress()
@@ -75,6 +80,19 @@ class MainViewModel @Inject constructor(
         hideProgress()
     }
 
+    fun getShuttleBusStopMark() {
+        val shuttleBusStopMark = AppPreferences.getShuttleBusStopMark()
+        _shuttleBusStopMark.postValue(shuttleBusStopMark)
+    }
+
+    fun updateShuttleBusStopMark(shuttleBusStop : ShuttleBusStop, isMakeNewMark : Boolean) {
+        if(isMakeNewMark){
+            AppPreferences.updateShuttleBusStopMark(shuttleBusStop)
+        }else{
+            AppPreferences.updateShuttleBusStopMark(ShuttleBusStop("", 0.0, 0.0, "", false))
+        }
+        getShuttleBusStopMark()
+    }
 
     private fun postValueEvent(value : Int, type: String) {
         val msgArrayList = arrayOf("Api 오류 : $type 실패했습니다.",
