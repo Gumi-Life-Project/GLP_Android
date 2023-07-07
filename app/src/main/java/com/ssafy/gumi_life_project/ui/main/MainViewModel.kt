@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,23 +15,22 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "MainViewModel_구미"
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: MainRepository
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private val _msg = MutableLiveData<Event<String>>()
-    val errorMsg : LiveData<Event<String>> = _msg
+    val errorMsg: LiveData<Event<String>> = _msg
 
-    private val _tip = MutableLiveData<Event<List<Tip>>>()
-    val tip: LiveData<Event<List<Tip>>> = _tip
+    private val _tip = MutableLiveData<List<Tip>>()
+    val tip: LiveData<List<Tip>> = _tip
 
-    private val _weather = MutableLiveData<Event<WeatherResponse>>()
-    val weather: LiveData<Event<WeatherResponse>> = _weather
+    private val _weather = MutableLiveData<WeatherResponse>()
+    val weather: LiveData<WeatherResponse> = _weather
 
-    private val _shuttleBusStopMark =MutableLiveData<ShuttleBusStop>()
-    val shuttleBusStopMark : LiveData<ShuttleBusStop> = _shuttleBusStopMark
+    private val _shuttleBusStopMark = MutableLiveData<ShuttleBusStop>()
+    val shuttleBusStopMark: LiveData<ShuttleBusStop> = _shuttleBusStopMark
 
     fun getAllTipList() {
         showProgress()
@@ -42,14 +40,17 @@ class MainViewModel @Inject constructor(
             val type = "정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    _tip.value = Event(response.body)
+                    _tip.postValue(response.body)
                 }
+
                 is NetworkResponse.ApiError -> {
                     postValueEvent(0, type)
                 }
+
                 is NetworkResponse.NetworkError -> {
                     postValueEvent(1, type)
                 }
+
                 is NetworkResponse.UnknownError -> {
                     postValueEvent(2, type)
                 }
@@ -62,20 +63,21 @@ class MainViewModel @Inject constructor(
         showProgress()
         viewModelScope.launch {
             val response = repository.getNowWeather()
-            Log.d(TAG, "getNowWeather: $response")
 
             val type = "정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    _weather.value = Event(response.body)
-                    Log.d(TAG, "getNowWeather: ${weather.value}")
+                    _weather.postValue(response.body)
                 }
+
                 is NetworkResponse.ApiError -> {
                     postValueEvent(0, type)
                 }
+
                 is NetworkResponse.NetworkError -> {
                     postValueEvent(1, type)
                 }
+
                 is NetworkResponse.UnknownError -> {
                     postValueEvent(2, type)
                 }
@@ -89,22 +91,23 @@ class MainViewModel @Inject constructor(
         _shuttleBusStopMark.postValue(shuttleBusStopMark)
     }
 
-    fun updateShuttleBusStopMark(shuttleBusStop : ShuttleBusStop, isMakeNewMark : Boolean) {
-        if(isMakeNewMark){
+    fun updateShuttleBusStopMark(shuttleBusStop: ShuttleBusStop, isMakeNewMark: Boolean) {
+        if (isMakeNewMark) {
             AppPreferences.updateShuttleBusStopMark(shuttleBusStop)
-        }else{
+        } else {
             AppPreferences.updateShuttleBusStopMark(ShuttleBusStop("", 0.0, 0.0, "", false))
         }
         getShuttleBusStopMark()
     }
 
-    private fun postValueEvent(value : Int, type: String) {
-        val msgArrayList = arrayOf("Api 오류 : $type 실패했습니다.",
+    private fun postValueEvent(value: Int, type: String) {
+        val msgArrayList = arrayOf(
+            "Api 오류 : $type 실패했습니다.",
             "서버 오류 : $type 실패했습니다.",
             "알 수 없는 오류 : $type 실패했습니다."
         )
 
-        when(value) {
+        when (value) {
             0 -> _msg.postValue(Event(msgArrayList[0]))
             1 -> _msg.postValue(Event(msgArrayList[1]))
             2 -> _msg.postValue(Event(msgArrayList[2]))
