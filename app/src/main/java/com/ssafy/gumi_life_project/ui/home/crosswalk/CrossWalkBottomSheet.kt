@@ -31,13 +31,30 @@ class CrossWalkBottomSheet(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val signalLightType = if(isAfternoon()) {
+            when(signalLight) {
+                SignalLight.SIGNAL_LIGHT_1 -> SignalLight.SIGNAL_LIGHT_4
+                SignalLight.SIGNAL_LIGHT_2 -> SignalLight.SIGNAL_LIGHT_5
+                SignalLight.SIGNAL_LIGHT_3 -> SignalLight.SIGNAL_LIGHT_6
+                else -> signalLight
+            }
+        } else {
+            signalLight
+        }
+
         val crossWorkTimeList =
-            getCrossWorkTimeListWithRecentTime(signalLight, getCurrentTimeInSeconds())
+            getCrossWorkTimeListWithRecentTime(signalLightType, getCurrentTimeInSeconds())
 
         adapter = CrossWalkTimeListAdapter(crossWorkTimeList)
         binding.recyclerviewTimes.adapter = adapter
         binding.textviewCrossWorkTitle.text = title
         binding.textviewCrossWorkExplain.text = content
+    }
+
+    private fun isAfternoon(): Boolean {
+        val calendar = Calendar.getInstance()
+        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+        return currentHour >= 12
     }
 
     private fun getCurrentTimeInSeconds(): Int {

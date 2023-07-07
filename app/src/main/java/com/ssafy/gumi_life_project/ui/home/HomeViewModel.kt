@@ -13,6 +13,7 @@ import com.ssafy.gumi_life_project.util.CrossWorkTimeList
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import javax.inject.Inject
 
 
@@ -41,9 +42,7 @@ class HomeViewModel @Inject constructor(
 
     private fun postValueEvent(value: Int, type: String) {
         val msgArrayList = arrayOf(
-            "Api 오류 : $type 실패했습니다.",
-            "서버 오류 : $type 실패했습니다.",
-            "알 수 없는 오류 : $type 실패했습니다."
+            "Api 오류 : $type 실패했습니다.", "서버 오류 : $type 실패했습니다.", "알 수 없는 오류 : $type 실패했습니다."
         )
 
         when (value) {
@@ -62,12 +61,31 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val triggerTimes = CrossWorkTimeList.getTriggerTimes()
 
-            _timeText1.value = SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
-            _timeText2.value = SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
-            _timeText3.value = SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
+            _timeText1.value = if (isAfternoon()) {
+                SignalLight.SIGNAL_LIGHT_4.calculateRemainingTime(triggerTimes[3])
+            } else {
+                SignalLight.SIGNAL_LIGHT_1.calculateRemainingTime(triggerTimes[0])
+            }
+            _timeText2.value = if (isAfternoon()) {
+                SignalLight.SIGNAL_LIGHT_5.calculateRemainingTime(triggerTimes[4])
+            } else {
+                SignalLight.SIGNAL_LIGHT_2.calculateRemainingTime(triggerTimes[1])
+            }
+            _timeText3.value = if (isAfternoon()) {
+                SignalLight.SIGNAL_LIGHT_6.calculateRemainingTime(triggerTimes[5])
+            } else {
+                SignalLight.SIGNAL_LIGHT_3.calculateRemainingTime(triggerTimes[2])
+            }
 
             hideProgress()
         }
+    }
+
+
+    private fun isAfternoon(): Boolean {
+        val calendar = Calendar.getInstance()
+        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
+        return currentHour >= 12
     }
 
 
