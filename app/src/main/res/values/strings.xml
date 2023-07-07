@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gumi-Insider</string>
+    <string name="app_name">구미 인사이더</string>
 
     <!-- splash -->
     <string name="splash_slogan">싸피 생활을 더 편하고 즐겁게</string>
@@ -24,7 +24,6 @@
     <string name="cross_walk_explain1">편의점과 SSAFY 교육장 사이의 \n 신호등 시간표입니다.</string>
     <string name="cross_walk_explain2">도미노피자와 SSAFY 교육장 사이의 \n 신호등 시간표입니다.</string>
     <string name="cross_walk_explain3">도미노피자와 홍게마트 사이의 \n 신호등 시간표입니다.</string>
-
     <string name="service_unavailable">서비스 제공 시간이 아닙니다. \n (8:00 ~ 8:59)</string>
 
     <!-- shuttle bus -->

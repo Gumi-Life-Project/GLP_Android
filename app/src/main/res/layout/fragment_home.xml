@@ -58,7 +58,7 @@
                     <TextView
                         android:id="@+id/textview_today_weather_title"
                         style="@style/HomeMiddleTitleTextStyle"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/home_weather_today" />
@@ -67,8 +67,7 @@
                         android:id="@+id/imageview_today_weather_img"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginEnd="4dp"
-                        tools:src="@drawable/icon_rainy" />
+                        android:layout_marginEnd="4dp"/>
 
                     <TextView
                         android:id="@+id/textview_today_weather_temperature"
@@ -85,12 +84,13 @@
                     android:background="@drawable/border_main_background"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingStart="18dp">
+                    android:paddingStart="18dp"
+                    android:paddingEnd="2dp">
 
                     <TextView
                         android:id="@+id/textview_shuttle_time_title"
                         style="@style/HomeMiddleTitleTextStyle"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/home_shuttle_time" />
@@ -108,23 +108,22 @@
                         style="@style/HomeMiddleContentTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="4dp"
+                        android:layout_marginEnd="6dp"
                         android:ellipsize="end"
                         android:maxEms="6"
-                        android:maxLines="1"
-                        tools:text="구미역" />
+                        android:maxLines="1"/>
 
                     <TextView
                         android:id="@+id/textview_shuttle_bus_stop_time"
                         style="@style/HomeMiddleContentTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="07:00" />
+                        android:layout_marginEnd="2dp"/>
 
                     <ImageView
                         android:id="@+id/imagebutton_home_to_shuttle"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/icon_right" />
                 </LinearLayout>
 
@@ -161,10 +160,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             style="@style/LayoutTitleTextStyle"
                             android:layout_width="0dp"
@@ -172,6 +173,7 @@
                             android:layout_marginStart="7dp"
                             android:layout_weight="1"
                             android:text="@string/home_cross_walk" />
+
                         <ImageView
                             android:id="@+id/image_start"
                             android:layout_width="40dp"
@@ -209,20 +211,18 @@
                             android:text="@string/service_unavailable"
                             android:textColor="@color/black"
                             android:textStyle="bold"
-
                             android:visibility="@{viewModel.isInServiceTime() ? View.GONE : View.VISIBLE}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="서비스 제공 시간이 아닙니다." />
+                            app:layout_constraintTop_toTopOf="parent"/>
 
                         <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
                             android:id="@+id/cross_walk_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_1)}"
+                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.058"
@@ -231,12 +231,13 @@
                             app:layout_constraintVertical_bias="0.551"
                             app:timeColor="@{viewModel.timeText1.getCurrentColorRes()}"
                             app:timeText="@{viewModel.timeText1.remainingTimeString}" />
+
                         <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
                             android:id="@+id/cross_walk_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_3)}"
+                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.908"
@@ -250,8 +251,8 @@
                             android:id="@+id/cross_walk_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_2)}"
+                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.466"

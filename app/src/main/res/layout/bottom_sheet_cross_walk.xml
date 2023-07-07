@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,15 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:text="@string/cross_walk_title1" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/textview_cross_work_explain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/cross_walk_explain1" />
+            android:gravity="center" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -37,8 +31,6 @@
             android:layout_margin="15dp"
             android:background="@drawable/border_cross_work_table"
             android:padding="15dp"
-            tools:itemCount="10"
-            tools:listitem="@layout/item_cross_walk_time"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>

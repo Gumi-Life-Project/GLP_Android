@@ -68,6 +68,8 @@
         <item name="android:textSize">28sp</item>
         <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
     </style>
+
+    <!-- Shuttle Bus -->
     <style name="ShuttleBusGuidanceTextStyle">
         <item name="android:textColor">#242424</item>
         <item name="android:textSize">14sp</item>
@@ -92,6 +94,7 @@
         <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
     </style>
 
+    <!-- Home -->
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>

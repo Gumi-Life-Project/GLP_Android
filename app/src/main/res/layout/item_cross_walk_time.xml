@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-<data>
-    <variable
-        name="crossWalkTime"
-        type="String" />
-</data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="crossWalkTime"
+            type="String" />
+    </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -17,10 +18,9 @@
             android:id="@+id/textview_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{crossWalkTime}"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            tools:text="20:09"/>
+            android:text="@{crossWalkTime}" />
     </androidx.cardview.widget.CardView>
 
 </layout>
