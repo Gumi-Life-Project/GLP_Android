@@ -19,9 +19,9 @@
 ## 안드로이드 담당 팀원
 | 팀원 | 역할 |
 |-----|-----
-|오희주| 신호등 관련 기능
-|김도연| 셔틀버스 관련 기능
-|김진영| 스플래쉬, 날씨, 팁 관련 기능
+|[오희주](https://github.com/noion0511)| 신호등 관련 기능
+|[김도연](https://github.com/DodoKim0425)| 셔틀버스 관련 기능
+|[김진영](https://github.com/jinyoungMango)| 스플래쉬, 날씨, 팁 관련 기능
 
 ## 기술 스택
 | Category | Stack |
@@ -33,3 +33,10 @@
 | JetPack | AAC, LiveData, ViewMoel, DataBinding, Navigation  |
 | Image | Glide  |
 | Collaboration | Git, Figma, Discord, Notion|
+
+## 기여 방법
+1. ([https://github.com/noion0511/Log.M](https://github.com/Gumi-Life-Project/GLP_Android))을 포크합니다.
+2. (git checkout -b feature/example) 명령어로 새 브랜치를 만드세요.
+3. (git commit -am 'Add some example') 명령어로 커밋하세요.
+4. (git push origin feature/example) 명령어로 브랜치에 푸시하세요.
+5. 풀퀘스트를 보내주세요.
