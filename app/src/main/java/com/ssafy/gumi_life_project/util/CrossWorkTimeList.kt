@@ -20,7 +20,7 @@ object CrossWorkTimeList {
         val list = mutableListOf<TriggerTime>()
         list.add(TriggerTime(8, 51, 51))
         list.add(TriggerTime(8, 59, 42))
-        list.add(TriggerTime(8, 52, 28))
+        list.add(TriggerTime(8, 52, 25))
         return list
     }
 
