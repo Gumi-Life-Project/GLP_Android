@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.ui.home
 
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                         CrossWalkBottomSheet(signalLight, title, content)
                     bottomSheetDialogFragment.show(childFragmentManager, "CrossWorkBottomSheet")
                 }
+            }
+
+            isInServiceTime.observe(viewLifecycleOwner) {
+                val animatorRotate = ObjectAnimator.ofFloat(bindingNonNull.imageRefresh, "rotation", 0f, 360f)
+                animatorRotate.duration = 1000
+                animatorRotate.start()
             }
         }
 
