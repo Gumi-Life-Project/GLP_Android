@@ -73,7 +73,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         with(activityViewModel) {
             tip.observe(viewLifecycleOwner) { tip ->
                 val randomTip = getRandomTip(tip)
-                bindingNonNull.textviewTipContent.text = limitStringLength(randomTip.subject)
+                bindingNonNull.textviewTipContent.text = randomTip.subject
 
                 bindingNonNull.linearlayoutTip.setOnClickListener {
                     val bottomSheetDialogFragment =
@@ -110,11 +110,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun getRandomTip(tips: List<Tip>): Tip {
         return if (tips.isNotEmpty()) tips[Random.nextInt(tips.size)] else Tip()
     }
-
-    private fun limitStringLength(input: String, maxLength: Int = 23): String {
-        return if (input.length > maxLength) input.substring(0, maxLength) + "..." else input
-    }
-
+    
     private fun makeWeatherIcon(type: String) {
         when (type) {
             "없음" -> bindingNonNull.imageviewTodayWeatherImg.setImageResource(R.drawable.icon_sunny)
