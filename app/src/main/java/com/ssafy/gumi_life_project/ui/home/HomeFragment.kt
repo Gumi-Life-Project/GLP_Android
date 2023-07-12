@@ -1,6 +1,7 @@
 package com.ssafy.gumi_life_project.ui.home
 
 import android.animation.ObjectAnimator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 ) {
     private val viewModel by viewModels<HomeViewModel>()
     private val activityViewModel by activityViewModels<MainViewModel>()
+    private lateinit var randomTip: Tip
 
     override fun onCreateBinding(
         inflater: LayoutInflater,
@@ -38,6 +40,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     override fun init() {
         observeData()
         viewModel.loadAndSetTriggerTimes()
+
+        bindingNonNull.linearlayoutTip.setOnClickListener {
+            if(::randomTip.isInitialized) {
+                val bottomSheetDialogFragment =
+                    TipBottomSheet(randomTip.subject, randomTip.description)
+                bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
+            }
+        }
     }
 
     private fun observeData() {
@@ -72,14 +82,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
         with(activityViewModel) {
             tip.observe(viewLifecycleOwner) { tip ->
-                val randomTip = getRandomTip(tip)
+                randomTip = getRandomTip(tip)
                 bindingNonNull.textviewTipContent.text = randomTip.subject
-
-                bindingNonNull.linearlayoutTip.setOnClickListener {
-                    val bottomSheetDialogFragment =
-                        TipBottomSheet(randomTip.subject, randomTip.description)
-                    bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
-                }
             }
 
             weather.observe(viewLifecycleOwner) { weather ->
