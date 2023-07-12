@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <data>
+        <variable
+            name="board"
+            type="com.ssafy.gumi_life_project.data.model.BoardItem" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_board"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        card_view:cardElevation="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
+
+            <TextView
+                android:id="@+id/tv_board_title"
+                style="@style/HomeMiddleContentTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                tools:text="싸피 꿀팁 대방출 ~" />
+
+            <TextView
+                android:id="@+id/tv_board_writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="미리 보기 방지 ~~~ 미리 보기 방지 ~~~ 미리 보기 방지 ~~~미리 보기 방지 ~~~미리 보기 ..." />
+
+            <LinearLayout
+                android:id="@+id/linearlayout_under"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textview_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="5분 전" />
+
+                <TextView
+                    android:id="@+id/textview_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/board_line" />
+
+                <TextView
+                    android:id="@+id/textview_writer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="망고" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
