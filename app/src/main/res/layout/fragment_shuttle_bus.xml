@@ -16,7 +16,7 @@
 
         <include
             android:id="@+id/tool_bar"
-            layout="@layout/tool_bar_back_button" />
+            layout="@layout/toolbar_back_button" />
 
         <TextView
             style="@style/ShuttleBusGuidanceTextStyle"
