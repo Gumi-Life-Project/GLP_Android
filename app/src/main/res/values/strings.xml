@@ -5,6 +5,10 @@
     <string name="splash_slogan">싸피 생활을 더 편하고 즐겁게</string>
     <string name="splash_title">구미 인사이더</string>
 
+    <!-- login -->
+    <string name="login_button">카카오 로그인</string>
+    <string name="login_checked_login_maintain">로그인 유지</string>
+
     <!-- home -->
     <string name="home_subtitle">10기를 위한 싸피 가이드</string>
     <string name="home_title">구미 캠퍼스</string>
