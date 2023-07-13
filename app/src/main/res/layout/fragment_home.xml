@@ -152,7 +152,11 @@
                         style="@style/HomeMiddleContentTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        tools:text="마이구미는 맛있다."/>
                 </LinearLayout>
 
                 <LinearLayout
