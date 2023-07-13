@@ -35,4 +35,5 @@
 
     <!-- board -->
     <string name="board_line"> | </string>
+    <string name="board_title">자유 게시판</string>
 </resources>
