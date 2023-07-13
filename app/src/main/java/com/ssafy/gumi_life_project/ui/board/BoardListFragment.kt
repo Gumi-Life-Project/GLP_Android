@@ -12,13 +12,13 @@ import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "BoardListFragment"
+
 @AndroidEntryPoint
 class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
     R.layout.fragment_board_list
 ) {
     private val viewModel by viewModels<BoardViewModel>()
     private lateinit var adapter: BoardListAdapter
-    private lateinit var busLineList: MutableList<BoardItem>
 
     override fun onCreateBinding(
         inflater: LayoutInflater,
@@ -34,6 +34,7 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
         initToolbar()
         initRecyclerView()
         initObserver()
+        viewModel.getBoardList()
     }
 
     private fun initToolbar() {
@@ -56,8 +57,16 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
     }
 
     private fun initObserver() {
-        viewModel.board.observe(viewLifecycleOwner) {
-            adapter.setBoardList(it)
+        with(viewModel) {
+            board.observe(viewLifecycleOwner) {
+                adapter.setBoardList(it)
+            }
+
+            errorMsg.observe(viewLifecycleOwner) { event ->
+                event.getContentIfNotHandled()?.let {
+                    showToast(it)
+                }
+            }
         }
     }
 }

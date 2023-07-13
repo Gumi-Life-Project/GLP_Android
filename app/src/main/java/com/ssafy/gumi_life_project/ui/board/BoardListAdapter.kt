@@ -6,10 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.gumi_life_project.data.model.BoardItem
 import com.ssafy.gumi_life_project.databinding.ItemBoardBinding
 
-class BoardListAdapter(
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class BoardListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val boardItems: MutableList<BoardItem> = mutableListOf()
     lateinit var onItemClickListener: OnItemClickListener
 
@@ -33,7 +30,7 @@ class BoardListAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder is ViewHolder)
+        if (holder is ViewHolder)
             holder.bind(boardItems[position])
     }
 
@@ -41,7 +38,7 @@ class BoardListAdapter(
         return boardItems.size
     }
 
-    fun setBoardList(list : List<BoardItem>) {
+    fun setBoardList(list: List<BoardItem>) {
         boardItems.clear()
         boardItems.addAll(list)
         notifyDataSetChanged()
