@@ -31,12 +31,12 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
     }
 
     override fun init() {
-        initToolBar()
+        initToolbar()
         initRecyclerView()
         initObserver()
     }
 
-    private fun initToolBar() {
+    private fun initToolbar() {
         bindingNonNull.toolbar.toolbarBackButtonTitle.text =
             resources.getString(R.string.board_title)
         bindingNonNull.toolbar.buttonGoBack.setOnClickListener {
