@@ -83,7 +83,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun isInServiceTime(): Boolean {
+    private fun isInCountServiceTime(): Boolean {
         val calendar = Calendar.getInstance()
         val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
         return currentHour == 8
