@@ -12,11 +12,14 @@
         <action
             android:id="@+id/action_homeFragment_to_shuttleBusFragment"
             app:destination="@id/shuttleBusFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_boardListFragment"
+            app:destination="@id/boardListFragment" />
     </fragment>
     <fragment
         android:id="@+id/shuttleBusFragment"
         android:name="com.ssafy.gumi_life_project.ui.shuttlebus.ShuttleBusFragment"
-        tools:layout="@layout/fragment_shuttle_bus" >
+        tools:layout="@layout/fragment_shuttle_bus">
         <action
             android:id="@+id/action_shuttleBusFragment_to_homeFragment"
             app:destination="@id/homeFragment"
@@ -26,11 +29,15 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.ssafy.gumi_life_project.ui.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/boardListFragment"
+        android:name="com.ssafy.gumi_life_project.ui.board.BoardListFragment"
+        android:label="BoardListFragment" />
 </navigation>

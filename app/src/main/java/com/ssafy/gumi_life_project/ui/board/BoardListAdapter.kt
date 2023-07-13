@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.gumi_life_project.data.model.BoardItem
 import com.ssafy.gumi_life_project.databinding.ItemBoardBinding
 
-class BoardListAdapter(private val boardItems: MutableList<BoardItem>, private val onItemClickListener: OnItemClickListener
+class BoardListAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val boardItems: MutableList<BoardItem> = mutableListOf()
+    lateinit var onItemClickListener: OnItemClickListener
 
     interface OnItemClickListener {
         fun onItemClick(boardItem: BoardItem)
@@ -36,5 +39,11 @@ class BoardListAdapter(private val boardItems: MutableList<BoardItem>, private v
 
     override fun getItemCount(): Int {
         return boardItems.size
+    }
+
+    fun setBoardList(list : List<BoardItem>) {
+        boardItems.clear()
+        boardItems.addAll(list)
+        notifyDataSetChanged()
     }
 }
