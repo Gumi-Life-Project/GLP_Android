@@ -27,7 +27,7 @@ class BoardViewModel @Inject constructor(
         viewModelScope.launch {
             val response = repository.getBoardList()
 
-            val type = "정보 조회에"
+            val type = "게시판 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
                     _board.postValue(response.body.boardList)
