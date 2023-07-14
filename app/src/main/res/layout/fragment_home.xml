@@ -192,7 +192,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:onClick="@{() -> viewModel.loadAndSetTriggerTimes()}"
+                            android:onClick="@{() -> viewModel.onRefreshButtonClicked()}"
                             android:padding="5dp"
                             android:src="@drawable/baseline_refresh_24" />
                     </LinearLayout>

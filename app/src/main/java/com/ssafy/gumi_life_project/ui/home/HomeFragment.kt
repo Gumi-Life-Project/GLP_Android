@@ -101,10 +101,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 }
             }
 
-            isInServiceTime.observe(viewLifecycleOwner) {
-                val animatorRotate = ObjectAnimator.ofFloat(bindingNonNull.imageRefresh, "rotation", 0f, 360f)
-                animatorRotate.duration = 1000
-                animatorRotate.start()
+            isRefresh.observe(viewLifecycleOwner) { event ->
+                event.getContentIfNotHandled()?.let {
+                    val animatorRotate = ObjectAnimator.ofFloat(bindingNonNull.imageRefresh, "rotation", 0f, 360f)
+                    animatorRotate.duration = 1000
+                    animatorRotate.start()}
             }
 
             simpleBoard.observe(viewLifecycleOwner) {

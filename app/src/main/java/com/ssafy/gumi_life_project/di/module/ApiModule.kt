@@ -16,8 +16,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private const val baseUrl = "https://mygumiworld-backend-sxxzy.run.goorm.io "
-
+    private const val baseUrl = "https://mygumiworld-backend-sxxzy.run.goorm.io"
+    
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {

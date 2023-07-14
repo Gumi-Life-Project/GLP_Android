@@ -36,6 +36,9 @@ class HomeViewModel @Inject constructor(
     private var _isInServiceTime = MutableLiveData(false)
     val isInServiceTime: LiveData<Boolean> = _isInServiceTime
 
+    private var _isRefresh = MutableLiveData<Event<Boolean>>()
+    val isRefresh: LiveData<Event<Boolean>> = _isRefresh
+
     private val _timeText1 = MutableLiveData<LightTime>()
     val timeText1: LiveData<LightTime> = _timeText1
 
@@ -91,10 +94,15 @@ class HomeViewModel @Inject constructor(
         _showBottomSheetEvent.postValue(Event(signalLight))
     }
 
+    fun onRefreshButtonClicked() {
+        _isRefresh.postValue(Event(true))
+        loadAndSetTriggerTimes()
+    }
+
     fun loadAndSetTriggerTimes() {
         showProgress()
 
-        _isInServiceTime.postValue(isInServiceTime())
+        _isInServiceTime.postValue(isInCountServiceTime())
 
         viewModelScope.launch {
             val triggerTimes = CrossWorkTimeList.getTriggerTimes()
@@ -107,7 +115,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun isInServiceTime(): Boolean {
+    private fun isInCountServiceTime(): Boolean {
         val calendar = Calendar.getInstance()
         val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
         return currentHour == 8
