@@ -14,10 +14,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/icon_menu"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintHorizontal_bias="0.958"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar_back_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,11 +76,13 @@
                                 style="@style/ProfileTextStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:text="@{viewModel.boardDetail.boardDetail.writerName}"
                                 tools:text="으르르릉" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="@{viewModel.boardDetail.boardDetail.updateDate == null ? viewModel.boardDetail.boardDetail.createDate : viewModel.boardDetail.boardDetail.updateDate}"
                                 tools:text="09/18 10:37" />
                         </LinearLayout>
                     </LinearLayout>
@@ -79,6 +92,7 @@
                         style="@style/ShuttleBusLineTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@{viewModel.boardDetail.boardDetail.title}"
                         tools:text="이게 제목입니다." />
 
                     <TextView
@@ -87,11 +101,13 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
+                        android:text="@{viewModel.boardDetail.boardDetail.content}"
                         tools:text="이게 내용입니다. \n 이게 내용입니다. \n이게 내용입니다. \n이게 내용입니다. \n이게 내용입니다. \n" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -100,7 +116,8 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:padding="1dp"
-                            android:src="@drawable/icon_heart" />
+                            android:src="@drawable/selector_icon_heart"
+                            app:state="@{viewModel.boardDetail.boardDetail.likeStatus}"/>
 
                         <TextView
                             android:id="@+id/textview_heart"
@@ -108,6 +125,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                             android:textColor="@color/board_red"
+                            app:likesNum="@{viewModel.boardDetail.boardDetail.likesNum}"
                             tools:text="13" />
 
                         <ImageView

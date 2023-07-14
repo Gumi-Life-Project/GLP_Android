@@ -3,6 +3,7 @@ package com.ssafy.gumi_life_project.ui.board
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ssafy.gumi_life_project.data.model.BoardDetailResponse
 import com.ssafy.gumi_life_project.data.model.BoardItem
 import com.ssafy.gumi_life_project.data.model.Event
 import com.ssafy.gumi_life_project.data.repository.board.BoardRepository
@@ -21,6 +22,12 @@ class BoardViewModel @Inject constructor(
 
     private val _board = MutableLiveData<List<BoardItem>>()
     val board: LiveData<List<BoardItem>> = _board
+
+    private val _boardDetail = MutableLiveData<BoardDetailResponse>()
+    val boardDetail: LiveData<BoardDetailResponse> = _boardDetail
+
+    private val _isBoardClicked = MutableLiveData<Event<Unit>>()
+    val isBoardClicked: LiveData<Event<Unit>> = _isBoardClicked
 
     fun getBoardList() {
         showProgress()
@@ -45,6 +52,35 @@ class BoardViewModel @Inject constructor(
                     postValueEvent(2, type)
                 }
             }
+            hideProgress()
+        }
+    }
+
+    fun getBoardDetail(boardNo: String) {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.getBoardDetail(boardNo)
+
+            val type = "게시판 상세조회에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _boardDetail.postValue(response.body)
+                    _isBoardClicked.postValue(Event(Unit))
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+
             hideProgress()
         }
     }
