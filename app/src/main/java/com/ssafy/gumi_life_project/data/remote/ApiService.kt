@@ -17,4 +17,7 @@ interface ApiService {
 
     @GET("/board/list")
     suspend fun getBoardList(): NetworkResponse<BoardListResponse, ErrorResponse>
+
+    @GET("/board/list/new")
+    suspend fun getThreeBoard(): NetworkResponse<BoardListResponse, ErrorResponse>
 }
