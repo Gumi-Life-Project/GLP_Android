@@ -36,7 +36,6 @@
     <!-- board detail -->
     <string name="detail_comment_hint">댓글을 입력하세요.</string>
 
-
     <!-- board -->
     <string name="board_line"> | </string>
     <string name="board_title">자유 게시판</string>
