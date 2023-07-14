@@ -12,9 +12,9 @@
             layout="@layout/toolbar_back_button" />
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/ButtonTextStyle"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
+            style="@style/BoardWriteButtonTextStyle"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
             android:background="@drawable/button_rounded_radius30"
             android:text="@string/board_write_button_finish"
             app:layout_constraintBottom_toBottomOf="@+id/tool_bar"
@@ -51,23 +51,25 @@
                 android:layout_height="1dp"
                 android:background="@color/line_gray" />
 
-            <TextView
+            <EditText
                 style="@style/BoardWriteTitleHintTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/board_write_textview_title_hint" />
+                android:hint="@string/board_write_textview_title_hint"
+                android:background="@null"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/line_gray" />
 
-            <TextView
+            <EditText
                 style="@style/BoardWriteContentHintTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="@string/board_write_textview_content_hint" />
+                android:hint="@string/board_write_textview_content_hint"
+                android:background="@null"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
