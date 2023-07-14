@@ -41,7 +41,7 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
         bindingNonNull.toolbar.toolbarBackButtonTitle.text =
             resources.getString(R.string.board_title)
         bindingNonNull.toolbar.buttonGoBack.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_boardListFragment)
+            findNavController().navigate(R.id.action_boardListFragment_to_homeFragment)
         }
     }
 

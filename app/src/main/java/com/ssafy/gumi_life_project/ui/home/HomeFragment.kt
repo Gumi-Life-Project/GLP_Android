@@ -48,6 +48,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
             }
         }
+
+        bindingNonNull.linearlayoutSimpleBoard.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_boardListFragment)
+        }
     }
 
     private fun observeData() {
