@@ -36,8 +36,7 @@ object ApiModule {
                     it.proceed(request.newBuilder().apply {
                         addHeader(
                             "Authorization",
-                            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4IiwiZXhwIjoxNjg5MzIwODM2fQ.JG3TW3oymun1iQUgLlGm6ACHQOdN0rmFrUKHjXWg4Nmz7zIEXBQkHj8PI8qIuWbry_M3OMKct_PDaJFe5DYWAw"
-                        )
+                        "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5IiwiZXhwIjoxNjg5MzUyOTgwfQ.OuFqF9zDKdzcFRrfAdJ3wuWDZb42GJ72jXbC2gLPPL7wE8GP7pfKdo12iWggXo0Emv3_PtyanR1c44cMrWyO7g")
                     }.build())
                 }
             }.build()

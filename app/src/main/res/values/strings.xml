@@ -39,4 +39,7 @@
     <!-- board -->
     <string name="board_line"> | </string>
     <string name="board_title">자유 게시판</string>
+    <string name="board_update">수정하기</string>
+    <string name="board_delete">삭제하기</string>
+    <string name="board_notice">신고하기</string>
 </resources>

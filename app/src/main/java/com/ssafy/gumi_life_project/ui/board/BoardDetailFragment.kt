@@ -1,7 +1,9 @@
 package com.ssafy.gumi_life_project.ui.board
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ArrayAdapter
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
@@ -38,7 +40,54 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         bindingNonNull.toolbar.buttonGoBack.setOnClickListener {
             findNavController().navigate(R.id.action_boardDetailFragment_to_boardListFragment)
         }
+
+        bindingNonNull.imageviewMenu.setOnClickListener {
+            val popupMenu = PopupMenu(requireContext(), bindingNonNull.imageviewMenu)
+            popupMenu.inflate(R.menu.menu_board)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.button_board_notice -> {
+                        // Handle menu item 1 click
+                        true
+                    }
+                    R.id.button_board_delete -> {
+                        // Handle menu item 2 click
+                        true
+                    }
+                    R.id.button_board_update -> {
+                        // Handle menu item 2 click
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.show() // Show the menu
+        }
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_board, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.button_board_delete -> {
+
+                return true
+            }
+            R.id.button_board_update -> {
+
+                return true
+            }
+            R.id.button_board_notice -> {
+
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
 
     private fun initRecyclerView() {
 
