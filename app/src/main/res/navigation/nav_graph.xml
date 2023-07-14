@@ -39,11 +39,24 @@
     <fragment
         android:id="@+id/boardListFragment"
         android:name="com.ssafy.gumi_life_project.ui.board.BoardListFragment"
-        android:label="BoardListFragment" >
+        android:label="BoardListFragment">
         <action
             android:id="@+id/action_boardListFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/splashFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_boardListFragment_to_boardDetailFragment"
+            app:destination="@id/boardDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boardDetailFragment"
+        android:name="com.ssafy.gumi_life_project.ui.board.BoardDetailFragment"
+        android:label="BoardDetailFragment">
+        <action
+            android:id="@+id/action_boardDetailFragment_to_boardListFragment"
+            app:destination="@id/boardListFragment"
+            app:popUpTo="@id/boardListFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
