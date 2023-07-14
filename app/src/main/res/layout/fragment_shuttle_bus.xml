@@ -15,8 +15,8 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/tool_bar"
-            layout="@layout/tool_bar_back_button" />
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_back_button" />
 
         <TextView
             style="@style/ShuttleBusGuidanceTextStyle"
