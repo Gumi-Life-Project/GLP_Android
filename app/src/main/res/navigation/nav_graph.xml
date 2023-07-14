@@ -39,11 +39,11 @@
     <fragment
         android:id="@+id/boardListFragment"
         android:name="com.ssafy.gumi_life_project.ui.board.BoardListFragment"
-        android:label="BoardListFragment" >
+        android:label="BoardListFragment">
         <action
             android:id="@+id/action_boardListFragment_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/splashFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
