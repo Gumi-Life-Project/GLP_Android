@@ -2,7 +2,7 @@ package com.ssafy.gumi_life_project.ui.board
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentBoardDetailBinding
@@ -14,12 +14,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
     R.layout.fragment_board_detail
 ) {
-    private val viewModel by viewModels<BoardViewModel>()
-    private lateinit var adapter: BoardListAdapter
+    private val viewModel by activityViewModels<BoardViewModel>()
 
     override fun onCreateBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
+        inflater: LayoutInflater, container: ViewGroup?
     ): FragmentBoardDetailBinding {
         return FragmentBoardDetailBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
@@ -38,7 +36,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         bindingNonNull.toolbar.toolbarBackButtonTitle.text =
             resources.getString(R.string.board_title)
         bindingNonNull.toolbar.buttonGoBack.setOnClickListener {
-            findNavController().navigate(R.id.action_boardListFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_boardDetailFragment_to_boardListFragment)
         }
     }
 
@@ -48,10 +46,6 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
 
     private fun initObserver() {
         with(viewModel) {
-            board.observe(viewLifecycleOwner) {
-                adapter.setBoardList(it)
-            }
-
             errorMsg.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
                     showToast(it)

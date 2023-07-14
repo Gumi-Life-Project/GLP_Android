@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.data.repository.board
 
+import com.ssafy.gumi_life_project.data.model.BoardDetailResponse
 import com.ssafy.gumi_life_project.data.model.BoardListResponse
 import com.ssafy.gumi_life_project.data.model.ErrorResponse
 import com.ssafy.gumi_life_project.data.remote.ApiService
@@ -11,5 +12,9 @@ class BoardRepositoryImpl @Inject constructor(
 ) : BoardRepository {
     override suspend fun getBoardList(): NetworkResponse<BoardListResponse, ErrorResponse> {
         return apiService.getBoardList()
+    }
+
+    override suspend fun getBoardDetail(boardNo: String): NetworkResponse<BoardDetailResponse, ErrorResponse> {
+        return apiService.getBoardDetail(boardNo)
     }
 }

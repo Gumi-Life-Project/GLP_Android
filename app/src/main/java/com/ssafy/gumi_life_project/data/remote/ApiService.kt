@@ -1,12 +1,9 @@
 package com.ssafy.gumi_life_project.data.remote
 
-import com.ssafy.gumi_life_project.data.model.BoardItem
-import com.ssafy.gumi_life_project.data.model.BoardListResponse
-import com.ssafy.gumi_life_project.data.model.ErrorResponse
-import com.ssafy.gumi_life_project.data.model.Tip
-import com.ssafy.gumi_life_project.data.model.WeatherResponse
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ApiService {
     @GET("/tip/list")
@@ -20,4 +17,7 @@ interface ApiService {
 
     @GET("/board/list/new")
     suspend fun getThreeBoard(): NetworkResponse<BoardListResponse, ErrorResponse>
+
+    @GET("/board/{boardNo}")
+    suspend fun getBoardDetail(@Path("boardNo") boardNo : String): NetworkResponse<BoardDetailResponse, ErrorResponse>
 }
