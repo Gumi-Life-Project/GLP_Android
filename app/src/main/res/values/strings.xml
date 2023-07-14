@@ -38,4 +38,6 @@
     <string name="board_write_button_finish">완료</string>
     <string name="board_write_textview_title_hint">제목 입력</string>
     <string name="board_write_textview_content_hint">내용을 입력하세요.</string>
+    <string name="board_line"> | </string>
+    <string name="board_title">자유 게시판</string>
 </resources>

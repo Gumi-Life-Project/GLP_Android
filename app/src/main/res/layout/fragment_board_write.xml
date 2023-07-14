@@ -9,7 +9,7 @@
 
         <include
             android:id="@+id/tool_bar"
-            layout="@layout/tool_bar_back_button" />
+            layout="@layout/toolbar_back_button" />
 
         <androidx.appcompat.widget.AppCompatButton
             style="@style/ButtonTextStyle"
