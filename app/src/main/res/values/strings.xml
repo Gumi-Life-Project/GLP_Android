@@ -32,4 +32,10 @@
     <string name="shuttle_bus_dialog_title">%s 탑승위치</string>
     <string name="shuttle_bus_mark_button_cancel">즐겨찾기 취소</string>
     <string name="shuttle_bus_tool_bar_title">셔틀정보</string>
+
+    <!-- board -->
+    <string name="board_write_toolbar_title">글작성</string>
+    <string name="board_write_button_finish">완료</string>
+    <string name="board_write_textview_title_hint">제목 입력</string>
+    <string name="board_write_textview_content_hint">내용을 입력하세요.</string>
 </resources>
