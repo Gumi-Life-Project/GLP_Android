@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="board"
             type="com.ssafy.gumi_life_project.data.model.BoardItem" />
@@ -26,17 +25,19 @@
             android:paddingEnd="20dp">
 
             <TextView
-                android:id="@+id/tv_board_title"
+                android:id="@+id/textview_title"
                 style="@style/HomeMiddleContentTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:text="@{board.title}"
                 tools:text="싸피 꿀팁 대방출 ~" />
 
             <TextView
-                android:id="@+id/tv_board_writer"
+                android:id="@+id/textview_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{board.content}"
                 tools:text="미리 보기 방지 ~~~ 미리 보기 방지 ~~~ 미리 보기 방지 ~~~미리 보기 방지 ~~~미리 보기 ..." />
 
             <LinearLayout
@@ -51,7 +52,8 @@
                     android:id="@+id/textview_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="5분 전" />
+                    tools:text="5분 전"
+                    android:text="@{board.updateDate == null ? board.createDate.toString() : board.updateDate.toString()}"/>
 
                 <TextView
                     android:id="@+id/textview_line"
@@ -64,6 +66,7 @@
                     android:id="@+id/textview_writer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{board.writerName.toString()}"
                     tools:text="망고" />
             </LinearLayout>
         </LinearLayout>
