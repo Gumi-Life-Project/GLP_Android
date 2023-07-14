@@ -152,7 +152,11 @@
                         style="@style/HomeMiddleContentTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        tools:text="마이구미는 맛있다."/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -189,7 +193,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:onClick="@{() -> viewModel.loadAndSetTriggerTimes()}"
+                            android:onClick="@{() -> viewModel.onRefreshButtonClicked()}"
                             android:padding="5dp"
                             android:src="@drawable/baseline_refresh_24" />
                     </LinearLayout>
