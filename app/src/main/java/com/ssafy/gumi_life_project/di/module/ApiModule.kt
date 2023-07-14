@@ -24,10 +24,21 @@ object ApiModule {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
-            })
-            .build()
+            }).addInterceptor {
+                val request = it.request()
+                if (request.url().encodedPath().equals("/board/list", true)
+                    || request.url().encodedPath().equals("/weather/", true)
+                    || request.url().encodedPath().equals("/board/list/new", true)
+                    || request.url().encodedPath().equals("/tip/list", true)
+                ) {
+                    it.proceed(request)
+                } else {
+                    it.proceed(request.newBuilder().apply {
+                        addHeader("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4IiwiZXhwIjoxNjg5MzIwODM2fQ.JG3TW3oymun1iQUgLlGm6ACHQOdN0rmFrUKHjXWg4Nmz7zIEXBQkHj8PI8qIuWbry_M3OMKct_PDaJFe5DYWAw")
+                    }.build())
+                }
+            }.build()
     }
-
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
