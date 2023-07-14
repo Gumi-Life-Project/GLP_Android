@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.BoardItem
 import com.ssafy.gumi_life_project.databinding.FragmentBoardListBinding
+import com.ssafy.gumi_life_project.ui.main.LoadingDialog
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -71,6 +72,15 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
             errorMsg.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
                     showToast(it)
+                }
+            }
+
+            val dialog = LoadingDialog(requireContext())
+            isLoading.observe(viewLifecycleOwner) {
+                if (isLoading.value!!) {
+                    dialog.show()
+                } else if (!isLoading.value!!) {
+                    dialog.dismiss()
                 }
             }
         }

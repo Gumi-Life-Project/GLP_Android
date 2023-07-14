@@ -45,8 +45,8 @@ class BoardViewModel @Inject constructor(
                     postValueEvent(2, type)
                 }
             }
+            hideProgress()
         }
-        hideProgress()
     }
 
     private fun postValueEvent(value: Int, type: String) {
