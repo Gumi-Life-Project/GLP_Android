@@ -34,7 +34,11 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
         initToolbar()
         initRecyclerView()
         initObserver()
-        viewModel.getBoardList()
+
+        bindingNonNull.swipelayoutBoard.setOnRefreshListener {
+            viewModel.getBoardList()
+            bindingNonNull.swipelayoutBoard.isRefreshing = false
+        }
     }
 
     private fun initToolbar() {
@@ -46,6 +50,8 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
     }
 
     private fun initRecyclerView() {
+        viewModel.getBoardList()
+
         adapter = BoardListAdapter()
         adapter.onItemClickListener = object : BoardListAdapter.OnItemClickListener {
             override fun onItemClick(boardItem: BoardItem) {
