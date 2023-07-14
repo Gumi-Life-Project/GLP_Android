@@ -30,7 +30,7 @@ class BoardViewModel @Inject constructor(
             val type = "정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    _board.postValue(response.body)
+                    _board.postValue(response.body.boardList)
                 }
 
                 is NetworkResponse.ApiError -> {
