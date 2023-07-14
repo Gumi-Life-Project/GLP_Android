@@ -34,11 +34,15 @@ object ApiModule {
                     it.proceed(request)
                 } else {
                     it.proceed(request.newBuilder().apply {
-                        addHeader("Authorization", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4IiwiZXhwIjoxNjg5MzIwODM2fQ.JG3TW3oymun1iQUgLlGm6ACHQOdN0rmFrUKHjXWg4Nmz7zIEXBQkHj8PI8qIuWbry_M3OMKct_PDaJFe5DYWAw")
+                        addHeader(
+                            "Authorization",
+                            "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4IiwiZXhwIjoxNjg5MzIwODM2fQ.JG3TW3oymun1iQUgLlGm6ACHQOdN0rmFrUKHjXWg4Nmz7zIEXBQkHj8PI8qIuWbry_M3OMKct_PDaJFe5DYWAw"
+                        )
                     }.build())
                 }
             }.build()
     }
+
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {

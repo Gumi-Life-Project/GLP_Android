@@ -138,8 +138,7 @@
                         android:nestedScrollingEnabled="false"
                         android:overScrollMode="never"
                         android:scrollbars="none"
-                        tools:itemCount="1"
-                        tools:listitem="@layout/item_board_comments" />
+                        tools:itemCount="1" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -171,7 +170,7 @@
                 android:maxLength="1000"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:singleLine="true"></EditText>
+                android:singleLine="true" />
 
             <ImageView
                 android:id="@+id/img_post_comment"
