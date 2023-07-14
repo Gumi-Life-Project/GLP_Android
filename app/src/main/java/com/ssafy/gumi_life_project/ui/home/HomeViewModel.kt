@@ -5,11 +5,13 @@ import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.ssafy.gumi_life_project.data.model.BoardItem
 import com.ssafy.gumi_life_project.data.model.Event
 import com.ssafy.gumi_life_project.data.model.LightTime
 import com.ssafy.gumi_life_project.data.model.SignalLight
 import com.ssafy.gumi_life_project.data.repository.home.HomeRepository
 import com.ssafy.gumi_life_project.util.CrossWorkTimeList
+import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -34,6 +36,9 @@ class HomeViewModel @Inject constructor(
     private var _isInServiceTime = MutableLiveData(false)
     val isInServiceTime: LiveData<Boolean> = _isInServiceTime
 
+    private var _isRefresh = MutableLiveData<Event<Boolean>>()
+    val isRefresh: LiveData<Event<Boolean>> = _isRefresh
+
     private val _timeText1 = MutableLiveData<LightTime>()
     val timeText1: LiveData<LightTime> = _timeText1
 
@@ -42,6 +47,9 @@ class HomeViewModel @Inject constructor(
 
     private val _timeText3 = MutableLiveData<LightTime>()
     val timeText3: LiveData<LightTime> = _timeText3
+
+    private val _simpleBoard = MutableLiveData<List<BoardItem>>()
+    val simpleBoard: LiveData<List<BoardItem>> = _simpleBoard
 
     private fun postValueEvent(value: Int, type: String) {
         val msgArrayList = arrayOf(
@@ -55,14 +63,46 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getSimpleBoard() {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.getSimpleBoard()
+
+            val type = "간단 게시판 조회에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _simpleBoard.postValue(response.body.boardList)
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+            hideProgress()
+        }
+    }
+
     fun onCrossWorkTimeViewClicked(signalLight: SignalLight) {
         _showBottomSheetEvent.postValue(Event(signalLight))
+    }
+
+    fun onRefreshButtonClicked() {
+        _isRefresh.postValue(Event(true))
+        loadAndSetTriggerTimes()
     }
 
     fun loadAndSetTriggerTimes() {
         showProgress()
 
-        _isInServiceTime.postValue(isInServiceTime())
+        _isInServiceTime.postValue(isInCountServiceTime())
 
         viewModelScope.launch {
             val triggerTimes = CrossWorkTimeList.getTriggerTimes()
@@ -75,7 +115,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun isInServiceTime(): Boolean {
+    private fun isInCountServiceTime(): Boolean {
         val calendar = Calendar.getInstance()
         val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
         return currentHour == 8

@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.ui.home
 
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +8,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
+import com.ssafy.gumi_life_project.data.model.BoardItem
 import com.ssafy.gumi_life_project.data.model.Tip
 import com.ssafy.gumi_life_project.databinding.FragmentHomeBinding
 import com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkBottomSheet
+import com.ssafy.gumi_life_project.ui.main.LoadingDialog
 import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +25,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 ) {
     private val viewModel by viewModels<HomeViewModel>()
     private val activityViewModel by activityViewModels<MainViewModel>()
+    private lateinit var randomTip: Tip
+    private lateinit var adapter: SimpleBoardAdapter
 
     override fun onCreateBinding(
         inflater: LayoutInflater,
@@ -36,11 +41,45 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     override fun init() {
         observeData()
+        initRecyclerView()
         viewModel.loadAndSetTriggerTimes()
+
+        bindingNonNull.linearlayoutTip.setOnClickListener {
+            if(::randomTip.isInitialized) {
+                val bottomSheetDialogFragment =
+                    TipBottomSheet(randomTip.subject, randomTip.description)
+                bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
+            }
+        }
+
+        bindingNonNull.linearlayoutSimpleBoard.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_boardListFragment)
+        }
+    }
+
+    private fun initRecyclerView() {
+        viewModel.getSimpleBoard()
+
+        adapter = SimpleBoardAdapter()
+        adapter.onItemClickListener = object : SimpleBoardAdapter.OnItemClickListener {
+            override fun onItemClick(boardItem: BoardItem) {
+                findNavController().navigate(R.id.action_homeFragment_to_boardListFragment)
+            }
+        }
+        bindingNonNull.recyclerviewSimple.adapter = adapter
     }
 
     private fun observeData() {
         with(viewModel) {
+            val dialog = LoadingDialog(requireContext())
+            isLoading.observe(viewLifecycleOwner) {
+                if (isLoading.value!!) {
+                    dialog.show()
+                } else if (!isLoading.value!!) {
+                    dialog.dismiss()
+                }
+            }
+
             errorMsg.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
                     showToast(it)
@@ -61,18 +100,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                     bottomSheetDialogFragment.show(childFragmentManager, "CrossWorkBottomSheet")
                 }
             }
+
+            isRefresh.observe(viewLifecycleOwner) { event ->
+                event.getContentIfNotHandled()?.let {
+                    val animatorRotate = ObjectAnimator.ofFloat(bindingNonNull.imageRefresh, "rotation", 0f, 360f)
+                    animatorRotate.duration = 1000
+                    animatorRotate.start()}
+            }
+
+            simpleBoard.observe(viewLifecycleOwner) {
+                adapter.setBoardList(it)
+            }
         }
 
         with(activityViewModel) {
             tip.observe(viewLifecycleOwner) { tip ->
-                val randomTip = getRandomTip(tip)
-                bindingNonNull.textviewTipContent.text = limitStringLength(randomTip.subject)
-
-                bindingNonNull.linearlayoutTip.setOnClickListener {
-                    val bottomSheetDialogFragment =
-                        TipBottomSheet(randomTip.subject, randomTip.description)
-                    bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
-                }
+                randomTip = getRandomTip(tip)
+                bindingNonNull.textviewTipContent.text = randomTip.subject
             }
 
             weather.observe(viewLifecycleOwner) { weather ->
@@ -103,11 +147,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun getRandomTip(tips: List<Tip>): Tip {
         return if (tips.isNotEmpty()) tips[Random.nextInt(tips.size)] else Tip()
     }
-
-    private fun limitStringLength(input: String, maxLength: Int = 23): String {
-        return if (input.length > maxLength) input.substring(0, maxLength) + "..." else input
-    }
-
+    
     private fun makeWeatherIcon(type: String) {
         when (type) {
             "없음" -> bindingNonNull.imageviewTodayWeatherImg.setImageResource(R.drawable.icon_sunny)
