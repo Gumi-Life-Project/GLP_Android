@@ -40,7 +40,7 @@
             android:backgroundTint="@color/main_color"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/baseline_refresh_24"
+            android:src="@drawable/ic_add_24"
             app:layout_constraintBottom_toBottomOf="@+id/recyclerview_board_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.954"
