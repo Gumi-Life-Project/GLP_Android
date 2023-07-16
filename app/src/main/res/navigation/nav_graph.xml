@@ -30,5 +30,24 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ssafy.gumi_life_project.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_settingNicknameFragment"
+            app:destination="@id/settingNicknameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingNicknameFragment"
+        android:name="com.ssafy.gumi_life_project.ui.settingnickname.SettingNicknameFragment"
+        android:label="SettingNicknameFragment" >
+        <action
+            android:id="@+id/action_settingNicknameFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
