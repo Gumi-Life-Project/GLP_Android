@@ -37,7 +37,9 @@
             android:layout_height="0dp"
             android:orientation="vertical">
 
-            <include layout="@layout/tool_bar_home" />
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/tool_bar_home" />
 
             <LinearLayout
                 android:id="@+id/linearlayout_home"

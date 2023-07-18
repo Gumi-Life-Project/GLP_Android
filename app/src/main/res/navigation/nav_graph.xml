@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_shuttleBusFragment"
             app:destination="@id/shuttleBusFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mypageFragment"
+            app:destination="@id/mypageFragment" />
     </fragment>
     <fragment
         android:id="@+id/shuttleBusFragment"
@@ -48,6 +51,14 @@
         android:label="SettingNicknameFragment" >
         <action
             android:id="@+id/action_settingNicknameFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mypageFragment"
+        android:name="com.ssafy.gumi_life_project.ui.mypage.MypageFragment"
+        android:label="MypageFragment" >
+        <action
+            android:id="@+id/action_mypageFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

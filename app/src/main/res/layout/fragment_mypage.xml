@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ssafy.gumi_life_project.ui.mypage.MypageViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/tool_bar_back_button" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/border_main_background"
+                android:gravity="start|center"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <ImageView
+                    android:id="@+id/imageview_user_profile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="8dp"
+                    tools:src="@drawable/icon_user" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="start|center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/imageview_user_nickname"
+                        style="@style/HomeMiddleTitleTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="nickname" />
+
+                    <TextView
+                        android:id="@+id/imageview_user_organization"
+                        style="@style/HomeMiddleContentGrayTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintVertical_bias="0.9"
+                        tools:text="ssafy 9기 구미캠퍼스" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/border_main_background"
+                android:gravity="start|center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:text="@string/user_info_board"
+                    style="@style/LayoutTitleTextStyle"/>
+
+                <LinearLayout
+                    android:id="@+id/layout_board_write"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/icon_board" />
+
+                    <TextView
+                        android:id="@+id/textview_board_write"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_info_board_write"
+                        style="@style/HomeMiddleContentGrayTextStyle"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_board_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/icon_comment_filled" />
+
+                    <TextView
+                        android:id="@+id/textview_board_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_info_board_comment"
+                        style="@style/HomeMiddleContentGrayTextStyle"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_board_like"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/icon_heart" />
+
+                    <TextView
+                        android:id="@+id/textview_board_like"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_info_board_like"
+                        style="@style/HomeMiddleContentGrayTextStyle"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/border_main_background"
+                android:gravity="start|center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:text="@string/user_info_account"
+                    style="@style/LayoutTitleTextStyle"/>
+
+                <TextView
+                    android:id="@+id/textview_account_nickname_modify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_info_account_nickname_modify"
+                    android:layout_marginStart="16dp"
+                    style="@style/HomeMiddleContentGrayTextStyle"/>
+
+                <TextView
+                    android:id="@+id/textview_account_img_modify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_info_account_img_modify"
+                    android:layout_marginStart="16dp"
+                    style="@style/HomeMiddleContentGrayTextStyle"/>
+
+                <TextView
+                    android:id="@+id/textview_account_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_info_account_logout"
+                    android:layout_marginStart="16dp"
+                    style="@style/HomeMiddleContentGrayTextStyle"/>
+
+                <TextView
+                    android:id="@+id/textview_account_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_info_account_delete"
+                    android:layout_marginStart="16dp"
+                    style="@style/HomeMiddleContentGrayTextStyle"/>
+
+                <TextView
+                    android:id="@+id/textview_account_alarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_info_account_alarm"
+                    android:layout_marginStart="16dp"
+                    style="@style/HomeMiddleContentGrayTextStyle"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/border_main_background"
+            android:gravity="start|center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:text="@string/user_info_information"
+                style="@style/LayoutTitleTextStyle"/>
+
+            <TextView
+                android:id="@+id/textview_information_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_info_information_service"
+                android:layout_marginStart="16dp"
+                style="@style/HomeMiddleContentGrayTextStyle"/>
+
+            <TextView
+                android:id="@+id/textview_information_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_info_information_policy"
+                android:layout_marginStart="16dp"
+                style="@style/HomeMiddleContentGrayTextStyle"/>
+
+            <TextView
+                android:id="@+id/textview_information_using_library"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_info_information_using_library"
+                android:layout_marginStart="16dp"
+                style="@style/HomeMiddleContentGrayTextStyle"/>
+        </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</layout>

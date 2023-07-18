@@ -35,8 +35,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 
     override fun init() {
+        initIcons()
         observeData()
         viewModel.loadAndSetTriggerTimes()
+    }
+
+    private fun initIcons() {
+        bindingNonNull.toolBar.imageviewUserIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_mypageFragment)
+        }
     }
 
     private fun observeData() {
