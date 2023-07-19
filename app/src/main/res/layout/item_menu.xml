@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="meal"
+            type="com.ssafy.gumi_life_project.data.model.Meal" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/border_main_background"
+        android:orientation="horizontal"
+        android:padding="18dp"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textview_today_meal_title"
+                style="@style/HomeMiddleTitleTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{meal.time.toString() + meal.course.toString()}" />
+
+            <TextView
+                android:id="@+id/textview_today_meal_menu"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@{meal.courseFormatted}" />
+
+            <TextView
+                android:id="@+id/textview_today_meal_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{meal.title}"
+                android:gravity="bottom"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:imageUrl="@{meal.photoURL}"/>
+    </LinearLayout>
+</layout>
