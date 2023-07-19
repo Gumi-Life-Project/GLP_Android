@@ -15,12 +15,15 @@
         android:layout_height="match_parent"
         android:background="@drawable/border_main_background"
         android:orientation="horizontal"
-        android:padding="18dp"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="18dp"
+        android:paddingTop="6dp"
         android:gravity="center">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="150dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_gravity="center"
@@ -36,16 +39,15 @@
             <TextView
                 android:id="@+id/textview_today_meal_menu"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@{meal.courseFormatted}" />
+                android:layout_height="wrap_content"
+                android:text="@{meal.courseFormatted}"
+                android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:id="@+id/textview_today_meal_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{meal.title}"
-                android:gravity="bottom"/>
+                android:text="@{meal.title}"/>
         </LinearLayout>
 
         <ImageView
