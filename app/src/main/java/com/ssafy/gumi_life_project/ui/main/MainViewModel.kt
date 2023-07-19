@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.Event
+import com.ssafy.gumi_life_project.data.model.MealResponse
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
 import com.ssafy.gumi_life_project.data.model.Tip
 import com.ssafy.gumi_life_project.data.model.WeatherResponse
@@ -33,6 +34,9 @@ class MainViewModel @Inject constructor(
     private val _shuttleBusStopMark = MutableLiveData<ShuttleBusStop>()
     val shuttleBusStopMark: LiveData<ShuttleBusStop> = _shuttleBusStopMark
 
+    private val _meal = MutableLiveData<MealResponse>()
+    val meal: LiveData<MealResponse> = _meal
+
     fun getAllTipList() {
         showProgress()
         viewModelScope.launch {
@@ -58,6 +62,34 @@ class MainViewModel @Inject constructor(
             }
         }
         hideProgress()
+    }
+
+    fun getMealList() {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.getMealList()
+
+            val type = "정보 조회에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _meal.postValue(response.body)
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+
+            hideProgress()
+        }
     }
 
     fun getNowWeather() {
