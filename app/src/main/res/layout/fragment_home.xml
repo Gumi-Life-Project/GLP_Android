@@ -271,7 +271,7 @@
                     android:id="@+id/linearlayout_simple_board"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/border_cross_work_table"
                     android:orientation="vertical"
                     android:paddingStart="10dp"

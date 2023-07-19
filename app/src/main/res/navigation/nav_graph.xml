@@ -41,13 +41,13 @@
         android:name="com.ssafy.gumi_life_project.ui.board.BoardListFragment"
         android:label="BoardListFragment">
         <action
-            android:id="@+id/action_boardListFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
+            android:id="@+id/action_boardListFragment_to_boardDetailFragment"
+            app:destination="@id/boardDetailFragment"
+            app:popUpTo="@id/boardDetailFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_boardListFragment_to_boardDetailFragment"
-            app:destination="@id/boardDetailFragment" />
+            android:id="@+id/action_boardListFragment_to_homeFragment"
+            app:destination="@id/homeFragment"/>
     </fragment>
     <fragment
         android:id="@+id/boardDetailFragment"
