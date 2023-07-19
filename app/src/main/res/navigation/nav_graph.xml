@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_loginFragment_to_settingNicknameFragment"
             app:destination="@id/settingNicknameFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingNicknameFragment"
@@ -60,5 +63,11 @@
         <action
             android:id="@+id/action_mypageFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_mypageFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
 </navigation>

@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.ui.login
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -29,7 +28,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     override fun init() {
         initListener()
-        observeData()
     }
 
     private fun initListener() {
@@ -38,21 +36,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             login()
         }
 
-        bindingNonNull.imagebuttonLoginMaintain.setOnClickListener {
-            viewModel.checkLogin()
-        }
-    }
-
-    private fun observeData() {
-        viewModel.apply {
-            isCheckedLogin.observe(viewLifecycleOwner) {
-                if(it == false) {
-                    bindingNonNull.imagebuttonLoginMaintain.setImageResource(R.drawable.login_unchecked_maintain_button)
-                } else {
-                    bindingNonNull.imagebuttonLoginMaintain.setImageResource(R.drawable.login_checked_maintain_button)
-                }
-            }
-        }
     }
 
     private fun login() {
@@ -63,13 +46,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 Log.e(TAG, "카카오계정으로 로그인 실패", error)
             } else if (token != null) {
                 Log.i(TAG, "카카오계정으로 로그인 성공1 ${token.accessToken}")
-//                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                // 최초 로그인 -> settingNicknameFragment
+                // 최초 로그인이 아닐 시 -> homeFragment
+//                findNavController().navigate(R.id.action_loginFragment_to_settingNicknameFragment)
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
 
         // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
-        if (UserApiClient.instance.isKakaoTalkLoginAvailable(context!!)) {
-            UserApiClient.instance.loginWithKakaoTalk(context!!) { token, error ->
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
+            UserApiClient.instance.loginWithKakaoTalk(requireContext()) { token, error ->
                 if (error != null) {
                     Log.e(TAG, "카카오톡으로 로그인 실패", error)
 
@@ -80,14 +66,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     }
 
                     // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
-                    UserApiClient.instance.loginWithKakaoAccount(context!!, callback = callback)
+                    UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = callback)
                 } else if (token != null) {
                     Log.i(TAG, "카카오톡으로 로그인 성공2 ${token.accessToken}")
-                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 }
             }
         } else {
-            UserApiClient.instance.loginWithKakaoAccount(context!!, callback = callback)
+            UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = callback)
         }
 
     }

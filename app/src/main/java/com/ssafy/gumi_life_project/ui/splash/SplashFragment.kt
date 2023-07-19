@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.kakao.sdk.auth.AuthApiClient
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentSplashBinding
 import com.ssafy.gumi_life_project.ui.main.MainViewModel
@@ -80,7 +81,12 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
     private fun moveToHomeFragment() {
         // 1.5초 후에 HomeFragment로 이동
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            if (AuthApiClient.instance.hasToken()) {
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            } else {
+                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            }
+
         }, 1500)
     }
 
