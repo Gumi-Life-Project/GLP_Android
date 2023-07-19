@@ -26,9 +26,9 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
     }
 
     private fun initToolBar() {
-        bindingNonNull.toolBar.toolBarBackButtonTitile.text =
+        bindingNonNull.toolBarMypage.toolbarBackButtonTitle.text =
             resources.getString(R.string.user_info_tool_bar_title)
-        bindingNonNull.toolBar.toolBarBackButton.setOnClickListener {
+        bindingNonNull.toolBarMypage.toolbarBackButton.setOnClickListener {
             findNavController().navigate(R.id.action_mypageFragment_to_homeFragment)
         }
     }

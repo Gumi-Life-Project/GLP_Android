@@ -33,6 +33,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
             getAllTipList()
             getNowWeather()
             getShuttleBusStopMark()
+            getMealList()
         }
         animateLoading()
         moveToHomeFragment()

@@ -16,8 +16,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
-    private const val baseUrl = "https://gumiinsider-ea09851d1f47.herokuapp.com/"
-
+    private const val baseUrl = "https://mygumiworld-backend-sxxzy.run.goorm.io"
+    
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {

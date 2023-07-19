@@ -1,6 +1,7 @@
 package com.ssafy.gumi_life_project.data.repository.main
 
 import com.ssafy.gumi_life_project.data.model.ErrorResponse
+import com.ssafy.gumi_life_project.data.model.MealResponse
 import com.ssafy.gumi_life_project.data.model.Tip
 import com.ssafy.gumi_life_project.data.model.WeatherResponse
 import com.ssafy.gumi_life_project.data.remote.ApiService
@@ -16,6 +17,10 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun getNowWeather(): NetworkResponse<WeatherResponse, ErrorResponse> {
         return apiService.getNowWeather()
+    }
+
+    override suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse> {
+        return apiService.getMealList()
     }
 
 }

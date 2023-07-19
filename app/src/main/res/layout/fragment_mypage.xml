@@ -18,8 +18,8 @@
             android:orientation="vertical">
 
             <include
-                android:id="@+id/tool_bar"
-                layout="@layout/tool_bar_back_button" />
+                android:id="@+id/tool_bar_mypage"
+                layout="@layout/toolbar_back_button" />
 
             <LinearLayout
                 android:layout_width="match_parent"
