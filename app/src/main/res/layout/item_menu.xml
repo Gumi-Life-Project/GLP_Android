@@ -53,6 +53,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:imageUrl="@{meal.photoURL}"/>
+            app:imageUrl="@{meal.photoURL}"
+            android:paddingTop="12dp"/>
     </LinearLayout>
 </layout>
