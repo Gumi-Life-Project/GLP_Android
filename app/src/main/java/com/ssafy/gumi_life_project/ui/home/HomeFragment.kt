@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.Tip
 import com.ssafy.gumi_life_project.databinding.FragmentHomeBinding
@@ -25,6 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private val viewModel by viewModels<HomeViewModel>()
     private val activityViewModel by activityViewModels<MainViewModel>()
     private lateinit var randomTip: Tip
+    private val mealAdapter = MealAdapter()
 
     override fun onCreateBinding(
         inflater: LayoutInflater,
@@ -48,6 +52,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
             }
         }
+
+        bindingNonNull.viewPager.adapter = mealAdapter
     }
 
     private fun observeData() {
@@ -91,6 +97,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 bindingNonNull.textviewTodayWeatherTemperature.text = weather.data.temperature + "º"
                 makeWeatherIcon(weather.data.precipitationType)
 
+            }
+
+            meal.observe(viewLifecycleOwner) { meal ->
+                if(meal.message == "success") {
+                    mealAdapter.setMealList(meal.data)
+                    bindingNonNull.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageSelected(position: Int) {
+                            super.onPageSelected(position)
+                            bindingNonNull.textviewPage.text = "(${position + 1}/${meal.data.size})"
+                        }
+                    })
+                }
             }
 
             shuttleBusStopMark.observe(viewLifecycleOwner) { shuttleBusStopMark ->
