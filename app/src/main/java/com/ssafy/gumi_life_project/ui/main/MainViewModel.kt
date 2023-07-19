@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: MainRepository
@@ -63,11 +64,15 @@ class MainViewModel @Inject constructor(
         showProgress()
         viewModelScope.launch {
             val response = repository.getNowWeather()
-
+            val failResponses = WeatherResponse()
             val type = "정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    _weather.postValue(response.body)
+                    if (response.body.message == "fail") {
+                        _weather.postValue(failResponses)
+                    } else {
+                        _weather.postValue(response.body)
+                    }
                 }
 
                 is NetworkResponse.ApiError -> {
