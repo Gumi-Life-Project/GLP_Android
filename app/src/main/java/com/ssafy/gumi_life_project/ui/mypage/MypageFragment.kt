@@ -22,6 +22,7 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
     override fun init() {
         bindingNonNull.viewModel = viewModel
         initToolBar()
+        initListener()
     }
 
     private fun initToolBar() {
@@ -29,6 +30,13 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             resources.getString(R.string.user_info_tool_bar_title)
         bindingNonNull.toolBar.toolBarBackButton.setOnClickListener {
             findNavController().navigate(R.id.action_mypageFragment_to_homeFragment)
+        }
+    }
+
+    private fun initListener() {
+        bindingNonNull.textviewAccountLogout.setOnClickListener {
+            viewModel.logout()
+            findNavController().navigate(R.id.action_mypageFragment_to_loginFragment)
         }
     }
 
