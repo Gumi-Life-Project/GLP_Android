@@ -25,9 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:gravity="center">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textview_today_meal_title"
@@ -39,7 +37,8 @@
             <TextView
                 android:id="@+id/textview_today_meal_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:text="@{meal.courseFormatted}"
                 android:layout_marginBottom="8dp"/>
 
@@ -47,7 +46,9 @@
                 android:id="@+id/textview_today_meal_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{meal.title}"/>
+                android:text="@{meal.title}"
+                android:gravity="bottom"
+                android:layout_gravity="bottom"/>
         </LinearLayout>
 
         <ImageView
