@@ -1,12 +1,10 @@
 package com.ssafy.gumi_life_project.data.remote
 
-import com.ssafy.gumi_life_project.data.model.BoardItem
-import com.ssafy.gumi_life_project.data.model.BoardListResponse
-import com.ssafy.gumi_life_project.data.model.ErrorResponse
-import com.ssafy.gumi_life_project.data.model.Tip
-import com.ssafy.gumi_life_project.data.model.WeatherResponse
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
-import retrofit2.http.GET
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 interface ApiService {
     @GET("/tip/list")
@@ -20,4 +18,12 @@ interface ApiService {
 
     @GET("/board/list/new")
     suspend fun getThreeBoard(): NetworkResponse<BoardListResponse, ErrorResponse>
+
+    @Multipart
+    @POST("/board/writeBoard")
+    suspend fun writeBoard(
+        @Header("Authorization") accessToken: String,
+        @Part("boardDto") boardDto: RequestBody,
+        @Part files: MutableList<MultipartBody.Part>?
+    ): NetworkResponse<BoardWriteResponse, ErrorResponse>
 }
