@@ -2,10 +2,12 @@ package com.ssafy.gumi_life_project.ui.mypage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentMypageBinding
+import com.ssafy.gumi_life_project.ui.shuttlebus.ShuttleBusDialog
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 
 class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
@@ -35,8 +37,10 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
 
     private fun initListener() {
         bindingNonNull.textviewAccountLogout.setOnClickListener {
-            viewModel.logout()
-            findNavController().navigate(R.id.action_mypageFragment_to_loginFragment)
+            val dialog = LogoutDialog()
+            dialog.show(childFragmentManager, "logoutDialogTag")
+//            viewModel.logout()
+
         }
     }
 

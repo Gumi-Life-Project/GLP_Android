@@ -47,6 +47,10 @@
     <string name="user_info_information_policy">개인정보처리방침</string>
     <string name="user_info_information_using_library">사용한 라이브러리</string>
 
+    <string name="user_info_logout_message">로그아웃 하시겠습니까?</string>
+    <string name="user_info_logout_cancel">취소</string>
+    <string name="user_info_logout_confirm">확인</string>
+
     <!-- cross work -->
     <string name="cross_walk_title1">1번 신호등</string>
     <string name="cross_walk_title2">2번 신호등</string>
