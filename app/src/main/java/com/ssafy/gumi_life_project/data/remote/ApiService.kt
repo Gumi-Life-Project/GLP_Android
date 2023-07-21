@@ -26,4 +26,8 @@ interface ApiService {
         @Part("boardDto") boardDto: RequestBody,
         @Part files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardWriteResponse, ErrorResponse>
+
+    @GET("/meal/")
+    suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
+
 }
