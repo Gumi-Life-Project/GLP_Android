@@ -1,15 +1,13 @@
 package com.ssafy.gumi_life_project.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.gumi_life_project.data.local.AppPreferences
-import com.ssafy.gumi_life_project.data.model.Event
-import com.ssafy.gumi_life_project.data.model.MealResponse
-import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
-import com.ssafy.gumi_life_project.data.model.Tip
-import com.ssafy.gumi_life_project.data.model.WeatherResponse
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.data.repository.main.MainRepository
+import com.ssafy.gumi_life_project.data.repository.user.UserRepository
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,9 +15,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+private const val TAG = "MainViewModel_구미"
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: MainRepository
+    private val repository: MainRepository,
+    private val userRepository : UserRepository
 ) : BaseViewModel() {
 
     private val _msg = MutableLiveData<Event<String>>()
@@ -36,6 +36,9 @@ class MainViewModel @Inject constructor(
 
     private val _meal = MutableLiveData<MealResponse>()
     val meal: LiveData<MealResponse> = _meal
+
+    private val _memberInfo = MutableLiveData<Member>()
+    val memberInfo : LiveData<Member> = _memberInfo
 
     fun getAllTipList() {
         showProgress()
@@ -135,6 +138,33 @@ class MainViewModel @Inject constructor(
             AppPreferences.updateShuttleBusStopMark(ShuttleBusStop("", 0.0, 0.0, "", false))
         }
         getShuttleBusStopMark()
+    }
+
+    fun getMemberInfo(accessToken: String) {
+        showProgress()
+        viewModelScope.launch {
+            val response = userRepository.getMemberInfo(accessToken)
+            val type = "member 정보 조회에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _memberInfo.postValue(response.body)
+                    Log.d(TAG, "getMemberInfo: ${response.body}")
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+        }
+        hideProgress()
     }
 
     private fun postValueEvent(value: Int, type: String) {

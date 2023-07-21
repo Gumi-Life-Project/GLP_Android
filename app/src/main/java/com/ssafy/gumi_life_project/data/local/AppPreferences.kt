@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
-import java.util.*
 
 object AppPreferences {
     private const val LOGIN_SESSION = "login.session"
@@ -15,6 +14,8 @@ object AppPreferences {
     const val APP_RUN_STATE = "app_run_state"
     private const val SHUTTLE_BUS_INFO = "shuttle_bus_info"
     private const val SHUTTLE_BUS_STOP_MARKED = "shuttle_bus_stop_marked"
+
+    private const val JWT_TOKEN = "jwt_token"
 
     private lateinit var preferences: SharedPreferences
     private val gson = GsonBuilder().create()
@@ -283,6 +284,16 @@ object AppPreferences {
         val shuttleBusStopType = object : TypeToken<ShuttleBusStop>() {}.type
 
         return gson.fromJson(jsonData, shuttleBusStopType)
+    }
+
+    fun initJwtToken(jwtToken: String) {
+        preferences.edit().putString(JWT_TOKEN, jwtToken).commit()
+    }
+
+    // sharedPreferences에 저장된 jwt 토큰 정보 반환
+    fun getJwtToken(): String? {
+        val jsonData = preferences.getString(JWT_TOKEN, "")
+        return jsonData
     }
 
 }

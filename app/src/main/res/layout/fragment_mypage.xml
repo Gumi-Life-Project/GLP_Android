@@ -44,7 +44,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/imageview_user_nickname"
+                        android:id="@+id/textview_user_nickname"
                         style="@style/HomeMiddleTitleTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                         tools:text="nickname" />
 
                     <TextView
-                        android:id="@+id/imageview_user_organization"
+                        android:id="@+id/textview_user_organization"
                         style="@style/HomeMiddleContentGrayTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

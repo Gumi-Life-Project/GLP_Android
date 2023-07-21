@@ -1,14 +1,12 @@
 package com.ssafy.gumi_life_project.data.remote
 
-import com.ssafy.gumi_life_project.data.model.BoardItem
-import com.ssafy.gumi_life_project.data.model.BoardListResponse
-import com.ssafy.gumi_life_project.data.model.ErrorResponse
-import com.ssafy.gumi_life_project.data.model.MealResponse
-import com.ssafy.gumi_life_project.data.model.Tip
-import com.ssafy.gumi_life_project.data.model.User
-import com.ssafy.gumi_life_project.data.model.WeatherResponse
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiService {
@@ -19,7 +17,7 @@ interface ApiService {
     suspend fun getNowWeather(): NetworkResponse<WeatherResponse, ErrorResponse>
 
     @GET("/api/admin/{accessToken}")
-    suspend fun getUserInfo(@Path("accessToken") accessToken: String) : NetworkResponse<User, ErrorResponse>
+    suspend fun getMemberInfo(@Header("Authorization") accessToken: String) : NetworkResponse<Member, ErrorResponse>
 
     @GET("/board/list")
     suspend fun getBoardList(): NetworkResponse<BoardListResponse, ErrorResponse>
@@ -29,4 +27,10 @@ interface ApiService {
 
     @GET("/meal/")
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
+
+    @POST("/api/auth/kakaomobile")
+    suspend fun getJwtToken(@Body accessToken: String) : NetworkResponse<UserResponse, ErrorResponse>
+
+    @PUT("/api/members/makenickName")
+    suspend fun makeNickName(@Header("Authorization") accessToken: String) : NetworkResponse<Member, ErrorResponse>
 }

@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_settingNicknameFragment"
+            app:destination="@id/settingNicknameFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -52,6 +55,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingNicknameFragment"
