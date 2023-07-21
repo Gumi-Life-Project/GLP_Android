@@ -24,6 +24,14 @@
 - 신호등 리프레쉬버튼 클릭 확인을 위해서 회전 애니메이션 추가
 - 서버 주소 변경
 
+1.0.3
+- 버튼을 클릭했을 때만 애니메이션이 작동되도록 수정
+- 리스트 아이템 버그 수정
+
+1.0.4
+- 날씨 정보 기능 버그 수정
+- 홈 화면에 식단표 정보 제공
+
 ## 안드로이드 담당 팀원
 | 팀원 | 역할 |
 |-----|-----
@@ -43,7 +51,7 @@
 | Collaboration | Git, Figma, Discord, Notion|
 
 ## 기여 방법
-1. ([https://github.com/noion0511/Log.M](https://github.com/Gumi-Life-Project/GLP_Android))을 포크합니다.
+1. ([https://github.com/Gumi-Life-Project/GLP_Android](https://github.com/Gumi-Life-Project/GLP_Android))을 포크합니다.
 2. (git checkout -b feature/example) 명령어로 새 브랜치를 만드세요.
 3. (git commit -am 'Add some example') 명령어로 커밋하세요.
 4. (git push origin feature/example) 명령어로 브랜치에 푸시하세요.
