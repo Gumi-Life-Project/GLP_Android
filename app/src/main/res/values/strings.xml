@@ -5,6 +5,9 @@
     <string name="splash_slogan">싸피 생활을 더 편하고 즐겁게</string>
     <string name="splash_title">구미 인사이더</string>
 
+    <!-- setting nickname -->
+    <string name="setting_nickname_title">닉네임 설정</string>
+
     <!-- login -->
     <string name="login_button">카카오 로그인</string>
     <string name="login_checked_login_maintain">로그인 유지</string>

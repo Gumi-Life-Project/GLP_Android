@@ -3,12 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ssafy.gumi_life_project.ui.settingnickname.SettingNicknameViewModel" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/tool_bar_setting_nickname" />
+        <include
+            android:id="@+id/toolbar_setting_nickname"
+            layout="@layout/tool_bar_setting_nickname" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextField"
@@ -17,7 +25,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edittext_input_id"
+                android:id="@+id/edittext_input_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -26,7 +34,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_mark"
+            android:id="@+id/button_nickname_setting"
             style="@style/ButtonTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

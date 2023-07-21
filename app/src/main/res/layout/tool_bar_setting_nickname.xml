@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tool_bar_back_button"
+    android:id="@+id/tool_bar_setting_nickname"
     android:layout_width="match_parent"
     android:layout_height="70dp">
 
@@ -9,5 +9,5 @@
         style="@style/ToolBarTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp" />
+        android:layout_gravity="center" />
 </androidx.appcompat.widget.Toolbar>
