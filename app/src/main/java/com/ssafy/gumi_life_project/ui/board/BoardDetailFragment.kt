@@ -6,8 +6,11 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentBoardDetailBinding
+import com.ssafy.gumi_life_project.ui.board.comment.CommentAdapter
 import com.ssafy.gumi_life_project.ui.main.LoadingDialog
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +34,6 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         initToolbar()
         initRecyclerView()
         initObserver()
-
     }
 
     private fun initToolbar() {
@@ -107,6 +109,15 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                     dialog.show()
                 } else if (!isLoading.value!!) {
                     dialog.dismiss()
+                }
+            }
+
+            boardDetail.observe(viewLifecycleOwner) { board ->
+                bindingNonNull.recyclerviewComment.apply {
+                    adapter = CommentAdapter()
+                    (adapter as? CommentAdapter)?.submitList(board.comments)
+                    val dividerItemDecoration = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+                    addItemDecoration(dividerItemDecoration)
                 }
             }
         }
