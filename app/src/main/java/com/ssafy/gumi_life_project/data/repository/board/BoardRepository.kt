@@ -16,4 +16,9 @@ interface BoardRepository {
         files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardWriteResponse, ErrorResponse>
 
+    suspend fun modifyBoard(
+        boardDto: RequestBody,
+        files: MutableList<MultipartBody.Part>?
+    ): NetworkResponse<BoardModifyResponse, ErrorResponse>
+
 }

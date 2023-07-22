@@ -26,3 +26,7 @@ data class BoardDetailResponse(
     val comments: List<Comment>,
     val message: String
 )
+
+data class BoardModifyResponse(
+    val message: String
+)
