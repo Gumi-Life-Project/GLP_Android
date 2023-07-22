@@ -8,27 +8,27 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : UserRepository {
-    override suspend fun getMemberInfo(accessToken: String): NetworkResponse<Member, ErrorResponse> {
-        return apiService.getMemberInfo(accessToken)
+    override suspend fun getMemberInfo(): NetworkResponse<Member, ErrorResponse> {
+        return apiService.getMemberInfo()
     }
 
     override suspend fun getJwtToken(accessToken: String): NetworkResponse<UserResponse, ErrorResponse> {
         return apiService.getJwtToken(accessToken)
     }
 
-    override suspend fun makeNickName(accessToken: String): NetworkResponse<Member, ErrorResponse> {
-        return apiService.makeNickName(accessToken)
+    override suspend fun makeNickName(nickname : String): NetworkResponse<Member, ErrorResponse> {
+        return apiService.makeNickName(nickname)
     }
 
-    override suspend fun getUserBoards(jwtToken: String): NetworkResponse<BoardListResponse, ErrorResponse> {
-        return apiService.getUserBoards(jwtToken)
+    override suspend fun getUserBoards(): NetworkResponse<BoardListResponse, ErrorResponse> {
+        return apiService.getUserBoards()
     }
 
-    override suspend fun getUserComments(jwtToken: String): NetworkResponse<BoardListResponse, ErrorResponse> {
-        return apiService.getUserComments(jwtToken)
+    override suspend fun getUserComments(): NetworkResponse<BoardListResponse, ErrorResponse> {
+        return apiService.getUserComments()
     }
 
-    override suspend fun getUserLikes(jwtToken: String): NetworkResponse<BoardListResponse, ErrorResponse> {
-        return apiService.getUserLikes(jwtToken)
+    override suspend fun getUserLikes(): NetworkResponse<BoardListResponse, ErrorResponse> {
+        return apiService.getUserLikes()
     }
 }

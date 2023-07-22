@@ -14,7 +14,6 @@ import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(
     R.layout.fragment_splash
@@ -89,7 +88,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
                 val jwtToken = AppPreferences.getJwtToken()
                 if (jwtToken != null) {
                     activityViewModel.apply {
-                        getMemberInfo(jwtToken)
+                        getMemberInfo()
                     }
                 }
             } else { // 토큰이 없으면 loginFragment로 이동

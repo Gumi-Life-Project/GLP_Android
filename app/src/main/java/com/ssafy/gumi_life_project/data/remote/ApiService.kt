@@ -7,6 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 interface ApiService {
     @GET("/tip/list")
@@ -16,13 +19,20 @@ interface ApiService {
     suspend fun getNowWeather(): NetworkResponse<WeatherResponse, ErrorResponse>
 
     @GET("/api/admin/{accessToken}")
-    suspend fun getMemberInfo(@Header("Authorization") accessToken: String) : NetworkResponse<Member, ErrorResponse>
+    suspend fun getMemberInfo() : NetworkResponse<Member, ErrorResponse>
 
     @GET("/board/list")
     suspend fun getBoardList(): NetworkResponse<BoardListResponse, ErrorResponse>
 
     @GET("/board/list/new")
     suspend fun getThreeBoard(): NetworkResponse<BoardListResponse, ErrorResponse>
+
+    @Multipart
+    @POST("/board/writeBoard")
+    suspend fun writeBoard(
+        @Part("boardDto") boardDto: RequestBody,
+        @Part files: MutableList<MultipartBody.Part>?
+    ): NetworkResponse<BoardWriteResponse, ErrorResponse>
 
     @GET("/meal/")
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
@@ -31,14 +41,14 @@ interface ApiService {
     suspend fun getJwtToken(@Body accessToken: String) : NetworkResponse<UserResponse, ErrorResponse>
 
     @PUT("/api/members/makenickName")
-    suspend fun makeNickName(@Header("Authorization") accessToken: String) : NetworkResponse<Member, ErrorResponse>
+    suspend fun makeNickName(@Body nickname : String) : NetworkResponse<Member, ErrorResponse>
 
     @GET("/board/list/myboards")
-    suspend fun getUserBoards(@Header("Authorization") Authorization: String) : NetworkResponse<BoardListResponse, ErrorResponse>
+    suspend fun getUserBoards() : NetworkResponse<BoardListResponse, ErrorResponse>
 
     @GET("/board/list/mycomments")
-    suspend fun getUserComments(@Header("Authorization") Authorization: String) : NetworkResponse<BoardListResponse, ErrorResponse>
+    suspend fun getUserComments() : NetworkResponse<BoardListResponse, ErrorResponse>
 
     @GET("/board/list/likes")
-    suspend fun getUserLikes(@Header("Authorization") jwtToken: String) : NetworkResponse<BoardListResponse, ErrorResponse>
+    suspend fun getUserLikes() : NetworkResponse<BoardListResponse, ErrorResponse>
 }

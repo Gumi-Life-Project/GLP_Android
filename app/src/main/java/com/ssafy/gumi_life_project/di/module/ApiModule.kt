@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.di.module
 
+import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.remote.ApiService
 import com.ssafy.gumi_life_project.util.network.NetworkResponseAdapterFactory
 import dagger.Module
@@ -17,15 +18,29 @@ import javax.inject.Singleton
 object ApiModule {
 
     private const val baseUrl = "https://mygumiworld-backend-sxxzy.run.goorm.io"
-    
+
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
-            })
-            .build()
+            }).addInterceptor {
+                val request = it.request()
+                if (request.url.encodedPath.equals("/board/list", true)
+                    || request.url.encodedPath.equals("/weather/", true)
+                    || request.url.encodedPath.equals("/board/list/new", true)
+                    || request.url.encodedPath.equals("/tip/list", true)
+                ) {
+                    it.proceed(request)
+                } else {
+                    it.proceed(request.newBuilder().apply {
+                        addHeader(
+                            "Authorization",
+                            AppPreferences.getJwtToken()!!)
+                    }.build())
+                }
+            }.build()
     }
 
     @Provides

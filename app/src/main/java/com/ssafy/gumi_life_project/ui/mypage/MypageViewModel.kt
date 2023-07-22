@@ -43,7 +43,7 @@ class MypageViewModel @Inject constructor(
         showProgress()
         val jwtToken = AppPreferences.getJwtToken()
         viewModelScope.launch {
-            val response = repository.getUserBoards(jwtToken!!)
+            val response = repository.getUserBoards()
 
             val type = "게시판 조회에"
             when (response) {
@@ -71,7 +71,7 @@ class MypageViewModel @Inject constructor(
         showProgress()
         val jwtToken = AppPreferences.getJwtToken()
         viewModelScope.launch {
-            val response = repository.getUserComments(jwtToken!!)
+            val response = repository.getUserComments()
 
             val type = "게시판 조회에"
             when (response) {
@@ -100,7 +100,7 @@ class MypageViewModel @Inject constructor(
         val jwtToken = AppPreferences.getJwtToken()
 
         viewModelScope.launch {
-            val response = repository.getUserLikes(jwtToken!!)
+            val response = repository.getUserLikes()
 
             val type = "게시판 조회에"
             when (response) {

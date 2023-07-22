@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/button_rounded_radius12"
             android:text="@string/shuttle_bus_mark_button" />
     </LinearLayout>
 </layout>

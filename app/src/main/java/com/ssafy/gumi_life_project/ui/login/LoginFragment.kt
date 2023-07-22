@@ -108,7 +108,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     
     private fun observeData() {
         viewModel.userResponse.observe(viewLifecycleOwner) {
-            activityViewModel.getMemberInfo(it.user.jwt.accessToken)
+            activityViewModel.getMemberInfo()
         }
 
         // usernickname이 null이면 닉네임 설정 화면으로 이동

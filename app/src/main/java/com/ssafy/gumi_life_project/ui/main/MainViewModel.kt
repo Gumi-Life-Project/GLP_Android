@@ -138,10 +138,10 @@ class MainViewModel @Inject constructor(
         getShuttleBusStopMark()
     }
 
-    fun getMemberInfo(accessToken: String) {
+    fun getMemberInfo() {
         showProgress()
         viewModelScope.launch {
-            val response = userRepository.getMemberInfo(accessToken)
+            val response = userRepository.getMemberInfo()
             val type = "member 정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {

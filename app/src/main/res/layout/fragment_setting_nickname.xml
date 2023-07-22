@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/button_rounded_radius12"
             android:text="@string/setting_nickname_button" />
     </LinearLayout>
 </layout>
