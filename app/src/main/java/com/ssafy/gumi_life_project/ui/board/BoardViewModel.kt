@@ -34,14 +34,13 @@ class BoardViewModel @Inject constructor(
     private val _boardDetail = MutableLiveData<BoardDetailResponse>()
     val boardDetail: LiveData<BoardDetailResponse> = _boardDetail
 
-    private val _isBoardClicked = MutableLiveData<Event<Unit>>()
-    val isBoardClicked: LiveData<Event<Unit>> = _isBoardClicked
-
     private val _writeResponse = MutableLiveData<Event<BoardWriteResponseType>>()
     val writeResponse: LiveData<Event<BoardWriteResponseType>> = _writeResponse
 
+    private val _boardNo = MutableLiveData<String>()
+    val boardNo: LiveData<String> = _boardNo
+
     fun getBoardList() {
-        showProgress()
         viewModelScope.launch {
             val response = repository.getBoardList()
 
@@ -63,8 +62,11 @@ class BoardViewModel @Inject constructor(
                     postValueEvent(2, type)
                 }
             }
-            hideProgress()
         }
+    }
+
+    fun saveBoardNo(boardNo: String) {
+        _boardNo.value = boardNo
     }
 
 
@@ -77,7 +79,6 @@ class BoardViewModel @Inject constructor(
             when (response) {
                 is NetworkResponse.Success -> {
                     _boardDetail.postValue(response.body)
-                    _isBoardClicked.postValue(Event(Unit))
                 }
 
                 is NetworkResponse.ApiError -> {
@@ -161,7 +162,6 @@ class BoardViewModel @Inject constructor(
             }
 
             hideProgress()
-            boardDetail.value?.boardDetail?.let { getBoardDetail(it.boardNo) }
         }
     }
 

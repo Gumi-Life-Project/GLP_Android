@@ -35,14 +35,17 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
     override fun init() {
         initToolbar()
         initObserver()
+        initData()
 
         bindingNonNull.layoutSwipe.setOnRefreshListener {
             viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
             bindingNonNull.layoutSwipe.isRefreshing = false
-            hideKeyboard(bindingNonNull.edittextComment.windowToken)
         }
     }
 
+    private fun initData() {
+        viewModel.boardNo.value?.let { viewModel.getBoardDetail(it) }
+    }
 
 
     private fun initToolbar() {
@@ -118,8 +121,9 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             }
 
             comment.observe(viewLifecycleOwner) { event ->
-                event.getContentIfNotHandled()?.let {
-                    if(it == "success") {
+                event.getContentIfNotHandled()?.let { comment ->
+                    if(comment == "success") {
+                        viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
                         showToast("댓글 작성 완료")
                         bindingNonNull.edittextComment.setText("")
                     }

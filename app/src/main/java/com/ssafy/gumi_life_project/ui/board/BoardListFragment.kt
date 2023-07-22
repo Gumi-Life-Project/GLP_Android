@@ -54,7 +54,8 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
         adapter = BoardListAdapter()
         adapter.onItemClickListener = object : BoardListAdapter.OnItemClickListener {
             override fun onItemClick(boardItem: BoardItem) {
-                viewModel.getBoardDetail(boardItem.boardNo)
+                findNavController().navigate(R.id.action_boardListFragment_to_boardDetailFragment)
+                viewModel.saveBoardNo(boardItem.boardNo)
             }
         }
         bindingNonNull.recyclerviewBoardList.adapter = adapter
@@ -64,12 +65,6 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
         with(viewModel) {
             board.observe(viewLifecycleOwner) {
                 adapter.setBoardList(it)
-            }
-
-            isBoardClicked.observe(viewLifecycleOwner) { event ->
-                event.getContentIfNotHandled()?.let {
-                    findNavController().navigate(R.id.action_boardListFragment_to_boardDetailFragment)
-                }
             }
 
             errorMsg.observe(viewLifecycleOwner) { event ->
