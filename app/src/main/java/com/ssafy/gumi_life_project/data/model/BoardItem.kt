@@ -14,9 +14,7 @@ data class BoardItem(
     val writerName: String,
     val likesNum: Int,
     val likeStatus: Int
-) {
-    constructor() : this("", "", "", 0, "", null, "", "", "", 0, "익명", 0, 0)
-}
+)
 
 data class BoardListResponse(
     val boardList: List<BoardItem>,

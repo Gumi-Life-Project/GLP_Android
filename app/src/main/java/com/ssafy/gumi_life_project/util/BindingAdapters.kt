@@ -34,17 +34,16 @@ fun setHitCount(textView: TextView, likesNum: Int) {
 @BindingAdapter("app:state")
 fun setHeartImageResource(imageView: ImageView, state: Int) {
     imageView.setImageResource(if (state == 0) R.drawable.icon__heart_ else R.drawable.icon_heart)
+}
 
-
-    @BindingAdapter("imageUrl")
-    fun loadImageWithLayoutWeight(imageView: ImageView, imageUrl: String?) {
-        if (imageUrl == null) {
-            imageView.visibility = View.GONE
-        } else {
-            imageView.visibility = View.VISIBLE
-            Glide.with(imageView.context)
-                .load(imageUrl)
-                .into(imageView)
-        }
+@BindingAdapter("imageUrl")
+fun loadImageWithLayoutWeight(imageView: ImageView, imageUrl: String?) {
+    if (imageUrl == null) {
+        imageView.visibility = View.GONE
+    } else {
+        imageView.visibility = View.VISIBLE
+        Glide.with(imageView.context)
+            .load(imageUrl)
+            .into(imageView)
     }
 }
