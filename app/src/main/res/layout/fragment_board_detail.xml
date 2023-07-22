@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.ssafy.gumi_life_project.ui.board.BoardViewModel" />
+
+        <variable
+            name="boardDetail"
+            type="com.ssafy.gumi_life_project.ui.board.BoardDetailFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -117,7 +121,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:padding="1dp"
-                            app:state="@{viewModel.boardDetail.boardDetail.likeStatus}"/>
+                            app:state="@{viewModel.boardDetail.boardDetail.likeStatus}" />
 
                         <TextView
                             android:id="@+id/textview_heart"
@@ -178,7 +182,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <EditText
-                android:id="@+id/etv_comment"
+                android:id="@+id/edittext_comment"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -191,14 +195,17 @@
                 android:maxHeight="180dp"
                 android:maxLength="1000"
                 android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:singleLine="true" />
+                android:paddingEnd="10dp"
+                android:singleLine="true"
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/img_post_comment"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{() -> boardDetail.writeComment(viewModel.boardDetail.boardDetail.boardNo)}"
                 android:padding="5dp"
                 app:srcCompat="@drawable/icon_write_comment"
                 app:tint="@color/main_color" />
