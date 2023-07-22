@@ -69,7 +69,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                         true
                     }
                     R.id.button_board_update -> {
-                        // Handle menu item 2 click
+                        findNavController().navigate(R.id.action_boardDetailFragment_to_boardModifyFragment)
                         true
                     }
                     else -> false
