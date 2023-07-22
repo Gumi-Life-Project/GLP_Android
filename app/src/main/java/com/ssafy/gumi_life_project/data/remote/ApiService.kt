@@ -2,6 +2,8 @@ package com.ssafy.gumi_life_project.data.remote
 
 import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -19,6 +21,13 @@ interface ApiService {
 
     @GET("/board/{boardNo}")
     suspend fun getBoardDetail(@Path("boardNo") boardNo: String): NetworkResponse<BoardDetailResponse, ErrorResponse>
+
+    @Multipart
+    @POST("/board/writeBoard")
+    suspend fun writeBoard(
+        @Part("boardDto") boardDto: RequestBody,
+        @Part files: MutableList<MultipartBody.Part>?
+    ): NetworkResponse<BoardWriteResponse, ErrorResponse>
 
     @GET("/meal/")
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>

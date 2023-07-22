@@ -134,4 +134,20 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <!-- Board -->
+    <style name="BoardWriteTitleHintTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
+    </style>
+
+    <style name="BoardWriteContentHintTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_light</item>
+    </style>
+
+    <style name="BoardWriteButtonTextStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
+    </style>
 </resources>

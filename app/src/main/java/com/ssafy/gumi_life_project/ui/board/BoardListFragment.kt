@@ -32,6 +32,7 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
         initToolbar()
         initRecyclerView()
         initObserver()
+        initListener()
 
         bindingNonNull.swipelayoutBoard.setOnRefreshListener {
             viewModel.getBoardList()
@@ -85,6 +86,12 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
                     dialog.dismiss()
                 }
             }
+        }
+    }
+
+    private fun initListener() {
+        bindingNonNull.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_boardListFragment_to_boardWriteFragment)
         }
     }
 }
