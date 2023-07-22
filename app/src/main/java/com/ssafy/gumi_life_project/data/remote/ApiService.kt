@@ -2,8 +2,7 @@ package com.ssafy.gumi_life_project.data.remote
 
 import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
     @GET("/tip/list")
@@ -23,4 +22,13 @@ interface ApiService {
 
     @GET("/meal/")
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
+
+    @POST("/board/writeComment")
+    suspend fun writeComment(@Body commentDto: CommentDto): NetworkResponse<CommentResponse, ErrorResponse>
+
+    @PUT("/board/modifyComment")
+    suspend fun modifyComment(): NetworkResponse<CommentResponse, ErrorResponse>
+
+    @PUT("/board/deleteComment")
+    suspend fun deleteComment(): NetworkResponse<CommentResponse, ErrorResponse>
 }
