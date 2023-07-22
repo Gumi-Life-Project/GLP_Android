@@ -1,9 +1,6 @@
 package com.ssafy.gumi_life_project.data.repository.user
 
-import com.ssafy.gumi_life_project.data.model.ErrorResponse
-import com.ssafy.gumi_life_project.data.model.Member
-import com.ssafy.gumi_life_project.data.model.User
-import com.ssafy.gumi_life_project.data.model.UserResponse
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import retrofit2.http.Header
 
@@ -14,4 +11,10 @@ interface UserRepository {
     suspend fun getJwtToken(accessToken: String): NetworkResponse<UserResponse, ErrorResponse>
 
     suspend fun makeNickName(@Header("Authorization") accessToken: String) : NetworkResponse<Member, ErrorResponse>
+
+    suspend fun getUserBoards(@Header("Authorization") jwtToken: String) : NetworkResponse<BoardListResponse, ErrorResponse>
+
+    suspend fun getUserComments(@Header("Authorization") jwtToken: String) : NetworkResponse<BoardListResponse, ErrorResponse>
+
+    suspend fun getUserLikes(@Header("Authorization") jwtToken: String) : NetworkResponse<BoardListResponse, ErrorResponse>
 }

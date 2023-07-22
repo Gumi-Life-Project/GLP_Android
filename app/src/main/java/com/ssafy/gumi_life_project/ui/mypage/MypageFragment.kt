@@ -2,16 +2,20 @@ package com.ssafy.gumi_life_project.ui.mypage
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentMypageBinding
-import com.ssafy.gumi_life_project.ui.shuttlebus.ShuttleBusDialog
+import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     private val viewModel by viewModels<MypageViewModel>()
+    private val mainViewModel by activityViewModels<MainViewModel>()
+
     override fun onCreateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -36,12 +40,31 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
     }
 
     private fun initListener() {
+        // 내가 쓴 글
+        bindingNonNull.layoutBoardWrite.setOnClickListener {
+            viewModel.getUserBoards()
+        }
+        // 댓글 단 글
+        bindingNonNull.layoutBoardComment.setOnClickListener {
+            viewModel.getUserComments()
+        }
+        // 좋아요한 글
+        bindingNonNull.layoutBoardLike.setOnClickListener {
+            viewModel.getUserLikes()
+        }
+
+        // 로그아웃
         bindingNonNull.textviewAccountLogout.setOnClickListener {
             val dialog = LogoutDialog()
             dialog.show(childFragmentManager, "logoutDialogTag")
-//            viewModel.logout()
-
         }
+
+        // 닉네임 변경
+        bindingNonNull.textviewAccountNicknameModify.setOnClickListener {
+            findNavController().navigate(R.id.action_mypageFragment_to_settingNicknameFragment)
+        }
+
+
     }
 
 }

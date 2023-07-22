@@ -7,7 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Path
 
 interface ApiService {
     @GET("/tip/list")
@@ -33,4 +32,13 @@ interface ApiService {
 
     @PUT("/api/members/makenickName")
     suspend fun makeNickName(@Header("Authorization") accessToken: String) : NetworkResponse<Member, ErrorResponse>
+
+    @GET("/board/list/myboards")
+    suspend fun getUserBoards(@Header("Authorization") Authorization: String) : NetworkResponse<BoardListResponse, ErrorResponse>
+
+    @GET("/board/list/mycomments")
+    suspend fun getUserComments(@Header("Authorization") Authorization: String) : NetworkResponse<BoardListResponse, ErrorResponse>
+
+    @GET("/board/list/likes")
+    suspend fun getUserLikes(@Header("Authorization") jwtToken: String) : NetworkResponse<BoardListResponse, ErrorResponse>
 }
