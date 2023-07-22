@@ -1,10 +1,12 @@
 package com.ssafy.gumi_life_project.ui.board
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.gumi_life_project.data.model.BoardDetailResponse
 import com.ssafy.gumi_life_project.data.model.BoardItem
+import com.ssafy.gumi_life_project.data.model.CommentDto
 import com.ssafy.gumi_life_project.data.model.Event
 import com.ssafy.gumi_life_project.data.repository.board.BoardRepository
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
@@ -19,6 +21,9 @@ class BoardViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _msg = MutableLiveData<Event<String>>()
     val errorMsg: LiveData<Event<String>> = _msg
+
+    private val _comment = MutableLiveData<Event<String>>()
+    val comment: LiveData<Event<String>> = _comment
 
     private val _board = MutableLiveData<List<BoardItem>>()
     val board: LiveData<List<BoardItem>> = _board
@@ -66,6 +71,35 @@ class BoardViewModel @Inject constructor(
                 is NetworkResponse.Success -> {
                     _boardDetail.postValue(response.body)
                     _isBoardClicked.postValue(Event(Unit))
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+
+            hideProgress()
+        }
+    }
+
+
+    fun writeComment(comment: CommentDto) {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.writeComment(comment)
+
+            val type = "댓글 생성에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _comment.postValue(Event(response.body.message))
                 }
 
                 is NetworkResponse.ApiError -> {

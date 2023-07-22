@@ -1,6 +1,6 @@
 package com.ssafy.gumi_life_project.data.model
 
-data class CommentDto(val boardNo: String, val comment: String)
+data class CommentDto(val boardNo: String, val content: String)
 
 data class CommentResponse(val message: String)
 

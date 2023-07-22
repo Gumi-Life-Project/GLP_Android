@@ -1,14 +1,13 @@
 package com.ssafy.gumi_life_project.ui.board
 
 import android.view.*
-import android.widget.ArrayAdapter
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.gumi_life_project.R
+import com.ssafy.gumi_life_project.data.model.CommentDto
 import com.ssafy.gumi_life_project.databinding.FragmentBoardDetailBinding
 import com.ssafy.gumi_life_project.ui.board.comment.CommentAdapter
 import com.ssafy.gumi_life_project.ui.main.LoadingDialog
@@ -27,12 +26,12 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         return FragmentBoardDetailBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = this@BoardDetailFragment.viewModel
+            boardDetail = this@BoardDetailFragment
         }
     }
 
     override fun init() {
         initToolbar()
-        initRecyclerView()
         initObserver()
     }
 
@@ -91,8 +90,8 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
     }
 
 
-    private fun initRecyclerView() {
-
+    fun writeComment(boardNo: String) {
+        viewModel.writeComment(CommentDto(boardNo, bindingNonNull.edittextComment.text.toString()))
     }
 
     private fun initObserver() {
@@ -100,6 +99,15 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             errorMsg.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
                     showToast(it)
+                }
+            }
+
+            comment.observe(viewLifecycleOwner) { event ->
+                event.getContentIfNotHandled()?.let {
+                    if(it == "success") {
+                        showToast("댓글 작성 완료")
+                        bindingNonNull.edittextComment.setText("")
+                    }
                 }
             }
 
@@ -116,7 +124,8 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                 bindingNonNull.recyclerviewComment.apply {
                     adapter = CommentAdapter()
                     (adapter as? CommentAdapter)?.submitList(board.comments)
-                    val dividerItemDecoration = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+                    val dividerItemDecoration =
+                        DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
                     addItemDecoration(dividerItemDecoration)
                 }
             }
