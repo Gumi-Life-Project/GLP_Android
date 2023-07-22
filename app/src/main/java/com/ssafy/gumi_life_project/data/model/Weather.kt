@@ -6,9 +6,13 @@ data class Weather(
     @SerializedName("온도") val temperature: String,
     @SerializedName("강수 형태") val precipitationType: String,
     @SerializedName("1시간 강수량") val hourlyPrecipitation: String
-)
+) {
+    constructor() : this("", "", "")
+}
 
 data class WeatherResponse(
     @SerializedName("data") val data: Weather,
     @SerializedName("message") val message: String
-)
+) {
+    constructor() : this(Weather(), "")
+}

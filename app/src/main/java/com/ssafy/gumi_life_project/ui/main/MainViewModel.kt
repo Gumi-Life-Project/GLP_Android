@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.Event
+import com.ssafy.gumi_life_project.data.model.MealResponse
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
 import com.ssafy.gumi_life_project.data.model.Tip
 import com.ssafy.gumi_life_project.data.model.WeatherResponse
@@ -14,6 +15,7 @@ import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -31,6 +33,9 @@ class MainViewModel @Inject constructor(
 
     private val _shuttleBusStopMark = MutableLiveData<ShuttleBusStop>()
     val shuttleBusStopMark: LiveData<ShuttleBusStop> = _shuttleBusStopMark
+
+    private val _meal = MutableLiveData<MealResponse>()
+    val meal: LiveData<MealResponse> = _meal
 
     fun getAllTipList() {
         showProgress()
@@ -59,15 +64,47 @@ class MainViewModel @Inject constructor(
         hideProgress()
     }
 
-    fun getNowWeather() {
+    fun getMealList() {
         showProgress()
         viewModelScope.launch {
-            val response = repository.getNowWeather()
+            val response = repository.getMealList()
 
             val type = "정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    _weather.postValue(response.body)
+                    _meal.postValue(response.body)
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+
+            hideProgress()
+        }
+    }
+
+    fun getNowWeather() {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.getNowWeather()
+            val failResponses = WeatherResponse()
+            val type = "정보 조회에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.message == "fail") {
+                        _weather.postValue(failResponses)
+                    } else {
+                        _weather.postValue(response.body)
+                    }
                 }
 
                 is NetworkResponse.ApiError -> {

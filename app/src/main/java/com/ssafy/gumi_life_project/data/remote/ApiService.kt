@@ -19,5 +19,8 @@ interface ApiService {
     suspend fun getThreeBoard(): NetworkResponse<BoardListResponse, ErrorResponse>
 
     @GET("/board/{boardNo}")
-    suspend fun getBoardDetail(@Path("boardNo") boardNo : String): NetworkResponse<BoardDetailResponse, ErrorResponse>
+    suspend fun getBoardDetail(@Path("boardNo") boardNo: String): NetworkResponse<BoardDetailResponse, ErrorResponse>
+
+    @GET("/meal/")
+    suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
 }
