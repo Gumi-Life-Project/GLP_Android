@@ -10,7 +10,10 @@ interface BoardRepository {
     suspend fun getBoardList(): NetworkResponse<BoardListResponse, ErrorResponse>
     suspend fun getBoardDetail(boardNo: String): NetworkResponse<BoardDetailResponse, ErrorResponse>
 
-    suspend fun writeComment(@Body commentDto: CommentDto): NetworkResponse<CommentResponse, ErrorResponse>
+    suspend fun writeComment(commentDto: CommentDto): NetworkResponse<CommentResponse, ErrorResponse>
+
+    suspend fun writeReply(replyDto: ReplyDto): NetworkResponse<CommentResponse, ErrorResponse>
+
     suspend fun writeBoard(
         boardDto: RequestBody,
         files: MutableList<MultipartBody.Part>?

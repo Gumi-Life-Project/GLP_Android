@@ -23,6 +23,10 @@ class BoardRepositoryImpl @Inject constructor(
         return apiService.writeComment(commentDto)
     }
 
+    override suspend fun writeReply(replyDto: ReplyDto): NetworkResponse<CommentResponse, ErrorResponse> {
+        return apiService.writeReply(replyDto)
+    }
+
     override suspend fun writeBoard(
         boardDto: RequestBody,
         files: MutableList<MultipartBody.Part>?
@@ -30,5 +34,4 @@ class BoardRepositoryImpl @Inject constructor(
         return apiService.writeBoard(boardDto, files)
 
     }
-
 }

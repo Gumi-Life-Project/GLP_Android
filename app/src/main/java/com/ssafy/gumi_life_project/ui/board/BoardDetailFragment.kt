@@ -1,15 +1,15 @@
 package com.ssafy.gumi_life_project.ui.board
 
-import android.os.IBinder
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.gumi_life_project.R
+import com.ssafy.gumi_life_project.data.model.Comment
 import com.ssafy.gumi_life_project.data.model.CommentDto
+import com.ssafy.gumi_life_project.data.model.ReplyDto
 import com.ssafy.gumi_life_project.databinding.FragmentBoardDetailBinding
 import com.ssafy.gumi_life_project.ui.board.comment.CommentAdapter
 import com.ssafy.gumi_life_project.ui.main.LoadingDialog
@@ -21,6 +21,9 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
     R.layout.fragment_board_detail
 ) {
     private val viewModel by activityViewModels<BoardViewModel>()
+    private val commentAdapter = CommentAdapter()
+
+    private var selectedCommentId: String? = null
 
     override fun onCreateBinding(
         inflater: LayoutInflater, container: ViewGroup?
@@ -41,6 +44,26 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
             bindingNonNull.layoutSwipe.isRefreshing = false
         }
+
+        commentAdapter.onCommentClick = {
+            if(selectedCommentId == it.commentNo) {
+                deselectComment()
+            } else {
+                selectComment(it)
+            }
+        }
+    }
+
+
+    private fun selectComment(comment: Comment) {
+        selectedCommentId = comment.commentNo
+        bindingNonNull.textviewReadReply.text = getString(R.string.board_comment_user_reply, comment.writerName)
+        bindingNonNull.textviewReadReply.visibility = View.VISIBLE
+    }
+    private fun deselectComment() {
+        selectedCommentId = null
+        bindingNonNull.textviewReadReply.visibility = View.GONE
+        commentAdapter.changeCommentColor()
     }
 
     private fun initData() {
@@ -109,7 +132,12 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             showToast("내용을 입력해주세요.")
             return
         }
-        viewModel.writeComment(CommentDto(boardNo, comment))
+        if(selectedCommentId != null) {
+            viewModel.writeReply(ReplyDto(boardNo, selectedCommentId!!, comment))
+            deselectComment()
+        } else {
+            viewModel.writeComment(CommentDto(boardNo, comment))
+        }
     }
 
     private fun initObserver() {
@@ -125,7 +153,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                     if(comment == "success") {
                         viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
                         showToast("댓글 작성 완료")
-                        bindingNonNull.edittextComment.setText("")
+                        bindingNonNull.edittextComment.text.clear()
                     }
                 }
             }
@@ -141,7 +169,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
 
             boardDetail.observe(viewLifecycleOwner) { board ->
                 bindingNonNull.recyclerviewComment.apply {
-                    adapter = CommentAdapter()
+                    adapter = commentAdapter
                     (adapter as? CommentAdapter)?.submitList(board.comments)
                     val dividerItemDecoration =
                         DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)

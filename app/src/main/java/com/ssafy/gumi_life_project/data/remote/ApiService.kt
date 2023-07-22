@@ -35,6 +35,9 @@ interface ApiService {
     @POST("/board/writeComment")
     suspend fun writeComment(@Body commentDto: CommentDto): NetworkResponse<CommentResponse, ErrorResponse>
 
+    @POST("/board/writeReply")
+    suspend fun writeReply(@Body replyDto: ReplyDto): NetworkResponse<CommentResponse, ErrorResponse>
+
     @PUT("/board/modifyComment")
     suspend fun modifyComment(): NetworkResponse<CommentResponse, ErrorResponse>
 

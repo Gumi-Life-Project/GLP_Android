@@ -40,6 +40,7 @@ class BoardViewModel @Inject constructor(
     private val _boardNo = MutableLiveData<String>()
     val boardNo: LiveData<String> = _boardNo
 
+
     fun getBoardList() {
         viewModelScope.launch {
             val response = repository.getBoardList()
@@ -141,6 +142,34 @@ class BoardViewModel @Inject constructor(
         showProgress()
         viewModelScope.launch {
             val response = repository.writeComment(comment)
+
+            val type = "댓글 생성에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _comment.postValue(Event(response.body.message))
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+
+            hideProgress()
+        }
+    }
+
+    fun writeReply(replyDto: ReplyDto) {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.writeReply(replyDto)
 
             val type = "댓글 생성에"
             when (response) {
