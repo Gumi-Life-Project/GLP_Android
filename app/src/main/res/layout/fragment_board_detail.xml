@@ -153,12 +153,13 @@
                         android:background="@color/splash_gray" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_comment"
+                        android:id="@+id/recyclerview_comment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:nestedScrollingEnabled="false"
                         android:overScrollMode="never"
                         android:scrollbars="none"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="1" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

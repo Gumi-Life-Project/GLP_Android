@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.data.model
 
-
 data class BoardItem(
     val boardNo: String,
     val title: String,
@@ -16,7 +15,7 @@ data class BoardItem(
     val likesNum: Int,
     val likeStatus: Int
 ) {
-    constructor() : this("", "", "", 0, "", null, "", "", "", 0, "", 0, 0)
+    constructor() : this("", "", "", 0, "", null, "", "", "", 0, "익명", 0, 0)
 }
 
 data class BoardListResponse(
@@ -26,5 +25,6 @@ data class BoardListResponse(
 
 data class BoardDetailResponse(
     val boardDetail: BoardItem,
+    val comments: List<Comment>,
     val message: String
 )
