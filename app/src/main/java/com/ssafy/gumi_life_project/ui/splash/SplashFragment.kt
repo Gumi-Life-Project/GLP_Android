@@ -82,7 +82,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
     }
 
     private fun moveToHomeFragment() {
-
         Handler(Looper.getMainLooper()).postDelayed({
             if (AuthApiClient.instance.hasToken()) {
                 val jwtToken = AppPreferences.getJwtToken()
