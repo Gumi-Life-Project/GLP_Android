@@ -26,10 +26,10 @@ object ApiModule {
                 level = HttpLoggingInterceptor.Level.BODY
             }).addInterceptor {
                 val request = it.request()
-                if (request.url().encodedPath().equals("/board/list", true)
-                    || request.url().encodedPath().equals("/weather/", true)
-                    || request.url().encodedPath().equals("/board/list/new", true)
-                    || request.url().encodedPath().equals("/tip/list", true)
+                if (request.url.encodedPath.equals("/board/list", true)
+                    || request.url.encodedPath.equals("/weather/", true)
+                    || request.url.encodedPath.equals("/board/list/new", true)
+                    || request.url.encodedPath.equals("/tip/list", true)
                 ) {
                     it.proceed(request)
                 } else {

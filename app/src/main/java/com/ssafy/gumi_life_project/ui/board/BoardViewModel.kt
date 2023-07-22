@@ -11,7 +11,9 @@ import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -99,7 +101,7 @@ class BoardViewModel @Inject constructor(
         showProgress()
         viewModelScope.launch {
             val requestBody =
-                RequestBody.create(MediaType.parse("application/json"), gson.toJson(boardWriteItem))
+                gson.toJson(boardWriteItem).toRequestBody("application/json".toMediaTypeOrNull())
 
             var response: NetworkResponse<BoardWriteResponse, ErrorResponse>? = null
             response = repository.writeBoard(requestBody, null)
