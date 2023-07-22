@@ -145,6 +145,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="3dp"
+                            android:text="@{viewModel.commentCount}"
                             android:textColor="@color/board_blue"
                             tools:text="13" />
                     </LinearLayout>
@@ -180,9 +181,9 @@
                 android:id="@+id/textview_read_reply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                android:paddingEnd="15dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout

@@ -41,6 +41,10 @@ class BoardViewModel @Inject constructor(
     val boardNo: LiveData<String> = _boardNo
 
 
+    private val _commentCount = MutableLiveData<String>()
+    val commentCount: LiveData<String> = _commentCount
+
+
     fun getBoardList() {
         viewModelScope.launch {
             val response = repository.getBoardList()
@@ -80,6 +84,7 @@ class BoardViewModel @Inject constructor(
             when (response) {
                 is NetworkResponse.Success -> {
                     _boardDetail.postValue(response.body)
+                    _commentCount.postValue(response.body.comments.size.toString())
                 }
 
                 is NetworkResponse.ApiError -> {
