@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.ui.settingnickname
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,16 +11,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "SettingNicknameViewMode_구미"
 @HiltViewModel
 class SettingNicknameViewModel @Inject constructor(
     private val repository: UserRepository
-)  : BaseViewModel() {
+) : BaseViewModel() {
     private val _msg = MutableLiveData<Event<String>>()
     val errorMsg: LiveData<Event<String>> = _msg
 
     fun makeNickName(nickName: String) {
-        Log.d(TAG, "getJwtToken: $nickName")
         showProgress()
         viewModelScope.launch {
             val response = repository.makeNickName(nickName)
@@ -29,7 +26,7 @@ class SettingNicknameViewModel @Inject constructor(
             val type = "닉네임 변경에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    Log.d(TAG, "getJwtToken: ${response.body}")
+
                 }
 
                 is NetworkResponse.ApiError -> {

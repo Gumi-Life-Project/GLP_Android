@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.BoardItem
 import com.ssafy.gumi_life_project.data.model.Tip
@@ -50,7 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         viewModel.loadAndSetTriggerTimes()
 
         bindingNonNull.linearlayoutTip.setOnClickListener {
-            if(::randomTip.isInitialized) {
+            if (::randomTip.isInitialized) {
                 val bottomSheetDialogFragment =
                     TipBottomSheet(randomTip.subject, randomTip.description)
                 bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
@@ -115,9 +113,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
             isRefresh.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
-                    val animatorRotate = ObjectAnimator.ofFloat(bindingNonNull.imageRefresh, "rotation", 0f, 360f)
+                    val animatorRotate =
+                        ObjectAnimator.ofFloat(bindingNonNull.imageRefresh, "rotation", 0f, 360f)
                     animatorRotate.duration = 1000
-                    animatorRotate.start()}
+                    animatorRotate.start()
+                }
             }
 
             simpleBoard.observe(viewLifecycleOwner) {
@@ -138,9 +138,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             }
 
             meal.observe(viewLifecycleOwner) { meal ->
-                if(meal.message == "success") {
+                if (meal.message == "success") {
                     mealAdapter.setMealList(meal.data)
-                    bindingNonNull.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    bindingNonNull.viewPager.registerOnPageChangeCallback(object :
+                        ViewPager2.OnPageChangeCallback() {
                         override fun onPageSelected(position: Int) {
                             super.onPageSelected(position)
                             bindingNonNull.textviewPage.text = "(${position + 1}/${meal.data.size})"
@@ -171,7 +172,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun getRandomTip(tips: List<Tip>): Tip {
         return if (tips.isNotEmpty()) tips[Random.nextInt(tips.size)] else Tip()
     }
-    
+
     private fun makeWeatherIcon(type: String) {
         when (type) {
             "없음" -> bindingNonNull.imageviewTodayWeatherImg.setImageResource(R.drawable.icon_sunny)

@@ -7,14 +7,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentMypageBinding
-import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     private val viewModel by viewModels<MypageViewModel>()
-    private val mainViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateBinding(
         inflater: LayoutInflater,

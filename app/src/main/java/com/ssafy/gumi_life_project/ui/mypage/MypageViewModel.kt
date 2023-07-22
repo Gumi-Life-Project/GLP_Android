@@ -15,7 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "MypageViewModel_구미"
 
 @HiltViewModel
 class MypageViewModel @Inject constructor(
@@ -31,10 +30,7 @@ class MypageViewModel @Inject constructor(
     fun logout() {
         UserApiClient.instance.logout { error ->
             if (error != null) {
-                Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
-            }
-            else {
-                Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
+                Log.e("로그아웃 실패. SDK에서 토큰 삭제됨", error.toString())
             }
         }
     }
@@ -42,14 +38,12 @@ class MypageViewModel @Inject constructor(
     fun getUserBoards() {
         showProgress()
         val jwtToken = AppPreferences.getJwtToken()
-        Log.d(TAG, "getUserBoards: $jwtToken")
         viewModelScope.launch {
             val response = repository.getUserBoards(jwtToken!!)
 
             val type = "게시판 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    Log.d(TAG, "getUserBoards: ${response.body}")
                     _board.postValue(response.body.boardList)
                 }
 
@@ -72,14 +66,12 @@ class MypageViewModel @Inject constructor(
     fun getUserComments() {
         showProgress()
         val jwtToken = AppPreferences.getJwtToken()
-        Log.d(TAG, "getUserBoards: $jwtToken")
         viewModelScope.launch {
             val response = repository.getUserComments(jwtToken!!)
 
             val type = "게시판 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    Log.d(TAG, "getUserBoards: ${response.body}")
                     _board.postValue(response.body.boardList)
                 }
 
@@ -102,14 +94,13 @@ class MypageViewModel @Inject constructor(
     fun getUserLikes() {
         showProgress()
         val jwtToken = AppPreferences.getJwtToken()
-        Log.d(TAG, "getUserBoards: $jwtToken")
+
         viewModelScope.launch {
             val response = repository.getUserLikes(jwtToken!!)
 
             val type = "게시판 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    Log.d(TAG, "getUserBoards: ${response.body}")
                     _board.postValue(response.body.boardList)
                 }
 

@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -15,11 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-private const val TAG = "MainViewModel_구미"
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: MainRepository,
-    private val userRepository : UserRepository
+    private val userRepository: UserRepository
 ) : BaseViewModel() {
 
     private val _msg = MutableLiveData<Event<String>>()
@@ -38,7 +36,7 @@ class MainViewModel @Inject constructor(
     val meal: LiveData<MealResponse> = _meal
 
     private val _memberInfo = MutableLiveData<Member>()
-    val memberInfo : LiveData<Member> = _memberInfo
+    val memberInfo: LiveData<Member> = _memberInfo
 
     fun getAllTipList() {
         showProgress()
@@ -148,7 +146,6 @@ class MainViewModel @Inject constructor(
             when (response) {
                 is NetworkResponse.Success -> {
                     _memberInfo.postValue(response.body)
-                    Log.d(TAG, "getMemberInfo: ${response.body}")
                 }
 
                 is NetworkResponse.ApiError -> {

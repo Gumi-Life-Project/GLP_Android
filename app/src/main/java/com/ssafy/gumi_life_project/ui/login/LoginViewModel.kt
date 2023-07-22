@@ -1,13 +1,10 @@
 package com.ssafy.gumi_life_project.ui.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.Event
-import com.ssafy.gumi_life_project.data.model.Member
-import com.ssafy.gumi_life_project.data.model.User
 import com.ssafy.gumi_life_project.data.model.UserResponse
 import com.ssafy.gumi_life_project.data.repository.user.UserRepository
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
@@ -17,21 +14,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-private const val TAG = "LoginViewModel_구미"
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val repository: UserRepository
-)  : BaseViewModel() {
+) : BaseViewModel() {
 
     private val _msg = MutableLiveData<Event<String>>()
     val errorMsg: LiveData<Event<String>> = _msg
 
     private val _userResponse = MutableLiveData<UserResponse>()
-    val userResponse : LiveData<UserResponse> = _userResponse
+    val userResponse: LiveData<UserResponse> = _userResponse
 
 
     fun getJwtToken(accessToken: String) {
-        Log.d(TAG, "getJwtToken: $accessToken")
         showProgress()
         viewModelScope.launch {
             val response = repository.getJwtToken(accessToken)
@@ -40,9 +35,7 @@ class LoginViewModel @Inject constructor(
             when (response) {
                 is NetworkResponse.Success -> {
                     _userResponse.postValue(response.body)
-                    Log.d(TAG, "getJwtToken: ${response.body}")
                     AppPreferences.initJwtToken(response.body.user.jwt.accessToken)
-
                 }
 
                 is NetworkResponse.ApiError -> {
