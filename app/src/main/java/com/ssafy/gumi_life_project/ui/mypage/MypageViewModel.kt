@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.ui.mypage
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,7 +31,10 @@ class MypageViewModel @Inject constructor(
     fun logout() {
         UserApiClient.instance.logout { error ->
             if (error != null) {
-                Log.e("로그아웃 실패. SDK에서 토큰 삭제됨", error.toString())
+                Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
+            }
+            else {
+                Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
             }
         }
     }

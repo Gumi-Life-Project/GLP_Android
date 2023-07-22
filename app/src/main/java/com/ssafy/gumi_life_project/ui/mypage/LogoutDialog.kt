@@ -1,6 +1,7 @@
 package com.ssafy.gumi_life_project.ui.mypage
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +13,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.DialogLogoutBinding
+import com.ssafy.gumi_life_project.ui.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LogoutDialog : DialogFragment() {
     private lateinit var binding: DialogLogoutBinding
     private val viewModel by viewModels<MypageViewModel>()
@@ -52,7 +56,13 @@ class LogoutDialog : DialogFragment() {
 
         binding.buttonLogoutConfirm.setOnClickListener {
             viewModel.logout()
-            findNavController().navigate(R.id.action_mypageFragment_to_loginFragment)
+
+            // Start MainActivity again
+            val intent = Intent(requireActivity(), MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                putExtra("startFragment", R.id.loginFragment)
+            }
+            startActivity(intent)
         }
     }
 

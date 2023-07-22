@@ -17,7 +17,6 @@ import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val TAG = "LoginFragment_구미"
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
     private val activityViewModel by activityViewModels<MainViewModel>()
@@ -52,9 +51,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인 할 경우 사용됨
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                Log.e(TAG, "카카오계정으로 로그인 실패", error)
+                Log.e("카카오계정으로 로그인 실패", error.toString())
             } else if (token != null) {
-                Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+                Log.i("카카오계정으로 로그인 성공 ${token.accessToken}", token.toString())
                 // jwt 토큰 발급 & sharedPrefences에 jwt 토큰 저장
                 viewModel.getJwtToken(token.accessToken)
                 findNavController().navigate(R.id.action_loginFragment_to_splashFragment)
@@ -73,7 +72,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                         Log.e(Constraints.TAG, "로그인 취소", error)
                     }
                 } else if (token != null) {
-                    Log.d(TAG, "login: 카카오앱으로 로그인 성공 $token")
+                    Log.d(Constraints.TAG,"login: 카카오앱으로 로그인 성공 $token")
                 }
             }
         } else {
@@ -109,7 +108,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     
     private fun observeData() {
         viewModel.userResponse.observe(viewLifecycleOwner) {
-            Log.d(TAG, "observeData: $it")
             activityViewModel.getMemberInfo(it.user.jwt.accessToken)
         }
 
