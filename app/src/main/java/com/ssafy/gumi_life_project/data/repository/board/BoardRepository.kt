@@ -10,7 +10,6 @@ import okhttp3.RequestBody
 interface BoardRepository {
     suspend fun getBoardList(): NetworkResponse<BoardListResponse, ErrorResponse>
     suspend fun writeBoard(
-        accessToken: String,
         boardDto: RequestBody,
         files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardWriteResponse, ErrorResponse>

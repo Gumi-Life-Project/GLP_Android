@@ -59,13 +59,11 @@ class BoardViewModel @Inject constructor(
     fun writeBoard(boardWriteItem: BoardWriteItem) {
         showProgress()
         viewModelScope.launch {
-            val accessToken ="token"
-
             val requestBody =
                 RequestBody.create(MediaType.parse("application/json"), gson.toJson(boardWriteItem))
 
             var response: NetworkResponse<BoardWriteResponse, ErrorResponse>? = null
-            response = repository.writeBoard(accessToken, requestBody, null)
+            response = repository.writeBoard(requestBody, null)
 
             val type = "게시글 작성에"
             when (response) {

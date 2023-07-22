@@ -17,10 +17,9 @@ class BoardRepositoryImpl @Inject constructor(
     }
 
     override suspend fun writeBoard(
-        accessToken: String,
         boardDto: RequestBody,
         files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardWriteResponse, ErrorResponse> {
-        return apiService.writeBoard(accessToken, boardDto, files)
+        return apiService.writeBoard(boardDto, files)
     }
 }

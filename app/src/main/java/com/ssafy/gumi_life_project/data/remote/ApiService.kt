@@ -22,7 +22,6 @@ interface ApiService {
     @Multipart
     @POST("/board/writeBoard")
     suspend fun writeBoard(
-        @Header("Authorization") accessToken: String,
         @Part("boardDto") boardDto: RequestBody,
         @Part files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardWriteResponse, ErrorResponse>
