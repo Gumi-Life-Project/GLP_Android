@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/button_board_update"
+        android:title="@string/board_update" />
+
+    <item
+        android:id="@+id/button_board_delete"
+        android:title="@string/board_delete" />
+
+    <item
+        android:id="@+id/button_board_notice"
+        android:title="@string/board_notice" />
+</menu>

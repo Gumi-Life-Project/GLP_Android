@@ -19,6 +19,9 @@ interface ApiService {
     @GET("/board/list/new")
     suspend fun getThreeBoard(): NetworkResponse<BoardListResponse, ErrorResponse>
 
+    @GET("/board/{boardNo}")
+    suspend fun getBoardDetail(@Path("boardNo") boardNo: String): NetworkResponse<BoardDetailResponse, ErrorResponse>
+
     @Multipart
     @POST("/board/writeBoard")
     suspend fun writeBoard(
@@ -29,4 +32,12 @@ interface ApiService {
     @GET("/meal/")
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
 
+    @POST("/board/writeComment")
+    suspend fun writeComment(@Body commentDto: CommentDto): NetworkResponse<CommentResponse, ErrorResponse>
+
+    @PUT("/board/modifyComment")
+    suspend fun modifyComment(): NetworkResponse<CommentResponse, ErrorResponse>
+
+    @PUT("/board/deleteComment")
+    suspend fun deleteComment(): NetworkResponse<CommentResponse, ErrorResponse>
 }

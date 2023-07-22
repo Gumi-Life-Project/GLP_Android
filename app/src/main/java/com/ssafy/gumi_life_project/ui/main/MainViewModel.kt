@@ -119,8 +119,8 @@ class MainViewModel @Inject constructor(
                     postValueEvent(2, type)
                 }
             }
+            hideProgress()
         }
-        hideProgress()
     }
 
     fun getShuttleBusStopMark() {
