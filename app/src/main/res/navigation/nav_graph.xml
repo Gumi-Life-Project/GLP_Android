@@ -45,5 +45,18 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_boardListFragment_to_boardWriteFragment"
+            app:destination="@id/boardWriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boardWriteFragment"
+        android:name="com.ssafy.gumi_life_project.ui.board.BoardWriteFragment"
+        android:label="BoardWriteFragment" >
+        <action
+            android:id="@+id/action_boardWriteFragment_to_boardListFragment"
+            app:destination="@id/boardListFragment"
+            app:popUpTo="@id/boardListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
