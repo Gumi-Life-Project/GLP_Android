@@ -1,6 +1,8 @@
 package com.ssafy.gumi_life_project.ui.board
 
+import android.os.IBinder
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -99,7 +101,12 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
 
 
     fun writeComment(boardNo: String) {
-        viewModel.writeComment(CommentDto(boardNo, bindingNonNull.edittextComment.text.toString()))
+        val comment = bindingNonNull.edittextComment.text.toString()
+        if(comment == "") {
+            showToast("내용을 입력해주세요.")
+            return
+        }
+        viewModel.writeComment(CommentDto(boardNo, comment))
     }
 
     private fun initObserver() {
