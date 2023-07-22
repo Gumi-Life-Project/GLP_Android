@@ -116,6 +116,7 @@ class BoardViewModel @Inject constructor(
             }
 
             hideProgress()
+            boardDetail.value?.boardDetail?.let { getBoardDetail(it.boardNo) }
         }
     }
 

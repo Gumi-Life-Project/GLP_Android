@@ -33,7 +33,15 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
     override fun init() {
         initToolbar()
         initObserver()
+
+        bindingNonNull.layoutSwipe.setOnRefreshListener {
+            viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
+            bindingNonNull.layoutSwipe.isRefreshing = false
+            hideKeyboard(bindingNonNull.edittextComment.windowToken)
+        }
     }
+
+
 
     private fun initToolbar() {
         bindingNonNull.toolbar.toolbarBackButtonTitle.text =
