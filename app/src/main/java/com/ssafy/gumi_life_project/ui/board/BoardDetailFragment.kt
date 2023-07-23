@@ -22,8 +22,10 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
 ) {
     private val viewModel by activityViewModels<BoardViewModel>()
     private val commentAdapter = CommentAdapter()
-
     private var selectedCommentId: String? = null
+    var likeStatus: Boolean = false
+    var likeCount: Int = 0
+    var boardId: String = ""
 
     override fun onCreateBinding(
         inflater: LayoutInflater, container: ViewGroup?
@@ -46,10 +48,19 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         }
 
         commentAdapter.onCommentClick = {
-            if(selectedCommentId == it.commentNo) {
+            if (selectedCommentId == it.commentNo) {
                 deselectComment()
             } else {
                 selectComment(it)
+            }
+        }
+
+        bindingNonNull.imageviewHeart.setOnClickListener {
+            if(boardId.isBlank()) return@setOnClickListener
+            if(likeStatus) {
+                viewModel.deleteLike(boardId)
+            } else {
+                viewModel.updateLike(boardId)
             }
         }
     }
@@ -57,9 +68,11 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
 
     private fun selectComment(comment: Comment) {
         selectedCommentId = comment.commentNo
-        bindingNonNull.textviewReadReply.text = getString(R.string.board_comment_user_reply, comment.writerName)
+        bindingNonNull.textviewReadReply.text =
+            getString(R.string.board_comment_user_reply, comment.writerName)
         bindingNonNull.textviewReadReply.visibility = View.VISIBLE
     }
+
     private fun deselectComment() {
         selectedCommentId = null
         bindingNonNull.textviewReadReply.visibility = View.GONE
@@ -128,11 +141,11 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
 
     fun writeComment(boardNo: String) {
         val comment = bindingNonNull.edittextComment.text.toString()
-        if(comment == "") {
+        if (comment == "") {
             showToast("내용을 입력해주세요.")
             return
         }
-        if(selectedCommentId != null) {
+        if (selectedCommentId != null) {
             viewModel.writeReply(ReplyDto(boardNo, selectedCommentId!!, comment))
             deselectComment()
         } else {
@@ -150,7 +163,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
 
             comment.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let { comment ->
-                    if(comment == "success") {
+                    if (comment == "success") {
                         viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
                         showToast("댓글 작성 완료")
                         bindingNonNull.edittextComment.text.clear()
@@ -168,12 +181,38 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             }
 
             boardDetail.observe(viewLifecycleOwner) { board ->
+                likeStatus = board.boardDetail.likeStatus == 1
+                likeCount = board.boardDetail.likesNum
+                boardId = board.boardDetail.boardNo
+
                 bindingNonNull.recyclerviewComment.apply {
                     adapter = commentAdapter
                     (adapter as? CommentAdapter)?.submitList(board.comments)
                     val dividerItemDecoration =
                         DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
                     addItemDecoration(dividerItemDecoration)
+                }
+            }
+
+            boardDislike.observe(viewLifecycleOwner) { event ->
+                event.getContentIfNotHandled()?.let {
+                    if (it == "success") {
+                        likeCount--
+                        likeStatus = false
+                        bindingNonNull.imageviewHeart.setImageResource(R.drawable.icon__heart_)
+                        bindingNonNull.textviewHeart.text = likeCount.toString()
+                    }
+                }
+            }
+
+            boardLike.observe(viewLifecycleOwner) { event ->
+                event.getContentIfNotHandled()?.let {
+                    if (it == "success") {
+                        likeCount++
+                        likeStatus = true
+                        bindingNonNull.imageviewHeart.setImageResource(R.drawable.icon_heart)
+                        bindingNonNull.textviewHeart.text = likeCount.toString()
+                    }
                 }
             }
         }
