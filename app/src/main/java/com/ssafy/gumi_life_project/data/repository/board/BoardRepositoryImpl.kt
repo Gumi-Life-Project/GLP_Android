@@ -35,6 +35,13 @@ class BoardRepositoryImpl @Inject constructor(
 
     }
 
+    override suspend fun deleteBoard(
+        boardNo: String,
+        boardWriterId: String
+    ): NetworkResponse<BaseResponse, ErrorResponse> {
+        return apiService.deleteBoard(boardNo, boardWriterId)
+    }
+
     override suspend fun updateLike(boardNo: String): NetworkResponse<BaseResponse, ErrorResponse> {
         return apiService.updateLike(boardNo)
     }

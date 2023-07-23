@@ -162,6 +162,36 @@ class BoardViewModel @Inject constructor(
         }
     }
 
+    fun deleteBoard(boardNo: String, boardWriterId: String) {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.deleteBoard(boardNo, boardWriterId)
+
+            val type = "게시글 삭제에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    if(response.body.message == "success") {
+                        _msg.postValue(Event("게시글 삭제에 성공했습니다."))
+                    }
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+
+            hideProgress()
+        }
+    }
+
     fun writeBoard(boardWriteItem: BoardWriteItem) {
         showProgress()
         viewModelScope.launch {

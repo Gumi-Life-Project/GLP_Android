@@ -29,6 +29,9 @@ interface ApiService {
         @Part files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardWriteResponse, ErrorResponse>
 
+    @PUT("/board/deleteBoard")
+    suspend fun deleteBoard(@Query("boardNo") boardNo: String, @Query("BoardWriterId") boardWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
+
     @GET("/meal/")
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
 
