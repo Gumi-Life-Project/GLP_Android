@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.ssafy.gumi_life_project.databinding.DialogNoticeBinding
 
-fun showDialog(context: Context, title: String) {
+fun showDialog(context: Context, title: String, onOkClick: () -> Unit) {
     val dialogBinding: DialogNoticeBinding = DialogNoticeBinding.inflate(
         LayoutInflater.from(context)
     )
@@ -23,6 +23,7 @@ fun showDialog(context: Context, title: String) {
 
     dialogBinding.textviewOk.setOnClickListener {
         customDialog.dismiss()
+        onOkClick()
     }
 
     customDialog.show()
