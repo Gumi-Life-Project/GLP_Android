@@ -25,6 +25,9 @@ class MainViewModel @Inject constructor(
     private val _msg = MutableLiveData<Event<String>>()
     val errorMsg: LiveData<Event<String>> = _msg
 
+    private val _userId = MutableLiveData<Int>()
+    val userId: LiveData<Int> = _userId
+
     private val _tip = MutableLiveData<List<Tip>>()
     val tip: LiveData<List<Tip>> = _tip
 
@@ -46,6 +49,33 @@ class MainViewModel @Inject constructor(
             when (response) {
                 is NetworkResponse.Success -> {
                     _tip.postValue(response.body)
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+        }
+        hideProgress()
+    }
+
+    fun findId() {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.findId()
+
+            val type = "id 정보 조회에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _userId.postValue(response.body)
                 }
 
                 is NetworkResponse.ApiError -> {
