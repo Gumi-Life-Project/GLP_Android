@@ -7,6 +7,9 @@ import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
+    @POST("/api/auth/findid")
+    suspend fun findId(): NetworkResponse<Int, ErrorResponse>
+
     @GET("/tip/list")
     suspend fun getAllTipList(): NetworkResponse<List<Tip>, ErrorResponse>
 

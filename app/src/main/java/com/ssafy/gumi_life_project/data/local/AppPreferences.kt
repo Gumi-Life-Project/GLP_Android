@@ -15,6 +15,7 @@ object AppPreferences {
     const val APP_RUN_STATE = "app_run_state"
     private const val SHUTTLE_BUS_INFO = "shuttle_bus_info"
     private const val SHUTTLE_BUS_STOP_MARKED = "shuttle_bus_stop_marked"
+    private const val USER_ID = "user_id"
 
     private lateinit var preferences: SharedPreferences
     private val gson = GsonBuilder().create()
@@ -285,4 +286,10 @@ object AppPreferences {
         return gson.fromJson(jsonData, shuttleBusStopType)
     }
 
+    fun getUserId(): Int {
+        return preferences.getInt(USER_ID, -1)
+    }
+    fun saveUserId(userId : Int) {
+        preferences.edit().putInt(USER_ID, userId).apply()
+    }
 }
