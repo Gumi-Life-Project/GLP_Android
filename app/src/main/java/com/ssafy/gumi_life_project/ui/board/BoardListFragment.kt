@@ -1,9 +1,8 @@
 package com.ssafy.gumi_life_project.ui.board
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.BoardItem
@@ -12,13 +11,11 @@ import com.ssafy.gumi_life_project.ui.main.LoadingDialog
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val TAG = "BoardListFragment"
-
 @AndroidEntryPoint
 class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
     R.layout.fragment_board_list
 ) {
-    private val viewModel by viewModels<BoardViewModel>()
+    private val viewModel by activityViewModels<BoardViewModel>()
     private lateinit var adapter: BoardListAdapter
 
     override fun onCreateBinding(
@@ -57,9 +54,9 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
         adapter = BoardListAdapter()
         adapter.onItemClickListener = object : BoardListAdapter.OnItemClickListener {
             override fun onItemClick(boardItem: BoardItem) {
-                Log.d(TAG, "onItemClick: ${boardItem.title}")
+                findNavController().navigate(R.id.action_boardListFragment_to_boardDetailFragment)
+                viewModel.saveBoardNo(boardItem.boardNo)
             }
-
         }
         bindingNonNull.recyclerviewBoardList.adapter = adapter
     }
