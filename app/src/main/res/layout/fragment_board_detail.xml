@@ -189,9 +189,10 @@
         <LinearLayout
             android:id="@+id/layout_write_comment"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:gravity="center"
+            android:minHeight="70dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -200,19 +201,19 @@
             <EditText
                 android:id="@+id/edittext_comment"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/border_comment"
                 android:ems="10"
                 android:hint="@string/detail_comment_hint"
-                android:imeOptions="actionDone"
                 android:inputType="text|textMultiLine"
                 android:maxHeight="180dp"
-                android:maxLength="1000"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:singleLine="true"
+                android:maxLength="300"
+                android:maxLines="5"
+                android:nestedScrollingEnabled="false"
+                android:padding="15dp"
+                android:scrollHorizontally="false"
                 android:textSize="15sp" />
 
             <ImageView
