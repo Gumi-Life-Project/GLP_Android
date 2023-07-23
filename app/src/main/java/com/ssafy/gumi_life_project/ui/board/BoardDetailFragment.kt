@@ -2,6 +2,7 @@ package com.ssafy.gumi_life_project.ui.board
 
 import android.view.*
 import android.widget.PopupMenu
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -10,9 +11,11 @@ import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.Comment
 import com.ssafy.gumi_life_project.data.model.CommentDto
 import com.ssafy.gumi_life_project.data.model.ReplyDto
+import com.ssafy.gumi_life_project.databinding.DialogNoticeBinding
 import com.ssafy.gumi_life_project.databinding.FragmentBoardDetailBinding
 import com.ssafy.gumi_life_project.ui.board.comment.CommentAdapter
 import com.ssafy.gumi_life_project.ui.main.LoadingDialog
+import com.ssafy.gumi_life_project.util.showDialog
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,8 +59,8 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         }
 
         bindingNonNull.imageviewHeart.setOnClickListener {
-            if(boardId.isBlank()) return@setOnClickListener
-            if(likeStatus) {
+            if (boardId.isBlank()) return@setOnClickListener
+            if (likeStatus) {
                 viewModel.deleteLike(boardId)
             } else {
                 viewModel.updateLike(boardId)
@@ -101,7 +104,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                         true
                     }
                     R.id.button_board_delete -> {
-                        // Handle menu item 2 click
+                        showDialog(requireContext(), getString(R.string.board_delete_notice))
                         true
                     }
                     R.id.button_board_update -> {
@@ -114,30 +117,6 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             popupMenu.show() // Show the menu
         }
     }
-
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_board, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.button_board_delete -> {
-
-                return true
-            }
-            R.id.button_board_update -> {
-
-                return true
-            }
-            R.id.button_board_notice -> {
-
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
-
 
     fun writeComment(boardNo: String) {
         val comment = bindingNonNull.edittextComment.text.toString()
