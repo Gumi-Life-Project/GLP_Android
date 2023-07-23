@@ -34,4 +34,6 @@ interface BoardRepository {
     suspend fun updateLike(boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
 
     suspend fun deleteLike(boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
+
+    suspend fun report(report: Report): NetworkResponse<ReportResponse, ErrorResponse>
 }

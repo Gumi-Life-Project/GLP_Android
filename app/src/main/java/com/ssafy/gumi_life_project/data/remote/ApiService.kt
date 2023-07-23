@@ -70,4 +70,7 @@ interface ApiService {
         @Part("boardDto") boardDto: RequestBody,
         @Part files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardModifyResponse, ErrorResponse>
+
+    @POST("/board/report")
+    suspend fun report(@Body report: Report): NetworkResponse<ReportResponse, ErrorResponse>
 }
