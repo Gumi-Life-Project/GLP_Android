@@ -42,14 +42,15 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="@{comment.writerName == null ? `익명` : comment.writerName }"
+                    android:text="@{comment.writerName == null || comment.status == 0 ? `익명` : comment.writerName }"
                     tools:text="으르르릉" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border_menu"
-                    android:gravity="center">
+                    android:gravity="center"
+                    app:commentState="@{comment.status}">
 
                     <ImageView
                         android:id="@+id/imageview_reply"
@@ -80,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@{comment.content}"
+                android:text="@{comment.status == 0 ? `삭제된 댓글입니다.` : comment.content}"
                 tools:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" />
 
             <TextView
