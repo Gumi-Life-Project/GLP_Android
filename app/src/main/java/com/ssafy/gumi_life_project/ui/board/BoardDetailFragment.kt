@@ -121,6 +121,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                     }
                     R.id.button_board_delete -> {
                         showDialog(requireContext(), getString(R.string.board_delete_notice)) {
+                        showDialog(requireContext(), getString(R.string.board_delete_notice), getString(R.string.board_delete_ok)) {
                             viewModel.deleteBoard(boardItem.boardNo, boardItem.writerId.toString())
                         }
                         true
