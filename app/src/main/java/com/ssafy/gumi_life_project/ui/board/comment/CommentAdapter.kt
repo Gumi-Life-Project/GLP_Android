@@ -91,26 +91,22 @@ class CommentAdapter :
 
     private fun showPopupMenu(anchorView: View, comment: Comment) {
         val popupMenu = PopupMenu(anchorView.context, anchorView)
-        popupMenu.inflate(R.menu.menu_board)
+        popupMenu.inflate(R.menu.menu_comment)
 
         val isCurrentUserAuthor = comment.writerId == AppPreferences.getUserId().toString()
 
         if (isCurrentUserAuthor) {
-            popupMenu.menu.findItem(R.id.button_board_notice).isVisible = false
+            popupMenu.menu.findItem(R.id.button_comment_notice).isVisible = false
         } else {
-            popupMenu.menu.findItem(R.id.button_board_update).isVisible = false
-            popupMenu.menu.findItem(R.id.button_board_delete).isVisible = false
+            popupMenu.menu.findItem(R.id.button_comment_delete).isVisible = false
         }
 
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.button_board_notice -> {
+                R.id.button_comment_notice -> {
                     true
                 }
-                R.id.button_board_update -> {
-                    true
-                }
-                R.id.button_board_delete -> {
+                R.id.button_comment_delete -> {
                     onCommentDelete?.invoke(comment)
                     true
                 }
