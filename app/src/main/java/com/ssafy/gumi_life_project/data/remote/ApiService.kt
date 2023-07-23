@@ -33,14 +33,20 @@ interface ApiService {
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
 
     @POST("/board/writeComment")
-    suspend fun writeComment(@Body commentDto: CommentDto): NetworkResponse<CommentResponse, ErrorResponse>
+    suspend fun writeComment(@Body commentDto: CommentDto): NetworkResponse<BaseResponse, ErrorResponse>
 
     @POST("/board/writeReply")
-    suspend fun writeReply(@Body replyDto: ReplyDto): NetworkResponse<CommentResponse, ErrorResponse>
+    suspend fun writeReply(@Body replyDto: ReplyDto): NetworkResponse<BaseResponse, ErrorResponse>
 
     @PUT("/board/modifyComment")
-    suspend fun modifyComment(): NetworkResponse<CommentResponse, ErrorResponse>
+    suspend fun modifyComment(): NetworkResponse<BaseResponse, ErrorResponse>
 
     @PUT("/board/deleteComment")
-    suspend fun deleteComment(): NetworkResponse<CommentResponse, ErrorResponse>
+    suspend fun deleteComment(): NetworkResponse<BaseResponse, ErrorResponse>
+
+    @PUT("/board/like")
+    suspend fun updateLike(@Query("boardNo") boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
+
+    @DELETE("/board/dislike")
+    suspend fun deleteLike(@Query("boardNo") boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
 }

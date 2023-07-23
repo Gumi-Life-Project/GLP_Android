@@ -19,11 +19,11 @@ class BoardRepositoryImpl @Inject constructor(
         return apiService.getBoardDetail(boardNo)
     }
 
-    override suspend fun writeComment(commentDto: CommentDto): NetworkResponse<CommentResponse, ErrorResponse> {
+    override suspend fun writeComment(commentDto: CommentDto): NetworkResponse<BaseResponse, ErrorResponse> {
         return apiService.writeComment(commentDto)
     }
 
-    override suspend fun writeReply(replyDto: ReplyDto): NetworkResponse<CommentResponse, ErrorResponse> {
+    override suspend fun writeReply(replyDto: ReplyDto): NetworkResponse<BaseResponse, ErrorResponse> {
         return apiService.writeReply(replyDto)
     }
 
@@ -33,5 +33,13 @@ class BoardRepositoryImpl @Inject constructor(
     ): NetworkResponse<BoardWriteResponse, ErrorResponse> {
         return apiService.writeBoard(boardDto, files)
 
+    }
+
+    override suspend fun updateLike(boardNo: String): NetworkResponse<BaseResponse, ErrorResponse> {
+        return apiService.updateLike(boardNo)
+    }
+
+    override suspend fun deleteLike(boardNo: String): NetworkResponse<BaseResponse, ErrorResponse> {
+        return apiService.deleteLike(boardNo)
     }
 }
