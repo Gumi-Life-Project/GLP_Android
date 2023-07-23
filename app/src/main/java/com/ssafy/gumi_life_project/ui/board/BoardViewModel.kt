@@ -10,9 +10,7 @@ import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
@@ -36,6 +34,9 @@ class BoardViewModel @Inject constructor(
 
     private val _writeResponse = MutableLiveData<Event<BoardWriteResponseType>>()
     val writeResponse: LiveData<Event<BoardWriteResponseType>> = _writeResponse
+
+    private val _modifyResponse = MutableLiveData<Event<BoardModifyResponseType>>()
+    val modifyResponse: LiveData<Event<BoardModifyResponseType>> = _modifyResponse
 
     private val _boardNo = MutableLiveData<String>()
     val boardNo: LiveData<String> = _boardNo
@@ -162,6 +163,65 @@ class BoardViewModel @Inject constructor(
             }
 
             hideProgress()
+        }
+    }
+
+    fun modifyBoard(title: String, content: String) {
+        showProgress()
+        viewModelScope.launch {
+            if (_boardDetail.value != null) {
+                val modifiedBoard = BoardItem(
+                    _boardDetail.value!!.boardDetail.boardNo,
+                    title,
+                    content,
+                    _boardDetail.value!!.boardDetail.hit,
+                    _boardDetail.value!!.boardDetail.createDate,
+                    _boardDetail.value!!.boardDetail.updateDate,
+                    _boardDetail.value!!.boardDetail.folder,
+                    _boardDetail.value!!.boardDetail.originName,
+                    _boardDetail.value!!.boardDetail.saveName,
+                    _boardDetail.value!!.boardDetail.writerId,
+                    _boardDetail.value!!.boardDetail.writerName,
+                    _boardDetail.value!!.boardDetail.likesNum,
+                    _boardDetail.value!!.boardDetail.likeStatus
+                )
+
+                val requestBody =
+                    gson.toJson(modifiedBoard).toRequestBody("application/json".toMediaTypeOrNull())
+
+                var response: NetworkResponse<BoardModifyResponse, ErrorResponse>? = null
+                response = repository.modifyBoard(requestBody, null)
+
+                val type = "게시글 수정에"
+                when (response) {
+                    is NetworkResponse.Success -> {
+                        if (response.body.message == "fail") {
+                            postValueEvent(2, type)
+                            _modifyResponse.postValue(Event(BoardModifyResponseType.FAIL))
+                        } else {
+                            _modifyResponse.postValue(Event(BoardModifyResponseType.SUCCESS))
+                        }
+                    }
+
+                    is NetworkResponse.ApiError -> {
+                        postValueEvent(0, type)
+                        _modifyResponse.postValue(Event(BoardModifyResponseType.FAIL))
+                    }
+
+                    is NetworkResponse.NetworkError -> {
+                        postValueEvent(1, type)
+                        _modifyResponse.postValue(Event(BoardModifyResponseType.FAIL))
+                    }
+
+                    is NetworkResponse.UnknownError -> {
+                        postValueEvent(2, type)
+                        _modifyResponse.postValue(Event(BoardModifyResponseType.FAIL))
+                    }
+                }
+                hideProgress()
+            }
+
+
         }
     }
 
