@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.gumi_life_project.R
+import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.Comment
 import com.ssafy.gumi_life_project.data.model.Reply
 import com.ssafy.gumi_life_project.databinding.ItemCommentBinding
@@ -91,6 +92,15 @@ class CommentAdapter :
     private fun showPopupMenu(anchorView: View, comment: Comment) {
         val popupMenu = PopupMenu(anchorView.context, anchorView)
         popupMenu.inflate(R.menu.menu_board)
+
+        val isCurrentUserAuthor = comment.writerId == AppPreferences.getUserId().toString()
+
+        if (isCurrentUserAuthor) {
+            popupMenu.menu.findItem(R.id.button_board_notice).isVisible = false
+        } else {
+            popupMenu.menu.findItem(R.id.button_board_update).isVisible = false
+            popupMenu.menu.findItem(R.id.button_board_delete).isVisible = false
+        }
 
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {

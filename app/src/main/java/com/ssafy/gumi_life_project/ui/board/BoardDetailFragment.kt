@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.gumi_life_project.R
+import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.databinding.FragmentBoardDetailBinding
 import com.ssafy.gumi_life_project.ui.board.comment.CommentAdapter
@@ -25,6 +26,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
     var likeStatus: Boolean = false
     var likeCount: Int = 0
     lateinit var boardItem: BoardItem
+    private val userId = AppPreferences.getUserId()
 
     override fun onCreateBinding(
         inflater: LayoutInflater, container: ViewGroup?
@@ -101,6 +103,16 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         bindingNonNull.imageviewMenu.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), bindingNonNull.imageviewMenu)
             popupMenu.inflate(R.menu.menu_board)
+
+            val isCurrentUserAuthor = boardItem.writerId == userId
+
+            if (isCurrentUserAuthor) {
+                popupMenu.menu.findItem(R.id.button_board_notice).isVisible = false
+            } else {
+                popupMenu.menu.findItem(R.id.button_board_update).isVisible = false
+                popupMenu.menu.findItem(R.id.button_board_delete).isVisible = false
+            }
+
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.button_board_notice -> {
