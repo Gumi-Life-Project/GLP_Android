@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.ui.board
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,6 +15,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
+private const val TAG = "BoardViewModel"
 @HiltViewModel
 class BoardViewModel @Inject constructor(
     private val repository: BoardRepository
@@ -50,6 +52,7 @@ class BoardViewModel @Inject constructor(
     private val _commentCount = MutableLiveData<String>()
     val commentCount: LiveData<String> = _commentCount
 
+    var report: Report? = null
 
     fun getBoardList() {
         viewModelScope.launch {
@@ -405,6 +408,57 @@ class BoardViewModel @Inject constructor(
                 hideProgress()
             }
         }
+    }
+
+    fun setReport(comment: Comment?) {
+        if (comment != null) { //댓글 신고
+            report = Report(
+                _boardDetail.value!!.boardDetail.boardNo,
+                "",
+                comment.writerId
+            )
+        } else { //게시글 신고
+            report = Report(
+                _boardDetail.value!!.boardDetail.boardNo,
+                "",
+                _boardDetail.value!!.boardDetail.writerId.toString()
+            )
+        }
+    }
+
+    fun setReportType(type: String) {
+        report?.report = type
+    }
+
+    fun report() {
+        showProgress()
+        if(report != null){
+            viewModelScope.launch {
+                val response = repository.report(report!!)
+
+                val type = "신고에"
+                when (response) {
+                    is NetworkResponse.Success -> {
+                        Log.d(TAG, "report: ${response}")
+                    }
+
+                    is NetworkResponse.ApiError -> {
+                        postValueEvent(0, type)
+                    }
+
+                    is NetworkResponse.NetworkError -> {
+                        postValueEvent(1, type)
+                    }
+
+                    is NetworkResponse.UnknownError -> {
+                        postValueEvent(2, type)
+                    }
+                }
+
+                hideProgress()
+            }
+        }
+
     }
 
     private fun postValueEvent(value: Int, type: String) {

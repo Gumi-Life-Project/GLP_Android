@@ -7,77 +7,92 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_top_corners"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             style="@style/BottomSheetTitleTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/report_type_select"/>
+            android:text="@string/report_type_select" />
+
         <TextView
+            android:id="@+id/button_report_hate"
             style="@style/BottomSheetReportTypeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/report_type_hate"/>
+            android:text="@string/report_type_hate" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line_gray" />
-        <TextView
-            style="@style/BottomSheetReportTypeTextStyle"
 
+        <TextView
+            android:id="@+id/button_report_cheat"
+            style="@style/BottomSheetReportTypeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/report_type_cheat"/>
+            android:text="@string/report_type_cheat" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line_gray" />
-        <TextView
-            style="@style/BottomSheetReportTypeTextStyle"
 
+        <TextView
+            android:id="@+id/button_report_political"
+            style="@style/BottomSheetReportTypeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/report_type_political"/>
+            android:text="@string/report_type_political" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line_gray" />
-        <TextView
-            style="@style/BottomSheetReportTypeTextStyle"
 
+        <TextView
+            android:id="@+id/button_report_impersonation"
+            style="@style/BottomSheetReportTypeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/report_type_impersonation"/>
+            android:text="@string/report_type_impersonation" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line_gray" />
-        <TextView
-            style="@style/BottomSheetReportTypeTextStyle"
 
+        <TextView
+            android:id="@+id/button_report_pornography"
+            style="@style/BottomSheetReportTypeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/report_type_pornography"/>
+            android:text="@string/report_type_pornography" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line_gray" />
-        <TextView
-            style="@style/BottomSheetReportTypeTextStyle"
 
+        <TextView
+            android:id="@+id/button_report_commercial"
+            style="@style/BottomSheetReportTypeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/report_type_commercial"/>
+            android:text="@string/report_type_commercial" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line_gray" />
-        <TextView
-            style="@style/BottomSheetReportTypeTextStyle"
 
+        <TextView
+            android:id="@+id/button_report_inappropriateness"
+            style="@style/BottomSheetReportTypeTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/report_type_inappropriateness"/>
+            android:text="@string/report_type_inappropriateness" />
     </LinearLayout>
 </layout>
