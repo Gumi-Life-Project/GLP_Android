@@ -7,9 +7,9 @@ data class BoardItem(
     val hit: Int,
     val createDate: String,
     val updateDate: String?,
-    val folder: String,
-    val originName: String,
-    val saveName: String,
+    val folder: String?,
+    val originName: String?,
+    val saveName: String?,
     val writerId: Int,
     val writerName: String,
     val likesNum: Int,
@@ -30,3 +30,7 @@ data class BoardDetailResponse(
 data class BoardModifyResponse(
     val message: String
 )
+
+enum class BoardModifyResponseType {
+    SUCCESS, FAIL
+}

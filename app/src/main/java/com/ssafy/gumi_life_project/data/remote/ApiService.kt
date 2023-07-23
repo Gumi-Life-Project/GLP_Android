@@ -41,6 +41,7 @@ interface ApiService {
     @PUT("/board/deleteComment")
     suspend fun deleteComment(): NetworkResponse<CommentResponse, ErrorResponse>
 
+    @Multipart
     @PUT("/board/modifyBoard")
     suspend fun modifyBoard(
         @Part("boardDto") boardDto: RequestBody,
