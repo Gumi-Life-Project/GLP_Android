@@ -143,7 +143,11 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             errorMsg.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
                     showToast(it)
-                    if (it == getString(R.string.board_delete_notice_success)) findNavController().navigate(R.id.action_boardDetailFragment_to_boardListFragment)
+                    if (it == getString(R.string.board_delete_notice_success)) {
+                        findNavController().navigate(R.id.action_boardDetailFragment_to_boardListFragment)
+                    } else if(it == getString(R.string.comment_delete_notice_success) || it == getString(R.string.reply_delete_notice_success)) {
+                        viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
+                    }
                 }
             }
 

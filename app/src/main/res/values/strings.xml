@@ -63,4 +63,5 @@
 
 
     <string name="comment_delete_notice_success">댓글이 삭제되었습니다.</string>
+    <string name="reply_delete_notice_success">대댓글이 삭제되었습니다.</string>
 </resources>
