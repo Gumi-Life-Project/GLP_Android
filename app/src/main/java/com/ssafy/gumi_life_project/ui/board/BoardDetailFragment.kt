@@ -2,16 +2,12 @@ package com.ssafy.gumi_life_project.ui.board
 
 import android.view.*
 import android.widget.PopupMenu
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.data.model.Comment
-import com.ssafy.gumi_life_project.data.model.CommentDto
-import com.ssafy.gumi_life_project.data.model.ReplyDto
-import com.ssafy.gumi_life_project.databinding.DialogNoticeBinding
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.databinding.FragmentBoardDetailBinding
 import com.ssafy.gumi_life_project.ui.board.comment.CommentAdapter
 import com.ssafy.gumi_life_project.ui.main.LoadingDialog
@@ -28,7 +24,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
     private var selectedCommentId: String? = null
     var likeStatus: Boolean = false
     var likeCount: Int = 0
-    var boardId: String = ""
+    lateinit var boardItem: BoardItem
 
     override fun onCreateBinding(
         inflater: LayoutInflater, container: ViewGroup?
@@ -59,11 +55,11 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         }
 
         bindingNonNull.imageviewHeart.setOnClickListener {
-            if (boardId.isBlank()) return@setOnClickListener
+            if (boardItem.boardNo.isBlank()) return@setOnClickListener
             if (likeStatus) {
-                viewModel.deleteLike(boardId)
+                viewModel.deleteLike(boardItem.boardNo)
             } else {
-                viewModel.updateLike(boardId)
+                viewModel.updateLike(boardItem.boardNo)
             }
         }
     }
@@ -104,7 +100,9 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                         true
                     }
                     R.id.button_board_delete -> {
-                        showDialog(requireContext(), getString(R.string.board_delete_notice))
+                        showDialog(requireContext(), getString(R.string.board_delete_notice)) {
+                            viewModel.deleteBoard(boardItem.boardNo, boardItem.writerId.toString())
+                        }
                         true
                     }
                     R.id.button_board_update -> {
@@ -137,6 +135,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             errorMsg.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
                     showToast(it)
+                    if (it == "게시글 삭제에 성공했습니다.") findNavController().navigate(R.id.action_boardDetailFragment_to_boardListFragment)
                 }
             }
 
@@ -162,7 +161,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             boardDetail.observe(viewLifecycleOwner) { board ->
                 likeStatus = board.boardDetail.likeStatus == 1
                 likeCount = board.boardDetail.likesNum
-                boardId = board.boardDetail.boardNo
+                boardItem = board.boardDetail
 
                 bindingNonNull.recyclerviewComment.apply {
                     adapter = commentAdapter
