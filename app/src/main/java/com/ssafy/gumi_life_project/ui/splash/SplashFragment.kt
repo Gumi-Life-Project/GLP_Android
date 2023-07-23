@@ -2,11 +2,13 @@ package com.ssafy.gumi_life_project.ui.splash
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kakao.sdk.auth.AuthApiClient
+import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.databinding.FragmentSplashBinding
@@ -14,6 +16,7 @@ import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "SplashFragment_구미"
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(
     R.layout.fragment_splash
@@ -85,9 +88,11 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
         Handler(Looper.getMainLooper()).postDelayed({
             if (AuthApiClient.instance.hasToken()) {
                 val jwtToken = AppPreferences.getJwtToken()
+                Log.d(TAG, "moveToHomeFragment: $jwtToken")
                 if (jwtToken != null) {
                     activityViewModel.apply {
-                        getMemberInfo()
+                        Log.d(TAG, "moveToHomeFragment: ")
+                        getUserId()
                     }
                 }
             } else { // 토큰이 없으면 loginFragment로 이동
@@ -99,7 +104,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
 
     private fun observeData() {
         activityViewModel.apply {
-            memberInfo.observe(viewLifecycleOwner) {
+            userId.observe(viewLifecycleOwner) {
                 findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
 //                if (it.usernickname == null) {
 //                    findNavController().navigate(R.id.action_splashFragment_to_settingNicknameFragment)

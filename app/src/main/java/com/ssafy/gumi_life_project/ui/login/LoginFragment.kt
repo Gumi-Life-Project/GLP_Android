@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.R
+import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.databinding.FragmentLoginBinding
 import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
@@ -52,6 +53,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 Log.i("카카오계정으로 로그인 성공 ${token.accessToken}", token.toString())
                 // jwt 토큰 발급 & sharedPreferences에 jwt 토큰 저장
                 viewModel.getJwtToken(token.accessToken)
+                initProfileImg()
                 // 최초 로그인 -> settingNicknameFragment
                 // 최초 로그인이 아닐 시 -> homeFragment
                 findNavController().navigate(R.id.action_loginFragment_to_splashFragment)
@@ -65,9 +67,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     }
 
+    private fun initProfileImg() {
+        // 사용자 정보 요청 (기본)
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e("사용자 정보 요청 실패", error.toString())
+            }
+            else if (user != null) {
+                user.kakaoAccount?.profile?.thumbnailImageUrl?.let {
+                    AppPreferences.initProfileImg(
+                        it
+                    )
+                }
+                Log.i("사용자 정보 요청 성공",
+                        "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+            }
+        }
+    }
+
     private fun observeData() {
         viewModel.userResponse.observe(viewLifecycleOwner) {
-            activityViewModel.getMemberInfo()
+//            activityViewModel.getMemberInfo()
         }
 
     }

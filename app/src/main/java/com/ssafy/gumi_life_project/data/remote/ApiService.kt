@@ -40,6 +40,9 @@ interface ApiService {
     @POST("/api/auth/kakaomobile")
     suspend fun getJwtToken(@Body accessToken: String) : NetworkResponse<UserResponse, ErrorResponse>
 
+    @POST("/api/auth/findid")
+    suspend fun getUserId() : NetworkResponse<String, ErrorResponse>
+
     @PUT("/api/members/makenickName")
     suspend fun makeNickName(@Body nickname : String) : NetworkResponse<Member, ErrorResponse>
 

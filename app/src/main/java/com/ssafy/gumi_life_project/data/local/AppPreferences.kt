@@ -17,6 +17,8 @@ object AppPreferences {
 
     private const val JWT_TOKEN = "jwt_token"
 
+    private const val PROFILE_IMG = "profile_img"
+
     private lateinit var preferences: SharedPreferences
     private val gson = GsonBuilder().create()
 
@@ -293,6 +295,15 @@ object AppPreferences {
     // sharedPreferences에 저장된 jwt 토큰 정보 반환
     fun getJwtToken(): String? {
         val jsonData = preferences.getString(JWT_TOKEN, "")
+        return jsonData
+    }
+
+    fun initProfileImg(profileImg : String) {
+        preferences.edit().putString(PROFILE_IMG, profileImg).commit()
+    }
+
+    fun getProfileImg(): String? {
+        val jsonData = preferences.getString(PROFILE_IMG, "")
         return jsonData
     }
 

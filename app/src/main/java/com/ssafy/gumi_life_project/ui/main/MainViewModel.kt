@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+private const val TAG = "MainViewModel_구미"
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: MainRepository,
@@ -35,8 +37,8 @@ class MainViewModel @Inject constructor(
     private val _meal = MutableLiveData<MealResponse>()
     val meal: LiveData<MealResponse> = _meal
 
-    private val _memberInfo = MutableLiveData<Member>()
-    val memberInfo: LiveData<Member> = _memberInfo
+    private val _userId = MutableLiveData<String>()
+    val userId: LiveData<String> = _userId
 
     fun getAllTipList() {
         showProgress()
@@ -138,14 +140,15 @@ class MainViewModel @Inject constructor(
         getShuttleBusStopMark()
     }
 
-    fun getMemberInfo() {
+    fun getUserId() {
         showProgress()
         viewModelScope.launch {
-            val response = userRepository.getMemberInfo()
+            val response = userRepository.getUserId()
             val type = "member 정보 조회에"
             when (response) {
                 is NetworkResponse.Success -> {
-                    _memberInfo.postValue(response.body)
+                    _userId.postValue(response.body)
+                    Log.d(TAG, "getMemberInfo: ${response.body}")
                 }
 
                 is NetworkResponse.ApiError -> {

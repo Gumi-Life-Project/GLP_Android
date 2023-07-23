@@ -16,6 +16,10 @@ class UserRepositoryImpl @Inject constructor(
         return apiService.getJwtToken(accessToken)
     }
 
+    override suspend fun getUserId(): NetworkResponse<String, ErrorResponse> {
+        return apiService.getUserId()
+    }
+
     override suspend fun makeNickName(nickname : String): NetworkResponse<Member, ErrorResponse> {
         return apiService.makeNickName(nickname)
     }

@@ -10,6 +10,8 @@ interface UserRepository {
 
     suspend fun getJwtToken(accessToken: String): NetworkResponse<UserResponse, ErrorResponse>
 
+    suspend fun getUserId() : NetworkResponse<String, ErrorResponse>
+
     suspend fun makeNickName(nickname: String) : NetworkResponse<Member, ErrorResponse>
 
     suspend fun getUserBoards() : NetworkResponse<BoardListResponse, ErrorResponse>
