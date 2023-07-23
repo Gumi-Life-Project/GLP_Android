@@ -35,6 +35,13 @@ class BoardRepositoryImpl @Inject constructor(
 
     }
 
+    override suspend fun modifyBoard(
+        boardDto: RequestBody,
+        files: MutableList<MultipartBody.Part>?
+    ): NetworkResponse<BoardModifyResponse, ErrorResponse> {
+        return apiService.modifyBoard(boardDto, files)
+    }
+
     override suspend fun deleteBoard(
         boardNo: String,
         boardWriterId: String

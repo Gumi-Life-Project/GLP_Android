@@ -21,10 +21,14 @@ interface BoardRepository {
         files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardWriteResponse, ErrorResponse>
 
+    suspend fun modifyBoard(
+        boardDto: RequestBody,
+        files: MutableList<MultipartBody.Part>?
+    ): NetworkResponse<BoardModifyResponse, ErrorResponse>
+
     suspend fun deleteBoard(boardNo: String, boardWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
 
     suspend fun updateLike(boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
 
     suspend fun deleteLike(boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
-
 }

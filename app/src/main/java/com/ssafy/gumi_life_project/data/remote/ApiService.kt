@@ -30,7 +30,10 @@ interface ApiService {
     ): NetworkResponse<BoardWriteResponse, ErrorResponse>
 
     @PUT("/board/deleteBoard")
-    suspend fun deleteBoard(@Query("boardNo") boardNo: String, @Query("BoardWriterId") boardWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
+    suspend fun deleteBoard(
+        @Query("boardNo") boardNo: String,
+        @Query("BoardWriterId") boardWriterId: String
+    ): NetworkResponse<BaseResponse, ErrorResponse>
 
     @GET("/meal/")
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
@@ -44,6 +47,7 @@ interface ApiService {
     @PUT("/board/modifyComment")
     suspend fun modifyComment(): NetworkResponse<BaseResponse, ErrorResponse>
 
+
     @PUT("/board/deleteComment")
     suspend fun deleteComment(): NetworkResponse<BaseResponse, ErrorResponse>
 
@@ -52,4 +56,11 @@ interface ApiService {
 
     @DELETE("/board/dislike")
     suspend fun deleteLike(@Query("boardNo") boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
+
+    @Multipart
+    @PUT("/board/modifyBoard")
+    suspend fun modifyBoard(
+        @Part("boardDto") boardDto: RequestBody,
+        @Part files: MutableList<MultipartBody.Part>?
+    ): NetworkResponse<BoardModifyResponse, ErrorResponse>
 }

@@ -106,20 +106,20 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                         true
                     }
                     R.id.button_board_update -> {
-                        // Handle menu item 2 click
+                        findNavController().navigate(R.id.action_boardDetailFragment_to_boardModifyFragment)
                         true
                     }
                     else -> false
                 }
             }
-            popupMenu.show() // Show the menu
+            popupMenu.show()
         }
     }
 
     fun writeComment(boardNo: String) {
         val comment = bindingNonNull.edittextComment.text.toString()
         if (comment == "") {
-            showToast("내용을 입력해주세요.")
+            showToast(getString(R.string.board_write_textview_content_hint))
             return
         }
         if (selectedCommentId != null) {
@@ -135,7 +135,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             errorMsg.observe(viewLifecycleOwner) { event ->
                 event.getContentIfNotHandled()?.let {
                     showToast(it)
-                    if (it == "게시글 삭제에 성공했습니다.") findNavController().navigate(R.id.action_boardDetailFragment_to_boardListFragment)
+                    if (it == getString(R.string.board_delete_notice_success)) findNavController().navigate(R.id.action_boardDetailFragment_to_boardListFragment)
                 }
             }
 
@@ -143,7 +143,7 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                 event.getContentIfNotHandled()?.let { comment ->
                     if (comment == "success") {
                         viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
-                        showToast("댓글 작성 완료")
+                        showToast(getString(R.string.detail_comment_notice_success))
                         bindingNonNull.edittextComment.text.clear()
                     }
                 }
