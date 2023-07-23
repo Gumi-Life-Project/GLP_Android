@@ -14,6 +14,8 @@ import com.ssafy.gumi_life_project.databinding.ItemReplyBinding
 
 class ReplyAdapter : ListAdapter<Reply, ReplyAdapter.ReplyViewHolder>(ReplyDiffCallback()) {
 
+    var onReplyDelete: ((Reply) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReplyViewHolder {
         val binding = ItemReplyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ReplyViewHolder(binding)
@@ -48,6 +50,7 @@ class ReplyAdapter : ListAdapter<Reply, ReplyAdapter.ReplyViewHolder>(ReplyDiffC
                     true
                 }
                 R.id.button_board_delete -> {
+                    onReplyDelete?.invoke(reply)
                     true
                 }
                 else -> false

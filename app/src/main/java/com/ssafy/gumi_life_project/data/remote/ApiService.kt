@@ -49,7 +49,11 @@ interface ApiService {
 
 
     @PUT("/board/deleteComment")
-    suspend fun deleteComment(): NetworkResponse<BaseResponse, ErrorResponse>
+    suspend fun deleteComment(@Query("commentNo") commentNo: String, @Query("commentWriterId") commentWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
+
+    @PUT("/board/deleteReply")
+    suspend fun deleteReply(@Query("replyNo") replyNo: String, @Query("replyWriterId") replyWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
+
 
     @PUT("/board/like")
     suspend fun updateLike(@Query("boardNo") boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>

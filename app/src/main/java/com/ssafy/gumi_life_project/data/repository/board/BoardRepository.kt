@@ -13,8 +13,11 @@ interface BoardRepository {
     suspend fun getBoardDetail(boardNo: String): NetworkResponse<BoardDetailResponse, ErrorResponse>
 
     suspend fun writeComment(commentDto: CommentDto): NetworkResponse<BaseResponse, ErrorResponse>
+    suspend fun deleteComment(commentNo: String, commentWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
 
     suspend fun writeReply(replyDto: ReplyDto): NetworkResponse<BaseResponse, ErrorResponse>
+
+    suspend fun deleteReply(replyNo: String, replyWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
 
     suspend fun writeBoard(
         boardDto: RequestBody,

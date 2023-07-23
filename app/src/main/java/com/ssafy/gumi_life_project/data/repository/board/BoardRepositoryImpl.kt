@@ -23,8 +23,22 @@ class BoardRepositoryImpl @Inject constructor(
         return apiService.writeComment(commentDto)
     }
 
+    override suspend fun deleteComment(
+        commentNo: String,
+        commentWriterId: String
+    ): NetworkResponse<BaseResponse, ErrorResponse> {
+        return apiService.deleteComment(commentNo, commentWriterId)
+    }
+
     override suspend fun writeReply(replyDto: ReplyDto): NetworkResponse<BaseResponse, ErrorResponse> {
         return apiService.writeReply(replyDto)
+    }
+
+    override suspend fun deleteReply(
+        replyNo: String,
+        replyWriterId: String
+    ): NetworkResponse<BaseResponse, ErrorResponse> {
+        return apiService.deleteReply(replyNo, replyWriterId)
     }
 
     override suspend fun writeBoard(

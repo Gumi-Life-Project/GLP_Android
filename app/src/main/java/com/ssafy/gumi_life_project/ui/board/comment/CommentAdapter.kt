@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.Comment
+import com.ssafy.gumi_life_project.data.model.Reply
 import com.ssafy.gumi_life_project.databinding.ItemCommentBinding
 
 class CommentAdapter :
@@ -18,6 +19,8 @@ class CommentAdapter :
 
     private var currentClickedPosition: Int? = null
     var onCommentClick: ((Comment) -> Unit)? = null
+    var onCommentDelete: ((Comment) -> Unit)? = null
+    var onReplyDelete: ((Reply) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
         val binding = ItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -77,6 +80,9 @@ class CommentAdapter :
                 val replyAdapter = ReplyAdapter()
                 binding.replyRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
                 binding.replyRecyclerView.adapter = replyAdapter
+                replyAdapter.onReplyDelete = {
+                    onReplyDelete?.invoke(it)
+                }
                 replyAdapter.submitList(comment.replyList)
             }
         }
@@ -95,6 +101,7 @@ class CommentAdapter :
                     true
                 }
                 R.id.button_board_delete -> {
+                    onCommentDelete?.invoke(comment)
                     true
                 }
                 else -> false

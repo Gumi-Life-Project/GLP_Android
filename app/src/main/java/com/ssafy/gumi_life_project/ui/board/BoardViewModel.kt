@@ -195,6 +195,66 @@ class BoardViewModel @Inject constructor(
         }
     }
 
+    fun deleteComment(commentNo: String, commentWriterId: String) {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.deleteComment(commentNo, commentWriterId)
+
+            val type = "댓글 삭제에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.message == "success") {
+                        _msg.postValue(Event("댓글이 삭제되었습니다."))
+                    }
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+
+            hideProgress()
+        }
+    }
+
+    fun deleteReply(replyNo: String, replyWriterId: String) {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.deleteReply(replyNo, replyWriterId)
+
+            val type = "대댓글 삭제에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.message == "success") {
+                        _msg.postValue(Event("대댓글이 삭제되었습니다."))
+                    }
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+
+            hideProgress()
+        }
+    }
+
     fun writeBoard(boardWriteItem: BoardWriteItem) {
         showProgress()
         viewModelScope.launch {

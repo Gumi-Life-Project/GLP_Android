@@ -54,6 +54,14 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             }
         }
 
+        commentAdapter.onReplyDelete = {
+            viewModel.deleteReply(it.replyNo, it.writerId)
+        }
+
+        commentAdapter.onCommentDelete = {
+            viewModel.deleteComment(it.commentNo, it.writerId)
+        }
+
         bindingNonNull.imageviewHeart.setOnClickListener {
             if (boardItem.boardNo.isBlank()) return@setOnClickListener
             if (likeStatus) {
