@@ -3,6 +3,7 @@ package com.ssafy.gumi_life_project.ui.board.comment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,6 +67,10 @@ class CommentAdapter :
                 notifyDataSetChanged()
             }
 
+            binding.imageviewMenu.setOnClickListener {
+                showPopupMenu(it, comment)
+            }
+
             if (comment.replyList.isEmpty()) {
                 binding.imageviewEnter.visibility = View.GONE
             } else {
@@ -75,6 +80,28 @@ class CommentAdapter :
                 replyAdapter.submitList(comment.replyList)
             }
         }
+    }
+
+    private fun showPopupMenu(anchorView: View, comment: Comment) {
+        val popupMenu = PopupMenu(anchorView.context, anchorView)
+        popupMenu.inflate(R.menu.menu_board)
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.button_board_notice -> {
+                    true
+                }
+                R.id.button_board_update -> {
+                    true
+                }
+                R.id.button_board_delete -> {
+                    true
+                }
+                else -> false
+            }
+        }
+
+        popupMenu.show()
     }
 }
 

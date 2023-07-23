@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -12,12 +13,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:background="@drawable/boarder_reply"
-        android:layout_marginTop="5dp">
+        android:background="@drawable/border_reply"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,18 +34,28 @@
 
             <TextView
                 style="@style/ProfileTextStyle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@{reply.writerName == null ? `익명` : reply.writerName}"
                 tools:text="으르르릉" />
+
+            <ImageView
+                android:id="@+id/imageview_menu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/border_menu"
+                android:padding="5dp"
+                android:src="@drawable/icon_menu"
+                app:tint="@color/splash_gray" />
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{reply.content}"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:text="@{reply.content}"
             tools:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" />
 
         <TextView
