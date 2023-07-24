@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.data.model.BoardItem
 import com.ssafy.gumi_life_project.data.model.Tip
 import com.ssafy.gumi_life_project.databinding.FragmentHomeBinding
 import com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkBottomSheet
@@ -44,8 +43,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     override fun init() {
         initIcons()
         observeData()
-        initRecyclerView()
+
         viewModel.loadAndSetTriggerTimes()
+
+        bindingNonNull.viewPager.adapter = mealAdapter
+
+        bindingNonNull.swipelayoutHome.setOnRefreshListener {
+            viewModel.loadAndSetTriggerTimes()
+            activityViewModel.getAllTipList()
+            activityViewModel.getNowWeather()
+            activityViewModel.getMealList()
+            bindingNonNull.swipelayoutHome.isRefreshing = false
+        }
 
         bindingNonNull.linearlayoutTip.setOnClickListener {
             if (::randomTip.isInitialized) {
@@ -54,27 +63,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
             }
         }
-
-        bindingNonNull.linearlayoutSimpleBoard.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_boardListFragment)
-        }
-    }
-
-    private fun initRecyclerView() {
-        viewModel.getSimpleBoard()
-
-        adapter = SimpleBoardAdapter()
-        adapter.onItemClickListener = object : SimpleBoardAdapter.OnItemClickListener {
-            override fun onItemClick(boardItem: BoardItem) {
-                findNavController().navigate(R.id.action_homeFragment_to_boardListFragment)
-            }
-        }
-        bindingNonNull.recyclerviewSimple.adapter = adapter
-        bindingNonNull.viewPager.adapter = mealAdapter
     }
 
     private fun initIcons() {
-        bindingNonNull.toolBar.imageviewUserIcon.setOnClickListener {
+        bindingNonNull.include.imageviewUserIcon.visibility = View.VISIBLE
+        bindingNonNull.include.imageviewUserIcon.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mypageFragment)
         }
     }
