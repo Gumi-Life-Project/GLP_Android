@@ -86,7 +86,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
         Handler(Looper.getMainLooper()).postDelayed({
             val jwtToken = AppPreferences.getJwtToken()
             if (!jwtToken.isNullOrEmpty() && AuthApiClient.instance.hasToken()) {
-                activityViewModel.getUserId()
+                activityViewModel.findId()
             } else {
                 // 토큰이 없으면 loginFragment로 이동
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)

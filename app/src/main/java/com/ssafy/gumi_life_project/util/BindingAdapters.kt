@@ -2,6 +2,7 @@ package com.ssafy.gumi_life_project.util
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
@@ -45,5 +46,14 @@ fun loadImageWithLayoutWeight(imageView: ImageView, imageUrl: String?) {
         Glide.with(imageView.context)
             .load(imageUrl)
             .into(imageView)
+    }
+}
+
+@BindingAdapter("commentState")
+fun setMenuType(view: LinearLayout, commentState: Int) {
+    if (commentState == 0) {
+        view.visibility = View.GONE
+    } else {
+        view.visibility = View.VISIBLE
     }
 }

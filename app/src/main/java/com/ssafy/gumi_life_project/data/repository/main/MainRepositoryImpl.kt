@@ -23,4 +23,8 @@ class MainRepositoryImpl @Inject constructor(
         return apiService.getMealList()
     }
 
+    override suspend fun findId(): NetworkResponse<Int, ErrorResponse> {
+        return apiService.findId()
+    }
+
 }

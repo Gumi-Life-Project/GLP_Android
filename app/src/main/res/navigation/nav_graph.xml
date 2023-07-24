@@ -116,6 +116,9 @@
             app:destination="@id/boardListFragment"
             app:popUpTo="@id/boardListFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_boardDetailFragment_to_boardModifyFragment"
+            app:destination="@id/boardModifyFragment" />
     </fragment>
     <fragment
         android:id="@+id/boardWriteFragment"
@@ -125,6 +128,16 @@
             android:id="@+id/action_boardWriteFragment_to_boardListFragment"
             app:destination="@id/boardListFragment"
             app:popUpTo="@id/boardListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/boardModifyFragment"
+        android:name="com.ssafy.gumi_life_project.ui.board.BoardModifyFragment"
+        android:label="BoardModifyFragment" >
+        <action
+            android:id="@+id/action_boardModifyFragment_to_boardDetailFragment"
+            app:destination="@id/boardDetailFragment"
+            app:popUpTo="@id/boardDetailFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

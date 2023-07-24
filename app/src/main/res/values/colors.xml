@@ -17,6 +17,7 @@
     <color name="weather_blue">#2146FF</color>
     <color name="board_red">#FF4B78</color>
     <color name="board_blue">#53A1FD</color>
+    <color name="board_light_blue">#D1E6FF</color>
     <color name="line_gray">#BDBDBD</color>
 
 </resources>

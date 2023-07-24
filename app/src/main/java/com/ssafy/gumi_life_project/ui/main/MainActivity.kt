@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ssafy.gumi_life_project.R
+import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.databinding.ActivityMainBinding
 import com.ssafy.gumi_life_project.util.template.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
         observeData()
     }
 
@@ -39,6 +41,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 } else if (!isLoading.value!!) {
                     dialog.dismiss()
                 }
+            }
+
+            userId.observe(this@MainActivity) {
+                AppPreferences.saveUserId(it)
             }
         }
     }

@@ -12,6 +12,9 @@ import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
+    @POST("/api/auth/findid")
+    suspend fun findId(): NetworkResponse<Int, ErrorResponse>
+
     @GET("/tip/list")
     suspend fun getAllTipList(): NetworkResponse<List<Tip>, ErrorResponse>
 
@@ -37,14 +40,17 @@ interface ApiService {
         @Part files: MutableList<MultipartBody.Part>?
     ): NetworkResponse<BoardWriteResponse, ErrorResponse>
 
+    @PUT("/board/deleteBoard")
+    suspend fun deleteBoard(
+        @Query("boardNo") boardNo: String,
+        @Query("BoardWriterId") boardWriterId: String
+    ): NetworkResponse<BaseResponse, ErrorResponse>
+
     @GET("/meal/")
     suspend fun getMealList(): NetworkResponse<MealResponse, ErrorResponse>
 
     @POST("/api/auth/kakaomobile")
     suspend fun getJwtToken(@Body accessToken: String) : NetworkResponse<UserResponse, ErrorResponse>
-
-    @POST("/api/auth/findid")
-    suspend fun getUserId() : NetworkResponse<String, ErrorResponse>
 
     @POST("/api/members/makenickName")
     suspend fun makeNickName(@Body nickName : Nickname) : NetworkResponse<Member, ErrorResponse>
@@ -59,12 +65,31 @@ interface ApiService {
     suspend fun getUserLikes() : NetworkResponse<BoardListResponse, ErrorResponse>
 
     @POST("/board/writeComment")
-    suspend fun writeComment(@Body commentDto: CommentDto): NetworkResponse<CommentResponse, ErrorResponse>
+    suspend fun writeComment(@Body commentDto: CommentDto): NetworkResponse<BaseResponse, ErrorResponse>
+
+    @POST("/board/writeReply")
+    suspend fun writeReply(@Body replyDto: ReplyDto): NetworkResponse<BaseResponse, ErrorResponse>
 
     @PUT("/board/modifyComment")
-    suspend fun modifyComment(): NetworkResponse<CommentResponse, ErrorResponse>
+    suspend fun modifyComment(): NetworkResponse<BaseResponse, ErrorResponse>
 
     @PUT("/board/deleteComment")
-    suspend fun deleteComment(): NetworkResponse<CommentResponse, ErrorResponse>
+    suspend fun deleteComment(@Query("commentNo") commentNo: String, @Query("commentWriterId") commentWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
 
+    @PUT("/board/deleteReply")
+    suspend fun deleteReply(@Query("replyNo") replyNo: String, @Query("replyWriterId") replyWriterId: String): NetworkResponse<BaseResponse, ErrorResponse>
+
+
+    @PUT("/board/like")
+    suspend fun updateLike(@Query("boardNo") boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
+
+    @DELETE("/board/dislike")
+    suspend fun deleteLike(@Query("boardNo") boardNo: String): NetworkResponse<BaseResponse, ErrorResponse>
+
+    @Multipart
+    @PUT("/board/modifyBoard")
+    suspend fun modifyBoard(
+        @Part("boardDto") boardDto: RequestBody,
+        @Part files: MutableList<MultipartBody.Part>?
+    ): NetworkResponse<BoardModifyResponse, ErrorResponse>
 }
