@@ -45,6 +45,7 @@ class SettingNicknameFragment : BaseFragment<FragmentSettingNicknameBinding>(
     private fun observeData() {
         viewModel.apply {
             member.observe(viewLifecycleOwner) {
+                showToast("닉네임이 변경되었습니다.")
                 findNavController().navigate(R.id.action_settingNicknameFragment_to_homeFragment)
             }
         }
