@@ -46,8 +46,8 @@ interface ApiService {
     @POST("/api/auth/findid")
     suspend fun getUserId() : NetworkResponse<String, ErrorResponse>
 
-    @PUT("/api/members/makenickName")
-    suspend fun makeNickName(@Body nickname : String) : NetworkResponse<Member, ErrorResponse>
+    @POST("/api/members/makenickName")
+    suspend fun makeNickName(@Body nickName : Nickname) : NetworkResponse<Member, ErrorResponse>
 
     @GET("/board/list/myboards")
     suspend fun getUserBoards() : NetworkResponse<BoardListResponse, ErrorResponse>

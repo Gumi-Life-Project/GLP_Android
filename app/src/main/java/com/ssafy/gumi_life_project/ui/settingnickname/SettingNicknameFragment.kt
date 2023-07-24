@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.ui.settingnickname
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -25,18 +26,27 @@ class SettingNicknameFragment : BaseFragment<FragmentSettingNicknameBinding>(
 
     override fun init() {
         initToolBar()
+        observeData()
         initListener()
     }
 
     private fun initToolBar() {
-        bindingNonNull.toolbarSettingNickname.toolBarTitle.text = resources.getString(R.string.setting_nickname_title)
+        bindingNonNull.toolbarSettingNickname.toolBarTitle.text =
+            resources.getString(R.string.setting_nickname_title)
     }
 
     private fun initListener() {
         bindingNonNull.buttonNicknameSetting.setOnClickListener {
             val nickName = bindingNonNull.edittextInputNickname.text.toString()
             viewModel.makeNickName(nickName)
-            findNavController().navigate(R.id.action_settingNicknameFragment_to_homeFragment)
+        }
+    }
+
+    private fun observeData() {
+        viewModel.apply {
+            member.observe(viewLifecycleOwner) {
+                findNavController().navigate(R.id.action_settingNicknameFragment_to_homeFragment)
+            }
         }
     }
 }
