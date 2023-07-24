@@ -2,6 +2,7 @@ package com.ssafy.gumi_life_project.ui.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -17,12 +18,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val viewModel by viewModels<MainViewModel>()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
         binding.navigationHome.setupWithNavController(navController)
 
@@ -37,10 +39,29 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         }
 
-        viewModel.findId()
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                when (navController.currentDestination?.id) {
+                    R.id.homeFragment -> {
+                        isEnabled = false
+                        finish()
+                    }
+                    R.id.boardListFragment -> {
+                        navController.navigate(R.id.homeFragment)
+                    }
+                    else -> {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                    }
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
 
+        viewModel.findId()
         observeData()
     }
+
 
     private fun observeData() {
         with(viewModel) {
