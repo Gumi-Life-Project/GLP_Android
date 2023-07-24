@@ -1,6 +1,8 @@
 package com.ssafy.gumi_life_project.ui.board
 
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -64,6 +66,12 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             viewModel.deleteComment(it.commentNo, it.writerId)
         }
 
+        commentAdapter.onReportClick = {
+            viewModel.setReport(it)
+            val bottomSheetReport =ReportBottomSheet()
+            bottomSheetReport.show(childFragmentManager, "ReportBottomSheet")
+        }
+
         bindingNonNull.imageviewHeart.setOnClickListener {
             if (boardItem.boardNo.isBlank()) return@setOnClickListener
             if (likeStatus) {
@@ -116,11 +124,13 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.button_board_notice -> {
-                        // Handle menu item 1 click
+                        viewModel.setReport(null)
+                        val bottomSheetReport = ReportBottomSheet()
+                        bottomSheetReport.show(childFragmentManager, "ReportBottomSheet")
                         true
                     }
                     R.id.button_board_delete -> {
-                        showDialog(requireContext(), getString(R.string.board_delete_notice)) {
+                        showDialog(requireContext(), getString(R.string.board_delete_notice), getString(R.string.board_delete_ok)) {
                             viewModel.deleteBoard(boardItem.boardNo, boardItem.writerId.toString())
                         }
                         true
