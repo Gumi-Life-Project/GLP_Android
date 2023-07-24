@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.ui.board
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -15,7 +14,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
-private const val TAG = "BoardViewModel"
 @HiltViewModel
 class BoardViewModel @Inject constructor(
     private val repository: BoardRepository
@@ -53,6 +51,9 @@ class BoardViewModel @Inject constructor(
     val commentCount: LiveData<String> = _commentCount
 
     var report: Report? = null
+
+    private val _reportResponse = MutableLiveData<Event<String>>()
+    val reportResponse : LiveData<Event<String>> = _reportResponse
 
     fun getBoardList() {
         viewModelScope.launch {
@@ -439,19 +440,28 @@ class BoardViewModel @Inject constructor(
                 val type = "신고에"
                 when (response) {
                     is NetworkResponse.Success -> {
-                        Log.d(TAG, "report: ${response}")
+                        if (response.body.message == "fail") {
+                            postValueEvent(2, type)
+                            _reportResponse.postValue(Event("fail"))
+                        } else {
+                            _msg.postValue(Event("신고되었습니다."))
+                            _reportResponse.postValue(Event("success"))
+                        }
                     }
 
                     is NetworkResponse.ApiError -> {
                         postValueEvent(0, type)
+                        _reportResponse.postValue(Event("fail"))
                     }
 
                     is NetworkResponse.NetworkError -> {
                         postValueEvent(1, type)
+                        _reportResponse.postValue(Event("fail"))
                     }
 
                     is NetworkResponse.UnknownError -> {
                         postValueEvent(2, type)
+                        _reportResponse.postValue(Event("fail"))
                     }
                 }
 

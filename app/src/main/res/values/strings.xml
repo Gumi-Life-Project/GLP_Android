@@ -75,6 +75,7 @@
     <string name="report_type_commercial">상업적 광고 및 판매</string>
     <string name="report_type_inappropriateness">게시판 성격에 부적절함</string>
     <string name="report_check">정말 신고하시겠습니까?</string>
+    <string name="report_success">신고에 성공했습니다.</string>
 
     <string name="ok">확인</string>
 </resources>

@@ -26,6 +26,7 @@ class ReportBottomSheet() : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListener()
+        initOberver()
     }
 
     private fun initListener() {
@@ -62,6 +63,14 @@ class ReportBottomSheet() : BottomSheetDialogFragment() {
     private fun showDialog() {
         showDialog(requireContext(), getString(R.string.report_check), getString(R.string.ok)) {
             viewModel.report()
+        }
+    }
+
+    private fun initOberver(){
+        viewModel.reportResponse.observe(viewLifecycleOwner){ event ->
+            event.getContentIfNotHandled()?.let{
+                dismiss()
+            }
         }
     }
 }
