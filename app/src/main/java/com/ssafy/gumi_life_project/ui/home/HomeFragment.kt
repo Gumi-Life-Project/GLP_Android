@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -45,7 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
     override fun init() {
         observeData()
-        initRecyclerView()
+
         viewModel.loadAndSetTriggerTimes()
 
         bindingNonNull.linearlayoutTip.setOnClickListener {
@@ -55,23 +57,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 bottomSheetDialogFragment.show(childFragmentManager, "TipBottomSheet")
             }
         }
-
-        bindingNonNull.linearlayoutSimpleBoard.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_boardListFragment)
-        }
-    }
-
-    private fun initRecyclerView() {
-        viewModel.getSimpleBoard()
-
-        adapter = SimpleBoardAdapter()
-        adapter.onItemClickListener = object : SimpleBoardAdapter.OnItemClickListener {
-            override fun onItemClick(boardItem: BoardItem) {
-                findNavController().navigate(R.id.action_homeFragment_to_boardListFragment)
-            }
-        }
-        bindingNonNull.recyclerviewSimple.adapter = adapter
-        bindingNonNull.viewPager.adapter = mealAdapter
     }
 
     private fun observeData() {

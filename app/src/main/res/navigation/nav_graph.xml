@@ -12,9 +12,6 @@
         <action
             android:id="@+id/action_homeFragment_to_shuttleBusFragment"
             app:destination="@id/shuttleBusFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_boardListFragment"
-            app:destination="@id/boardListFragment" />
     </fragment>
     <fragment
         android:id="@+id/shuttleBusFragment"
@@ -47,7 +44,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_boardListFragment_to_homeFragment"
-            app:destination="@id/homeFragment"/>
+            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_boardListFragment_to_boardWriteFragment"
             app:destination="@id/boardWriteFragment" />
@@ -68,7 +65,7 @@
     <fragment
         android:id="@+id/boardWriteFragment"
         android:name="com.ssafy.gumi_life_project.ui.board.BoardWriteFragment"
-        android:label="BoardWriteFragment" >
+        android:label="BoardWriteFragment">
         <action
             android:id="@+id/action_boardWriteFragment_to_boardListFragment"
             app:destination="@id/boardListFragment"
@@ -78,7 +75,7 @@
     <fragment
         android:id="@+id/boardModifyFragment"
         android:name="com.ssafy.gumi_life_project.ui.board.BoardModifyFragment"
-        android:label="BoardModifyFragment" >
+        android:label="BoardModifyFragment">
         <action
             android:id="@+id/action_boardModifyFragment_to_boardDetailFragment"
             app:destination="@id/boardDetailFragment"
