@@ -41,11 +41,8 @@ class BoardListFragment : BaseFragment<FragmentBoardListBinding>(
     }
 
     private fun initToolbar() {
-        bindingNonNull.toolbar.toolbarBackButtonTitle.text =
+        bindingNonNull.toolbar.toolbarTitle.text =
             resources.getString(R.string.board_title)
-        bindingNonNull.toolbar.buttonGoBack.setOnClickListener {
-            findNavController().navigate(R.id.action_boardListFragment_to_homeFragment)
-        }
     }
 
     private fun initRecyclerView() {

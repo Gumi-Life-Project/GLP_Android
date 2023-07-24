@@ -173,15 +173,6 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                 }
             }
 
-            val dialog = LoadingDialog(requireContext())
-            isLoading.observe(viewLifecycleOwner) {
-                if (isLoading.value!!) {
-                    dialog.show()
-                } else if (!isLoading.value!!) {
-                    dialog.dismiss()
-                }
-            }
-
             boardDetail.observe(viewLifecycleOwner) { board ->
                 likeStatus = board.boardDetail.likeStatus == 1
                 likeCount = board.boardDetail.likesNum

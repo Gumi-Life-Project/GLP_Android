@@ -43,9 +43,6 @@
             app:popUpTo="@id/boardDetailFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_boardListFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
             android:id="@+id/action_boardListFragment_to_boardWriteFragment"
             app:destination="@id/boardWriteFragment" />
     </fragment>

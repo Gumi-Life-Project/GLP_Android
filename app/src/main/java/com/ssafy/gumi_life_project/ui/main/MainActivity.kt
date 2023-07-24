@@ -2,10 +2,8 @@ package com.ssafy.gumi_life_project.ui.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.ssafy.gumi_life_project.R
@@ -39,26 +37,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         }
 
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                when (navController.currentDestination?.id) {
-                    R.id.homeFragment -> {
-                        isEnabled = false
-                        finish()
-                    }
-                    R.id.boardListFragment -> {
-                        navController.navigate(R.id.homeFragment)
-                    }
-                    else -> {
-                        isEnabled = false
-                        onBackPressedDispatcher.onBackPressed()
-                    }
-                }
+        binding.navigationHome.setOnItemSelectedListener { menuItem ->
+            if (navController.currentDestination?.id == R.id.homeFragment || navController.currentDestination?.id == R.id.boardListFragment) {
+                navController.popBackStack(menuItem.itemId, true)
             }
+            navController.navigate(menuItem.itemId)
+            true
         }
-        onBackPressedDispatcher.addCallback(this, callback)
 
-        viewModel.findId()
         observeData()
     }
 
