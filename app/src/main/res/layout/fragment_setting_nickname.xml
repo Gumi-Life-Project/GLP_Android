@@ -16,7 +16,7 @@
 
         <include
             android:id="@+id/toolbar_setting_nickname"
-            layout="@layout/tool_bar_setting_nickname" />
+            layout="@layout/toolbar_no_back_button" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/outlinedTextField"

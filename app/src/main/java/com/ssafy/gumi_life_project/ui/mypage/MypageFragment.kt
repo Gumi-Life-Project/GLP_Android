@@ -1,6 +1,5 @@
 package com.ssafy.gumi_life_project.ui.mypage
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
@@ -8,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentMypageBinding
-import com.ssafy.gumi_life_project.ui.board.BoardViewModel
 import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint

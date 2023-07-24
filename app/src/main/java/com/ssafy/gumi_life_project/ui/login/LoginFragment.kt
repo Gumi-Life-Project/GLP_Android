@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.R
-import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.databinding.FragmentLoginBinding
 import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment

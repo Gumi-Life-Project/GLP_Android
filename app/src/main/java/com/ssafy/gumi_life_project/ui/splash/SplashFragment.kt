@@ -2,13 +2,11 @@ package com.ssafy.gumi_life_project.ui.splash
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kakao.sdk.auth.AuthApiClient
-import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.databinding.FragmentSplashBinding

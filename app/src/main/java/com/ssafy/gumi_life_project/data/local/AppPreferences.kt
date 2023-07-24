@@ -304,15 +304,6 @@ object AppPreferences {
         preferences.edit().remove(JWT_TOKEN).apply()
     }
 
-    fun initProfileImg(profileImg : String) {
-        preferences.edit().putString(PROFILE_IMG, profileImg).apply()
-    }
-
-    fun getProfileImg(): String? {
-        val jsonData = preferences.getString(PROFILE_IMG, "")
-        return jsonData
-    }
-
     fun getUserId(): Int {
         return preferences.getInt(USER_ID, -1)
     }
