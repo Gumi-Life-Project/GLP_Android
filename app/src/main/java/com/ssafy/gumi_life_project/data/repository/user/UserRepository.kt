@@ -12,7 +12,7 @@ interface UserRepository {
 
     suspend fun getUserId() : NetworkResponse<String, ErrorResponse>
 
-    suspend fun makeNickName(nickname: String) : NetworkResponse<Member, ErrorResponse>
+    suspend fun makeNickName(nickName: Nickname) : NetworkResponse<Member, ErrorResponse>
 
     suspend fun getUserBoards() : NetworkResponse<BoardListResponse, ErrorResponse>
 

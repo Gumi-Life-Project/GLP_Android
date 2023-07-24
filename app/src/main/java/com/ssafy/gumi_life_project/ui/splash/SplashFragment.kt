@@ -2,13 +2,11 @@ package com.ssafy.gumi_life_project.ui.splash
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kakao.sdk.auth.AuthApiClient
-import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.databinding.FragmentSplashBinding
@@ -16,7 +14,7 @@ import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val TAG = "SplashFragment_구미"
+
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(
     R.layout.fragment_splash
@@ -86,19 +84,13 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
 
     private fun moveToHomeFragment() {
         Handler(Looper.getMainLooper()).postDelayed({
-            if (AuthApiClient.instance.hasToken()) {
-                val jwtToken = AppPreferences.getJwtToken()
-                Log.d(TAG, "moveToHomeFragment: $jwtToken")
-                if (jwtToken != null) {
-                    activityViewModel.apply {
-                        Log.d(TAG, "moveToHomeFragment: ")
-                        getUserId()
-                    }
-                }
-            } else { // 토큰이 없으면 loginFragment로 이동
+            val jwtToken = AppPreferences.getJwtToken()
+            if (!jwtToken.isNullOrEmpty() && AuthApiClient.instance.hasToken()) {
+                activityViewModel.getUserId()
+            } else {
+                // 토큰이 없으면 loginFragment로 이동
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             }
-
         }, 1500)
     }
 
@@ -106,13 +98,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
         activityViewModel.apply {
             userId.observe(viewLifecycleOwner) {
                 findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-//                if (it.usernickname == null) {
-//                    findNavController().navigate(R.id.action_splashFragment_to_settingNicknameFragment)
-//                } else {
-//                    // 닉네임이 null이 아니라면 homeFragment로 넘어감
-//                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-//                }
-
             }
         }
     }

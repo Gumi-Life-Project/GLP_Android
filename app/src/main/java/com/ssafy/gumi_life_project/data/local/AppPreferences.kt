@@ -2,6 +2,7 @@ package com.ssafy.gumi_life_project.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
@@ -294,12 +295,16 @@ object AppPreferences {
 
     // sharedPreferences에 저장된 jwt 토큰 정보 반환
     fun getJwtToken(): String? {
-        val jsonData = preferences.getString(JWT_TOKEN, "")
-        return jsonData
+        val jwtToken = preferences.getString(JWT_TOKEN, "")
+        return jwtToken
+    }
+
+    fun removeJwtToken() {
+        preferences.edit().remove(JWT_TOKEN).apply()
     }
 
     fun initProfileImg(profileImg : String) {
-        preferences.edit().putString(PROFILE_IMG, profileImg).commit()
+        preferences.edit().putString(PROFILE_IMG, profileImg).apply()
     }
 
     fun getProfileImg(): String? {

@@ -20,8 +20,8 @@ class UserRepositoryImpl @Inject constructor(
         return apiService.getUserId()
     }
 
-    override suspend fun makeNickName(nickname : String): NetworkResponse<Member, ErrorResponse> {
-        return apiService.makeNickName(nickname)
+    override suspend fun makeNickName(nickName : Nickname): NetworkResponse<Member, ErrorResponse> {
+        return apiService.makeNickName(nickName)
     }
 
     override suspend fun getUserBoards(): NetworkResponse<BoardListResponse, ErrorResponse> {

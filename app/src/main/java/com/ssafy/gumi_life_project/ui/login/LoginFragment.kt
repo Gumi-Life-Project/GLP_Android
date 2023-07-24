@@ -15,6 +15,7 @@ import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
     private val activityViewModel by activityViewModels<MainViewModel>()
@@ -50,13 +51,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             if (error != null) {
                 Log.e("카카오계정으로 로그인 실패", error.toString())
             } else if (token != null) {
-                Log.i("카카오계정으로 로그인 성공 ${token.accessToken}", token.toString())
+                Log.i("카카오계정으로 로그인 성공 ${token.accessToken}", token.accessToken)
                 // jwt 토큰 발급 & sharedPreferences에 jwt 토큰 저장
                 viewModel.getJwtToken(token.accessToken)
                 initProfileImg()
-                // 최초 로그인 -> settingNicknameFragment
-                // 최초 로그인이 아닐 시 -> homeFragment
-                findNavController().navigate(R.id.action_loginFragment_to_splashFragment)
             }
         }
         // 카카오계정으로 로그인
@@ -72,22 +70,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e("사용자 정보 요청 실패", error.toString())
-            }
-            else if (user != null) {
+            } else if (user != null) {
                 user.kakaoAccount?.profile?.thumbnailImageUrl?.let {
                     AppPreferences.initProfileImg(
                         it
                     )
                 }
-                Log.i("사용자 정보 요청 성공",
-                        "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                Log.i(
+                    "사용자 정보 요청 성공",
+                    "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                )
             }
         }
     }
 
     private fun observeData() {
         viewModel.userResponse.observe(viewLifecycleOwner) {
-//            activityViewModel.getMemberInfo()
+            findNavController().navigate(R.id.action_loginFragment_to_splashFragment)
         }
 
     }

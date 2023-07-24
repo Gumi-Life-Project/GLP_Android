@@ -31,6 +31,7 @@ object ApiModule {
                     || request.url.encodedPath.equals("/weather/", true)
                     || request.url.encodedPath.equals("/board/list/new", true)
                     || request.url.encodedPath.equals("/tip/list", true)
+                    || request.url.encodedPath.equals("/api/auth/kakaomobile", true)
                 ) {
                     it.proceed(request)
                 } else {
