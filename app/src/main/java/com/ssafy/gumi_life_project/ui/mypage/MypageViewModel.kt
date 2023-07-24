@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MypageViewModel @Inject constructor(
     private val repository: UserRepository
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private val _msg = MutableLiveData<Event<String>>()
     val errorMsg: LiveData<Event<String>> = _msg
@@ -32,8 +32,7 @@ class MypageViewModel @Inject constructor(
         UserApiClient.instance.logout { error ->
             if (error != null) {
                 Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
-            }
-            else {
+            } else {
                 Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제됨")
                 AppPreferences.removeJwtToken()
             }

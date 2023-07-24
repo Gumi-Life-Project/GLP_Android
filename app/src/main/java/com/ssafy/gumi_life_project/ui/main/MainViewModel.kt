@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.data.repository.main.MainRepository
@@ -14,8 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
-private const val TAG = "MainViewModel_구미"
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: MainRepository,
@@ -39,6 +38,9 @@ class MainViewModel @Inject constructor(
 
     private val _meal = MutableLiveData<MealResponse>()
     val meal: LiveData<MealResponse> = _meal
+
+    private val _kakaoUser = MutableLiveData<com.kakao.sdk.user.model.User>()
+    val kakaoUser: LiveData<com.kakao.sdk.user.model.User> = _kakaoUser
 
     fun getAllTipList() {
         showProgress()
@@ -165,6 +167,17 @@ class MainViewModel @Inject constructor(
             AppPreferences.updateShuttleBusStopMark(ShuttleBusStop("", 0.0, 0.0, "", false))
         }
         getShuttleBusStopMark()
+    }
+
+    fun getKakaoUserInfo() {
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e("사용자 정보 요청 실패", error.toString())
+            }
+            else if (user != null) {
+                _kakaoUser.postValue(user)
+            }
+        }
     }
 
     private fun postValueEvent(value: Int, type: String) {

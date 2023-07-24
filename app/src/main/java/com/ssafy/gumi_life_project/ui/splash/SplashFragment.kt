@@ -78,7 +78,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
                 }
             }
         }
-
         handler.post(runnable)
     }
 
@@ -87,11 +86,12 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
             val jwtToken = AppPreferences.getJwtToken()
             if (!jwtToken.isNullOrEmpty() && AuthApiClient.instance.hasToken()) {
                 activityViewModel.findId()
+                activityViewModel.getKakaoUserInfo()
             } else {
                 // 토큰이 없으면 loginFragment로 이동
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             }
-        }, 1500)
+        }, 1000)
     }
 
     private fun observeData() {
