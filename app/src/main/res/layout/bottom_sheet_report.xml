@@ -19,8 +19,9 @@
         <TextView
             android:id="@+id/button_report_hate"
             style="@style/BottomSheetReportTypeTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="@string/report_type_hate" />
 
         <View
@@ -31,8 +32,9 @@
         <TextView
             android:id="@+id/button_report_cheat"
             style="@style/BottomSheetReportTypeTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="@string/report_type_cheat" />
 
         <View
@@ -43,8 +45,9 @@
         <TextView
             android:id="@+id/button_report_political"
             style="@style/BottomSheetReportTypeTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="@string/report_type_political" />
 
         <View
@@ -55,8 +58,9 @@
         <TextView
             android:id="@+id/button_report_impersonation"
             style="@style/BottomSheetReportTypeTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="@string/report_type_impersonation" />
 
         <View
@@ -67,8 +71,9 @@
         <TextView
             android:id="@+id/button_report_pornography"
             style="@style/BottomSheetReportTypeTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="@string/report_type_pornography" />
 
         <View
@@ -79,8 +84,9 @@
         <TextView
             android:id="@+id/button_report_commercial"
             style="@style/BottomSheetReportTypeTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="@string/report_type_commercial" />
 
         <View
@@ -91,8 +97,9 @@
         <TextView
             android:id="@+id/button_report_inappropriateness"
             style="@style/BottomSheetReportTypeTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="@string/report_type_inappropriateness" />
     </LinearLayout>
 </layout>

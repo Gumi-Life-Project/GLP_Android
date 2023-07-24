@@ -73,4 +73,5 @@ class ReportBottomSheet() : BottomSheetDialogFragment() {
             }
         }
     }
+    override fun getTheme(): Int = R.style.BottomSheetDialog
 }
