@@ -66,6 +66,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 
     private fun initIcons() {
+        bindingNonNull.include.imageviewUserIcon.visibility = View.VISIBLE
         bindingNonNull.include.imageviewUserIcon.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mypageFragment)
         }
