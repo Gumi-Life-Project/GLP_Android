@@ -54,7 +54,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 Log.i("카카오계정으로 로그인 성공 ${token.accessToken}", token.accessToken)
                 // jwt 토큰 발급 & sharedPreferences에 jwt 토큰 저장
                 viewModel.getJwtToken(token.accessToken)
-                initProfileImg()
+                activityViewModel.getKakaoUserInfo()
             }
         }
         // 카카오계정으로 로그인
@@ -63,26 +63,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             callback = callback
         )
 
-    }
-
-    private fun initProfileImg() {
-        // 사용자 정보 요청 (기본)
-        UserApiClient.instance.me { user, error ->
-            if (error != null) {
-                Log.e("사용자 정보 요청 실패", error.toString())
-            } else if (user != null) {
-                user.kakaoAccount?.profile?.thumbnailImageUrl?.let {
-                    AppPreferences.initProfileImg(
-                        it
-                    )
-                }
-                Log.i(
-                    "사용자 정보 요청 성공",
-                    "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
-                )
-            }
-        }
     }
 
     private fun observeData() {

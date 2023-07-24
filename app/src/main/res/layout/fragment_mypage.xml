@@ -23,12 +23,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/border_main_background"
                 android:gravity="start|center"
                 android:orientation="horizontal"
-                android:padding="4dp">
+                android:padding="12dp">
 
                 <ImageView
                     android:id="@+id/imageview_user_profile"
@@ -45,23 +45,24 @@
 
                     <TextView
                         android:id="@+id/textview_user_nickname"
-                        style="@style/HomeMiddleTitleTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
                         tools:text="nickname" />
 
                     <TextView
                         android:id="@+id/textview_user_organization"
-                        style="@style/HomeMiddleContentGrayTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textview_user_nickname"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintVertical_bias="0.9"
+                        android:textStyle="bold"
                         tools:text="ssafy 9기 구미캠퍼스" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>

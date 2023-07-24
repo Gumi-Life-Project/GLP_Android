@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.data.repository.main.MainRepository
@@ -39,6 +40,9 @@ class MainViewModel @Inject constructor(
 
     private val _meal = MutableLiveData<MealResponse>()
     val meal: LiveData<MealResponse> = _meal
+
+    private val _kakaoUser = MutableLiveData<com.kakao.sdk.user.model.User>()
+    val kakaoUser: LiveData<com.kakao.sdk.user.model.User> = _kakaoUser
 
     fun getAllTipList() {
         showProgress()
@@ -165,6 +169,22 @@ class MainViewModel @Inject constructor(
             AppPreferences.updateShuttleBusStopMark(ShuttleBusStop("", 0.0, 0.0, "", false))
         }
         getShuttleBusStopMark()
+    }
+
+    fun getKakaoUserInfo() {
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e(TAG, "사용자 정보 요청 실패", error)
+            }
+            else if (user != null) {
+                _kakaoUser.postValue(user)
+                Log.i(TAG, "사용자 정보 요청 성공" +
+                        "\n회원번호: ${user.id}" +
+                        "\n이메일: ${user.kakaoAccount?.email}" +
+                        "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                        "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+            }
+        }
     }
 
     private fun postValueEvent(value: Int, type: String) {

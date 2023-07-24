@@ -2,11 +2,13 @@ package com.ssafy.gumi_life_project.ui.splash
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kakao.sdk.auth.AuthApiClient
+import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.databinding.FragmentSplashBinding
@@ -78,7 +80,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
                 }
             }
         }
-
         handler.post(runnable)
     }
 
@@ -87,11 +88,12 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
             val jwtToken = AppPreferences.getJwtToken()
             if (!jwtToken.isNullOrEmpty() && AuthApiClient.instance.hasToken()) {
                 activityViewModel.findId()
+                activityViewModel.getKakaoUserInfo()
             } else {
                 // 토큰이 없으면 loginFragment로 이동
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             }
-        }, 1500)
+        }, 1000)
     }
 
     private fun observeData() {

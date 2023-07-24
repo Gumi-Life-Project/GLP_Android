@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.ui.mypage
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
@@ -7,12 +8,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.databinding.FragmentMypageBinding
+import com.ssafy.gumi_life_project.ui.board.BoardViewModel
+import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_mypage) {
     private val viewModel by viewModels<MypageViewModel>()
+    private val activityViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateBinding(
         inflater: LayoutInflater,
@@ -26,6 +30,8 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
     override fun init() {
         bindingNonNull.viewModel = viewModel
         initToolBar()
+        initData()
+        observeData()
         initListener()
     }
 
@@ -35,6 +41,10 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
         bindingNonNull.toolBarMypage.toolbarBackButton.setOnClickListener {
             findNavController().navigate(R.id.action_mypageFragment_to_homeFragment)
         }
+    }
+
+    private fun initData() {
+        bindingNonNull.imageviewUserProfile.setImageResource(R.drawable.icon_profile_fill)
     }
 
     private fun initListener() {
@@ -62,7 +72,13 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>(R.layout.fragment_myp
             findNavController().navigate(R.id.action_mypageFragment_to_settingNicknameFragment)
         }
 
+    }
 
+    private fun observeData() {
+        activityViewModel.kakaoUser.observe(viewLifecycleOwner) { user ->
+            bindingNonNull.textviewUserNickname.text = user.kakaoAccount?.profile?.nickname
+            bindingNonNull.textviewUserOrganization.text = user.kakaoAccount?.email
+        }
     }
 
 }
