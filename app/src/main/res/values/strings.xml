@@ -5,6 +5,16 @@
     <string name="splash_slogan">싸피 생활을 더 편하고 즐겁게</string>
     <string name="splash_title">구미 인사이더</string>
 
+    <!-- setting nickname -->
+    <string name="setting_nickname_title">닉네임 설정</string>
+
+    <!-- login -->
+    <string name="login_button">카카오 로그인</string>
+    <string name="login_checked_login_maintain">로그인 유지</string>
+
+    <!-- setting nickname -->
+    <string name="setting_nickname_button">설정하기</string>
+
     <!-- home -->
     <string name="home_subtitle">10기를 위한 싸피 가이드</string>
     <string name="home_title">구미 캠퍼스</string>
@@ -17,6 +27,32 @@
     <string name="home_shuttle_no_mark">즐겨찾기 된 셔틀이 없습니다.</string>
     <string name="home_tool_bar_sub_title">10기를 위한 싸피 가이드</string>
     <string name="home_tool_bar_title">구미 캠퍼스</string>
+    <string name="home">home</string>
+    <string name="map">map</string>
+    <string name="board">board</string>
+
+    <!-- user info -->
+    <string name="user_info_tool_bar_title">내 정보</string>
+    <string name="user_info_board">게시판</string>
+    <string name="user_info_board_write">내가 쓴 글</string>
+    <string name="user_info_board_comment">댓글 단 글</string>
+    <string name="user_info_board_like">좋아요한 글</string>
+
+    <string name="user_info_account">계정</string>
+    <string name="user_info_account_nickname_modify">닉네임 변경</string>
+    <string name="user_info_account_img_modify">프로필 이미지 변경</string>
+    <string name="user_info_account_logout">로그아웃</string>
+    <string name="user_info_account_delete">회원 탈퇴</string>
+    <string name="user_info_account_alarm">알림 설정</string>
+
+    <string name="user_info_information">정보</string>
+    <string name="user_info_information_service">서비스 이용약관</string>
+    <string name="user_info_information_policy">개인정보처리방침</string>
+    <string name="user_info_information_using_library">사용한 라이브러리</string>
+
+    <string name="user_info_logout_message">로그아웃 하시겠습니까?</string>
+    <string name="user_info_logout_cancel">취소</string>
+    <string name="user_info_logout_confirm">확인</string>
 
     <!-- cross work -->
     <string name="cross_walk_title1">1번 신호등</string>
@@ -33,4 +69,49 @@
     <string name="shuttle_bus_dialog_title">%s 탑승위치</string>
     <string name="shuttle_bus_mark_button_cancel">즐겨찾기 취소</string>
     <string name="shuttle_bus_tool_bar_title">셔틀정보</string>
+
+    <!-- board detail -->
+    <string name="detail_comment_hint">댓글을 입력하세요.</string>
+    <string name="detail_comment_notice_success">댓글이 작성되었습니다.</string>
+
+    <!-- board -->
+    <string name="board_write_toolbar_title">글작성</string>
+    <string name="board_write_button_finish">완료</string>
+    <string name="board_write_textview_title_hint">제목 입력</string>
+    <string name="board_write_textview_content_hint">내용을 입력하세요.</string>
+    <string name="board_line"> | </string>
+    <string name="board_title">자유 게시판</string>
+    <string name="board_update">수정하기</string>
+    <string name="board_delete">삭제하기</string>
+    <string name="board_notice">신고하기</string>
+    <string name="board_write_toast_message">제목과 내용을 입력해주세요!</string>
+    <string name="board_write_image_process_fail">이미지 처리에 실패했습니다.</string>
+    <string name="board_write_response_fail">게시글 작성에 실패했습니다. 다시 시도해주세요.</string>
+    <string name="board_write_response_success">게시글이 작성되었습니다.</string>
+    <string name="board_comment_user_reply">%s님께 답 댓글을 남기는 중</string>
+    <string name="board_delete_notice">게시글을 삭제하시겠습니까?</string>
+    <string name="board_delete_notice_success">게시글이 삭제되었습니다.</string>
+    <string name="board_delete_ok">삭제</string>
+    <string name="board_delete_cancel">취소</string>
+    <string name="board_modify_toolbar_title">글수정</string>
+    <string name="board_modify_response_fail">게시글 수정에 실패했습니다. 다시 시도해주세요.</string>
+    <string name="board_modify_response_success">게시글이 수정되었습니다.</string>
+
+
+    <string name="comment_delete_notice_success">댓글이 삭제되었습니다.</string>
+    <string name="reply_delete_notice_success">대댓글이 삭제되었습니다.</string>
+    
+    <!-- Report -->
+    <string name="report_type_select">신고 사유 선택</string>
+    <string name="report_type_hate">욕설/비하</string>
+    <string name="report_type_cheat">낚시/놀람/도배</string>
+    <string name="report_type_political">정당/정치인 비하 및 선거운동</string>
+    <string name="report_type_impersonation">유출/사칭/사기</string>
+    <string name="report_type_pornography">음란물/불건전한 만남 및 대화</string>
+    <string name="report_type_commercial">상업적 광고 및 판매</string>
+    <string name="report_type_inappropriateness">게시판 성격에 부적절함</string>
+    <string name="report_check">정말 신고하시겠습니까?</string>
+    <string name="report_success">신고에 성공했습니다.</string>
+
+    <string name="ok">확인</string>
 </resources>

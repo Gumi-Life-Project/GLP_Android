@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.kakao.sdk.auth.AuthApiClient
 import com.ssafy.gumi_life_project.R
+import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.databinding.FragmentSplashBinding
 import com.ssafy.gumi_life_project.ui.main.MainViewModel
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(
@@ -34,6 +37,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
             getShuttleBusStopMark()
             getMealList()
         }
+        observeData()
         animateLoading()
         moveToHomeFragment()
     }
@@ -74,15 +78,28 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
                 }
             }
         }
-
         handler.post(runnable)
     }
 
     private fun moveToHomeFragment() {
-        // 1.5초 후에 HomeFragment로 이동
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-        }, 1500)
+            val jwtToken = AppPreferences.getJwtToken()
+            if (!jwtToken.isNullOrEmpty() && AuthApiClient.instance.hasToken()) {
+                activityViewModel.findId()
+                activityViewModel.getKakaoUserInfo()
+            } else {
+                // 토큰이 없으면 loginFragment로 이동
+                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+            }
+        }, 1000)
+    }
+
+    private fun observeData() {
+        activityViewModel.apply {
+            userId.observe(viewLifecycleOwner) {
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            }
+        }
     }
 
 }

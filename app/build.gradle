@@ -9,6 +9,7 @@ plugins {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 def map_api_key = properties.getProperty('map_api_key')
+def api_key = properties.getProperty('api_key')
 
 android {
     namespace 'com.ssafy.gumi_life_project'
@@ -18,11 +19,14 @@ android {
         applicationId "com.ssafy.gumi_life_project"
         minSdk 24
         targetSdk 33
-        versionCode 5
-        versionName "1.0.4.1"
+        versionCode 6
+        versionName "2.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [MAP_API_KEY: map_api_key]
+        manifestPlaceholders = [MAP_API_KEY: map_api_key, API_KEY: api_key]
+
+        // api key 변수 지정
+        buildConfigField "String", "API_KEY", properties['api_key']
     }
 
     buildTypes {
@@ -52,6 +56,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -62,7 +67,7 @@ dependencies {
 
     // 서버통신을 위한 Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.2'
 
     // 느슨한 통신규칙을 위해서 gson
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -96,4 +101,7 @@ dependencies {
 
     //kakao map
     implementation files('libs/libDaumMapAndroid.jar')
+
+    // kakao login
+    implementation "com.kakao.sdk:v2-user:2.15.0"
 }

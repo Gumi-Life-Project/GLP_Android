@@ -1,29 +1,31 @@
 package com.ssafy.gumi_life_project.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.kakao.sdk.user.UserApiClient
 import com.ssafy.gumi_life_project.data.local.AppPreferences
-import com.ssafy.gumi_life_project.data.model.Event
-import com.ssafy.gumi_life_project.data.model.MealResponse
-import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
-import com.ssafy.gumi_life_project.data.model.Tip
-import com.ssafy.gumi_life_project.data.model.WeatherResponse
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.data.repository.main.MainRepository
+import com.ssafy.gumi_life_project.data.repository.user.UserRepository
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: MainRepository
+    private val repository: MainRepository,
+    private val userRepository: UserRepository
 ) : BaseViewModel() {
 
     private val _msg = MutableLiveData<Event<String>>()
     val errorMsg: LiveData<Event<String>> = _msg
+
+    private val _userId = MutableLiveData<Int>()
+    val userId: LiveData<Int> = _userId
 
     private val _tip = MutableLiveData<List<Tip>>()
     val tip: LiveData<List<Tip>> = _tip
@@ -37,6 +39,9 @@ class MainViewModel @Inject constructor(
     private val _meal = MutableLiveData<MealResponse>()
     val meal: LiveData<MealResponse> = _meal
 
+    private val _kakaoUser = MutableLiveData<com.kakao.sdk.user.model.User>()
+    val kakaoUser: LiveData<com.kakao.sdk.user.model.User> = _kakaoUser
+
     fun getAllTipList() {
         showProgress()
         viewModelScope.launch {
@@ -46,6 +51,33 @@ class MainViewModel @Inject constructor(
             when (response) {
                 is NetworkResponse.Success -> {
                     _tip.postValue(response.body)
+                }
+
+                is NetworkResponse.ApiError -> {
+                    postValueEvent(0, type)
+                }
+
+                is NetworkResponse.NetworkError -> {
+                    postValueEvent(1, type)
+                }
+
+                is NetworkResponse.UnknownError -> {
+                    postValueEvent(2, type)
+                }
+            }
+        }
+        hideProgress()
+    }
+
+    fun findId() {
+        showProgress()
+        viewModelScope.launch {
+            val response = repository.findId()
+
+            val type = "id 정보 조회에"
+            when (response) {
+                is NetworkResponse.Success -> {
+                    _userId.postValue(response.body)
                 }
 
                 is NetworkResponse.ApiError -> {
@@ -119,8 +151,8 @@ class MainViewModel @Inject constructor(
                     postValueEvent(2, type)
                 }
             }
+            hideProgress()
         }
-        hideProgress()
     }
 
     fun getShuttleBusStopMark() {
@@ -135,6 +167,17 @@ class MainViewModel @Inject constructor(
             AppPreferences.updateShuttleBusStopMark(ShuttleBusStop("", 0.0, 0.0, "", false))
         }
         getShuttleBusStopMark()
+    }
+
+    fun getKakaoUserInfo() {
+        UserApiClient.instance.me { user, error ->
+            if (error != null) {
+                Log.e("사용자 정보 요청 실패", error.toString())
+            }
+            else if (user != null) {
+                _kakaoUser.postValue(user)
+            }
+        }
     }
 
     private fun postValueEvent(value: Int, type: String) {

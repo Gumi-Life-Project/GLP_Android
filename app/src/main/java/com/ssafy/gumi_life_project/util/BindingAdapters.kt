@@ -3,6 +3,7 @@ package com.ssafy.gumi_life_project.util
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -26,6 +27,16 @@ fun setImageResource(imageView: ImageView, isRunning: Boolean) {
     imageView.setImageResource(if (!isRunning) R.drawable.baseline_play_circle_24 else R.drawable.round_pause_circle_24)
 }
 
+@BindingAdapter("app:likesNum")
+fun setHitCount(textView: TextView, likesNum: Int) {
+    textView.text = likesNum.toString()
+}
+
+@BindingAdapter("app:state")
+fun setHeartImageResource(imageView: ImageView, state: Int) {
+    imageView.setImageResource(if (state == 0) R.drawable.icon__heart_ else R.drawable.icon_heart)
+}
+
 @BindingAdapter("imageUrl")
 fun loadImageWithLayoutWeight(imageView: ImageView, imageUrl: String?) {
     if (imageUrl == null) {
@@ -35,5 +46,14 @@ fun loadImageWithLayoutWeight(imageView: ImageView, imageUrl: String?) {
         Glide.with(imageView.context)
             .load(imageUrl)
             .into(imageView)
+    }
+}
+
+@BindingAdapter("commentState")
+fun setMenuType(view: LinearLayout, commentState: Int) {
+    if (commentState == 0) {
+        view.visibility = View.GONE
+    } else {
+        view.visibility = View.VISIBLE
     }
 }

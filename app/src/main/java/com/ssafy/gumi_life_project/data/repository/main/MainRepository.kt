@@ -12,4 +12,6 @@ interface MainRepository {
     suspend fun getNowWeather(): NetworkResponse<WeatherResponse, ErrorResponse>
 
     suspend fun getMealList() : NetworkResponse<MealResponse, ErrorResponse>
+
+    suspend fun findId() : NetworkResponse<Int, ErrorResponse>
 }

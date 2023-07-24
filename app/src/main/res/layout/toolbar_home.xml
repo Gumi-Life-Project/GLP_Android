@@ -23,6 +23,7 @@
             app:layout_constraintVertical_bias="0.17000002" />
 
         <TextView
+            android:id="@+id/toolbar_title"
             style="@style/HomeToolBarTitleTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +35,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.8" />
 
+        <ImageView
+            android:id="@+id/imageview_user_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_user"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.97" />
+
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
@@ -41,5 +56,4 @@
             android:background="@drawable/tool_bar_shadow"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.appcompat.widget.Toolbar>

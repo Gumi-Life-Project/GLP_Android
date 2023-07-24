@@ -32,16 +32,16 @@ class ShuttleBusFragment : BaseFragment<FragmentShuttleBusBinding>(
 
     override fun init() {
         bindingNonNull.viewModel = viewModel
-        initToolBar()
+        initToolbar()
         initData()
         initRecyclerView()
         initObserver()
     }
 
-    private fun initToolBar() {
-        bindingNonNull.toolBar.toolBarBackButtonTitile.text =
+    private fun initToolbar() {
+        bindingNonNull.toolbar.toolbarBackButtonTitle.text =
             resources.getString(R.string.shuttle_bus_tool_bar_title)
-        bindingNonNull.toolBar.toolBarBackButton.setOnClickListener {
+        bindingNonNull.toolbar.buttonGoBack.setOnClickListener {
             findNavController().navigate(R.id.action_shuttleBusFragment_to_homeFragment)
         }
     }
