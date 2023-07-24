@@ -1,15 +1,13 @@
 package com.ssafy.gumi_life_project.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ssafy.gumi_life_project.data.local.AppPreferences
-import com.ssafy.gumi_life_project.data.model.Event
-import com.ssafy.gumi_life_project.data.model.MealResponse
-import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
-import com.ssafy.gumi_life_project.data.model.Tip
-import com.ssafy.gumi_life_project.data.model.WeatherResponse
+import com.ssafy.gumi_life_project.data.model.*
 import com.ssafy.gumi_life_project.data.repository.main.MainRepository
+import com.ssafy.gumi_life_project.data.repository.user.UserRepository
 import com.ssafy.gumi_life_project.util.network.NetworkResponse
 import com.ssafy.gumi_life_project.util.template.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,9 +15,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+private const val TAG = "MainViewModel_구미"
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val repository: MainRepository
+    private val repository: MainRepository,
+    private val userRepository: UserRepository
 ) : BaseViewModel() {
 
     private val _msg = MutableLiveData<Event<String>>()

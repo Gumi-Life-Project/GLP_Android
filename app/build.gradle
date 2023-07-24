@@ -9,6 +9,7 @@ plugins {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 def map_api_key = properties.getProperty('map_api_key')
+def api_key = properties.getProperty('api_key')
 
 android {
     namespace 'com.ssafy.gumi_life_project'
@@ -22,7 +23,10 @@ android {
         versionName "1.0.4.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [MAP_API_KEY: map_api_key]
+        manifestPlaceholders = [MAP_API_KEY: map_api_key, API_KEY: api_key]
+
+        // api key 변수 지정
+        buildConfigField "String", "API_KEY", properties['api_key']
     }
 
     buildTypes {
@@ -97,4 +101,7 @@ dependencies {
 
     //kakao map
     implementation files('libs/libDaumMapAndroid.jar')
+
+    // kakao login
+    implementation "com.kakao.sdk:v2-user:2.15.0"
 }
