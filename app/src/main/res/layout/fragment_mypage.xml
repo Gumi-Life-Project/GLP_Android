@@ -76,7 +76,8 @@
                 android:paddingBottom="8dp"
                 android:background="@drawable/border_main_background"
                 android:gravity="start|center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -182,7 +183,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_info_account_img_modify"
                     android:layout_marginStart="16dp"
-                    style="@style/HomeMiddleContentGrayTextStyle"/>
+                    style="@style/HomeMiddleContentGrayTextStyle"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/textview_account_logout"
@@ -198,7 +200,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_info_account_delete"
                     android:layout_marginStart="16dp"
-                    style="@style/HomeMiddleContentGrayTextStyle"/>
+                    style="@style/HomeMiddleContentGrayTextStyle"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/textview_account_alarm"
@@ -206,7 +209,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/user_info_account_alarm"
                     android:layout_marginStart="16dp"
-                    style="@style/HomeMiddleContentGrayTextStyle"/>
+                    style="@style/HomeMiddleContentGrayTextStyle"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
@@ -219,7 +223,8 @@
             android:paddingBottom="8dp"
             android:background="@drawable/border_main_background"
             android:gravity="start|center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
