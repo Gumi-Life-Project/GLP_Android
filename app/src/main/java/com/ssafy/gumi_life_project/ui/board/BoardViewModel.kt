@@ -260,7 +260,6 @@ class BoardViewModel @Inject constructor(
         viewModelScope.launch {
             val requestBody =
                 gson.toJson(boardWriteItem).toRequestBody("application/json".toMediaTypeOrNull())
-
             var response: NetworkResponse<BoardWriteResponse, ErrorResponse>? = null
             response = repository.writeBoard(requestBody, null)
 

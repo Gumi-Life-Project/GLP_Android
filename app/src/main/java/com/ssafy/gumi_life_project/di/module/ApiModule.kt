@@ -1,5 +1,6 @@
 package com.ssafy.gumi_life_project.di.module
 
+import com.ssafy.gumi_life_project.data.local.AppPreferences
 import com.ssafy.gumi_life_project.data.remote.ApiService
 import com.ssafy.gumi_life_project.util.network.NetworkResponseAdapterFactory
 import dagger.Module
@@ -30,14 +31,14 @@ object ApiModule {
                     || request.url.encodedPath.equals("/weather/", true)
                     || request.url.encodedPath.equals("/board/list/new", true)
                     || request.url.encodedPath.equals("/tip/list", true)
+                    || request.url.encodedPath.equals("/api/auth/kakaomobile", true)
                 ) {
                     it.proceed(request)
                 } else {
                     it.proceed(request.newBuilder().apply {
                         addHeader(
                             "Authorization",
-                        "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5IiwiZXhwIjoxNjg5MzUyOTgwfQ.OuFqF9zDKdzcFRrfAdJ3wuWDZb42GJ72jXbC2gLPPL7wE8GP7pfKdo12iWggXo0Emv3_PtyanR1c44cMrWyO7g")
-
+                            AppPreferences.getJwtToken()!!)
                     }.build())
                 }
             }.build()

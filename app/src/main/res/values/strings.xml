@@ -5,6 +5,16 @@
     <string name="splash_slogan">싸피 생활을 더 편하고 즐겁게</string>
     <string name="splash_title">구미 인사이더</string>
 
+    <!-- setting nickname -->
+    <string name="setting_nickname_title">닉네임 설정</string>
+
+    <!-- login -->
+    <string name="login_button">카카오 로그인</string>
+    <string name="login_checked_login_maintain">로그인 유지</string>
+
+    <!-- setting nickname -->
+    <string name="setting_nickname_button">설정하기</string>
+
     <!-- home -->
     <string name="home_subtitle">10기를 위한 싸피 가이드</string>
     <string name="home_title">구미 캠퍼스</string>
@@ -17,6 +27,29 @@
     <string name="home_shuttle_no_mark">즐겨찾기 된 셔틀이 없습니다.</string>
     <string name="home_tool_bar_sub_title">10기를 위한 싸피 가이드</string>
     <string name="home_tool_bar_title">구미 캠퍼스</string>
+
+    <!-- user info -->
+    <string name="user_info_tool_bar_title">내 정보</string>
+    <string name="user_info_board">게시판</string>
+    <string name="user_info_board_write">내가 쓴 글</string>
+    <string name="user_info_board_comment">댓글 단 글</string>
+    <string name="user_info_board_like">좋아요한 글</string>
+
+    <string name="user_info_account">계정</string>
+    <string name="user_info_account_nickname_modify">닉네임 변경</string>
+    <string name="user_info_account_img_modify">프로필 이미지 변경</string>
+    <string name="user_info_account_logout">로그아웃</string>
+    <string name="user_info_account_delete">회원 탈퇴</string>
+    <string name="user_info_account_alarm">알림 설정</string>
+
+    <string name="user_info_information">정보</string>
+    <string name="user_info_information_service">서비스 이용약관</string>
+    <string name="user_info_information_policy">개인정보처리방침</string>
+    <string name="user_info_information_using_library">사용한 라이브러리</string>
+
+    <string name="user_info_logout_message">로그아웃 하시겠습니까?</string>
+    <string name="user_info_logout_cancel">취소</string>
+    <string name="user_info_logout_confirm">확인</string>
 
     <!-- cross work -->
     <string name="cross_walk_title1">1번 신호등</string>

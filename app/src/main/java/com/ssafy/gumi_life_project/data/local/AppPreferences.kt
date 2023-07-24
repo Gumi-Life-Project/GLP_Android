@@ -2,11 +2,11 @@ package com.ssafy.gumi_life_project.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.ssafy.gumi_life_project.data.model.ShuttleBusLine
 import com.ssafy.gumi_life_project.data.model.ShuttleBusStop
-import java.util.*
 
 object AppPreferences {
     private const val LOGIN_SESSION = "login.session"
@@ -16,6 +16,10 @@ object AppPreferences {
     private const val SHUTTLE_BUS_INFO = "shuttle_bus_info"
     private const val SHUTTLE_BUS_STOP_MARKED = "shuttle_bus_stop_marked"
     private const val USER_ID = "user_id"
+
+    private const val JWT_TOKEN = "jwt_token"
+
+    private const val PROFILE_IMG = "profile_img"
 
     private lateinit var preferences: SharedPreferences
     private val gson = GsonBuilder().create()
@@ -284,6 +288,29 @@ object AppPreferences {
         val shuttleBusStopType = object : TypeToken<ShuttleBusStop>() {}.type
 
         return gson.fromJson(jsonData, shuttleBusStopType)
+    }
+
+    fun initJwtToken(jwtToken: String) {
+        preferences.edit().putString(JWT_TOKEN, jwtToken).commit()
+    }
+
+    // sharedPreferences에 저장된 jwt 토큰 정보 반환
+    fun getJwtToken(): String? {
+        val jwtToken = preferences.getString(JWT_TOKEN, "")
+        return jwtToken
+    }
+
+    fun removeJwtToken() {
+        preferences.edit().remove(JWT_TOKEN).apply()
+    }
+
+    fun initProfileImg(profileImg : String) {
+        preferences.edit().putString(PROFILE_IMG, profileImg).apply()
+    }
+
+    fun getProfileImg(): String? {
+        val jsonData = preferences.getString(PROFILE_IMG, "")
+        return jsonData
     }
 
     fun getUserId(): Int {

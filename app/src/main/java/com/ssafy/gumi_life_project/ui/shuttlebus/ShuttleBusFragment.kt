@@ -41,7 +41,7 @@ class ShuttleBusFragment : BaseFragment<FragmentShuttleBusBinding>(
     private fun initToolbar() {
         bindingNonNull.toolbar.toolbarBackButtonTitle.text =
             resources.getString(R.string.shuttle_bus_tool_bar_title)
-        bindingNonNull.toolbar.toolbarBackButton.setOnClickListener {
+        bindingNonNull.toolbar.buttonGoBack.setOnClickListener {
             findNavController().navigate(R.id.action_shuttleBusFragment_to_homeFragment)
         }
     }
