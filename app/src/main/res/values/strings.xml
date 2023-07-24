@@ -27,6 +27,9 @@
     <string name="home_shuttle_no_mark">즐겨찾기 된 셔틀이 없습니다.</string>
     <string name="home_tool_bar_sub_title">10기를 위한 싸피 가이드</string>
     <string name="home_tool_bar_title">구미 캠퍼스</string>
+    <string name="home">home</string>
+    <string name="map">map</string>
+    <string name="board">board</string>
 
     <!-- user info -->
     <string name="user_info_tool_bar_title">내 정보</string>
@@ -97,4 +100,18 @@
 
     <string name="comment_delete_notice_success">댓글이 삭제되었습니다.</string>
     <string name="reply_delete_notice_success">대댓글이 삭제되었습니다.</string>
+    
+    <!-- Report -->
+    <string name="report_type_select">신고 사유 선택</string>
+    <string name="report_type_hate">욕설/비하</string>
+    <string name="report_type_cheat">낚시/놀람/도배</string>
+    <string name="report_type_political">정당/정치인 비하 및 선거운동</string>
+    <string name="report_type_impersonation">유출/사칭/사기</string>
+    <string name="report_type_pornography">음란물/불건전한 만남 및 대화</string>
+    <string name="report_type_commercial">상업적 광고 및 판매</string>
+    <string name="report_type_inappropriateness">게시판 성격에 부적절함</string>
+    <string name="report_check">정말 신고하시겠습니까?</string>
+    <string name="report_success">신고에 성공했습니다.</string>
+
+    <string name="ok">확인</string>
 </resources>

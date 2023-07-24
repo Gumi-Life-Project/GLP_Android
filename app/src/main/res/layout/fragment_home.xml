@@ -25,308 +25,299 @@
 
     </data>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollview_home"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <include
+            android:id="@+id/include"
+            layout="@layout/toolbar_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipelayout_home"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include">
 
-            <include
-                android:id="@+id/tool_bar"
-                layout="@layout/toolbar_home" />
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollview_home"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include">
+
 
             <LinearLayout
-                android:id="@+id/linearlayout_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:background="@drawable/border_main_background"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp">
-
-                    <TextView
-                        android:id="@+id/textview_today_weather_title"
-                        style="@style/HomeMiddleTitleTextStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/home_weather_today" />
-
-                    <ImageView
-                        android:id="@+id/imageview_today_weather_img"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="4dp" />
-
-                    <TextView
-                        android:id="@+id/textview_today_weather_temperature"
-                        style="@style/HomeWeatherTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
+                    android:id="@+id/linearlayout_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical">
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-                    <TextView
-                        style="@style/LayoutTitleTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="7dp"
-                        android:text="@string/home_meal" />
-
-                    <TextView
-                        android:id="@+id/textview_page"
-                        style="@style/LayoutTitleTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_shuttle_bus"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/border_main_background"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="2dp">
-
-                    <TextView
-                        android:id="@+id/textview_shuttle_time_title"
-                        style="@style/HomeMiddleTitleTextStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/home_shuttle_time" />
-
-                    <TextView
-                        android:id="@+id/textview_shuttle_no_mark"
-                        style="@style/HomeMiddleContentTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home_shuttle_no_mark"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/textview_shuttle_bus_stop_name"
-                        style="@style/HomeMiddleContentTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
-                        android:ellipsize="end"
-                        android:maxEms="6"
-                        android:maxLines="1" />
-
-                    <TextView
-                        android:id="@+id/textview_shuttle_bus_stop_time"
-                        style="@style/HomeMiddleContentTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="2dp" />
-
-                    <ImageView
-                        android:id="@+id/imagebutton_home_to_shuttle"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/icon_right" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_tip"
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/border_main_background"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp">
-
-                    <TextView
-                        android:id="@+id/textview_tip_title"
-                        style="@style/HomeMiddleTitleTextStyle"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:text="@string/home_tip" />
+                        android:layout_height="64dp"
+                        android:background="@drawable/border_main_background"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp">
 
-                    <TextView
-                        android:id="@+id/textview_tip_content"
-                        style="@style/HomeMiddleContentTextStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:gravity="right"
-                        android:maxLines="1"
-                        tools:text="마이구미는 맛있다." />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/textview_today_weather_title"
+                            style="@style/HomeMiddleTitleTextStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/home_weather_today" />
 
-                <LinearLayout
-                    android:id="@+id/linearlayout_map"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/imageview_today_weather_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="4dp" />
+
+                        <TextView
+                            android:id="@+id/textview_today_weather_temperature"
+                            style="@style/HomeWeatherTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <TextView
                             style="@style/LayoutTitleTextStyle"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="7dp"
-                            android:layout_weight="1"
-                            android:text="@string/home_cross_walk" />
-
-                        <ImageView
-                            android:id="@+id/image_start"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:onClick="@{() -> viewModel.startOrStopPeriodicTask()}"
-                            android:padding="5dp"
-                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
-                            app:isRunning="@{viewModel.isRunning}" />
-
-                        <ImageView
-                            android:id="@+id/image_refresh"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:onClick="@{() -> viewModel.onRefreshButtonClicked()}"
-                            android:padding="5dp"
-                            android:src="@drawable/baseline_refresh_24" />
-                    </LinearLayout>
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraint_map"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:alpha="@{viewModel.isInServiceTime() ? 1F : 0.5F}"
-                        android:background="@drawable/image_crosswalk">
+                            android:text="@string/home_meal" />
 
                         <TextView
-                            android:id="@+id/textview_service_unavailable"
+                            android:id="@+id/textview_page"
+                            style="@style/LayoutTitleTextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_shuttle_bus"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/border_main_background"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="2dp">
+
+                        <TextView
+                            android:id="@+id/textview_shuttle_time_title"
+                            style="@style/HomeMiddleTitleTextStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/home_shuttle_time" />
+
+                        <TextView
+                            android:id="@+id/textview_shuttle_no_mark"
+                            style="@style/HomeMiddleContentTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:alpha="1"
-                            android:gravity="center"
-                            android:text="@string/service_unavailable"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:visibility="@{viewModel.isInServiceTime() ? View.GONE : View.VISIBLE}"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:text="@string/home_shuttle_no_mark"
+                            android:visibility="gone" />
 
-                        <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
-                            android:id="@+id/cross_walk_1"
+                        <TextView
+                            android:id="@+id/textview_shuttle_bus_stop_name"
+                            style="@style/HomeMiddleContentTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_1)}"
-                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.058"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.551"
-                            app:timeColor="@{viewModel.timeText1.getCurrentColorRes()}"
-                            app:timeText="@{viewModel.timeText1.remainingTimeString}" />
+                            android:layout_marginEnd="6dp"
+                            android:ellipsize="end"
+                            android:maxEms="6"
+                            android:maxLines="1" />
 
-                        <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
-                            android:id="@+id/cross_walk_3"
+                        <TextView
+                            android:id="@+id/textview_shuttle_bus_stop_time"
+                            style="@style/HomeMiddleContentTextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_3)}"
-                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.908"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.502"
-                            app:timeColor="@{viewModel.timeText3.getCurrentColorRes()}"
-                            app:timeText="@{viewModel.timeText3.remainingTimeString}" />
+                            android:layout_marginEnd="2dp" />
 
-                        <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
-                            android:id="@+id/cross_walk_2"
-                            android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/imagebutton_home_to_shuttle"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/icon_right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/border_main_background"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp">
+
+                        <TextView
+                            android:id="@+id/textview_tip_title"
+                            style="@style/HomeMiddleTitleTextStyle"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_2)}"
-                            android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.466"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.028"
-                            app:timeColor="@{viewModel.timeText2.getCurrentColorRes()}"
-                            app:timeText="@{viewModel.timeText2.remainingTimeString}" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </LinearLayout>
+                            android:layout_weight="4"
+                            android:text="@string/home_tip" />
 
-                <LinearLayout
-                    android:id="@+id/linearlayout_simple_board"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/border_cross_work_table"
-                    android:orientation="vertical"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="15dp">
+                        <TextView
+                            android:id="@+id/textview_tip_content"
+                            style="@style/HomeMiddleContentTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="right"
+                            android:maxLines="1"
+                            tools:text="마이구미는 맛있다." />
+                    </LinearLayout>
 
-                    <TextView
-                        style="@style/LayoutTitleTextStyle"
+                    <LinearLayout
+                        android:id="@+id/linearlayout_map"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="@string/board_title" />
+                        android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerview_simple"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:nestedScrollingEnabled="false"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/item_title_board" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/LayoutTitleTextStyle"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="7dp"
+                                android:layout_weight="1"
+                                android:text="@string/home_cross_walk" />
+
+                            <ImageView
+                                android:id="@+id/image_start"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:onClick="@{() -> viewModel.startOrStopPeriodicTask()}"
+                                android:padding="5dp"
+                                android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
+                                app:isRunning="@{viewModel.isRunning}" />
+
+                            <ImageView
+                                android:id="@+id/image_refresh"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:onClick="@{() -> viewModel.onRefreshButtonClicked()}"
+                                android:padding="5dp"
+                                android:src="@drawable/baseline_refresh_24" />
+                        </LinearLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraint_map"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:alpha="@{viewModel.isInServiceTime() ? 1F : 0.5F}"
+                            android:background="@drawable/image_crosswalk">
+
+                            <TextView
+                                android:id="@+id/textview_service_unavailable"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:alpha="1"
+                                android:gravity="center"
+                                android:text="@string/service_unavailable"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:visibility="@{viewModel.isInServiceTime() ? View.GONE : View.VISIBLE}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
+                                android:id="@+id/cross_walk_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_1)}"
+                                android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.058"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.551"
+                                app:timeColor="@{viewModel.timeText1.getCurrentColorRes()}"
+                                app:timeText="@{viewModel.timeText1.remainingTimeString}" />
+
+                            <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
+                                android:id="@+id/cross_walk_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_3)}"
+                                android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.908"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.502"
+                                app:timeColor="@{viewModel.timeText3.getCurrentColorRes()}"
+                                app:timeText="@{viewModel.timeText3.remainingTimeString}" />
+
+                            <com.ssafy.gumi_life_project.ui.home.crosswalk.CrossWalkTimeView
+                                android:id="@+id/cross_walk_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="@{() -> viewModel.onCrossWorkTimeViewClicked(signalLight.SIGNAL_LIGHT_2)}"
+                                android:visibility="@{viewModel.isInServiceTime() ? View.VISIBLE : View.GONE}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.466"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.028"
+                                app:timeColor="@{viewModel.timeText2.getCurrentColorRes()}"
+                                app:timeText="@{viewModel.timeText2.remainingTimeString}" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

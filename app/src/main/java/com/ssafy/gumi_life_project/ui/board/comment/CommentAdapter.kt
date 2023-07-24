@@ -22,6 +22,7 @@ class CommentAdapter :
     var onCommentClick: ((Comment) -> Unit)? = null
     var onCommentDelete: ((Comment) -> Unit)? = null
     var onReplyDelete: ((Reply) -> Unit)? = null
+    var onReportClick: ((Comment) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
         val binding = ItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -104,6 +105,7 @@ class CommentAdapter :
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.button_comment_notice -> {
+                    onReportClick?.invoke(comment)
                     true
                 }
                 R.id.button_comment_delete -> {

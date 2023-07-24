@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.ssafy.gumi_life_project.databinding.DialogNoticeBinding
 
-fun showDialog(context: Context, title: String, onOkClick: () -> Unit) {
+fun showDialog(context: Context, title: String, okString: String, onOkClick: () -> Unit) {
     val dialogBinding: DialogNoticeBinding = DialogNoticeBinding.inflate(
         LayoutInflater.from(context)
     )
@@ -16,6 +16,7 @@ fun showDialog(context: Context, title: String, onOkClick: () -> Unit) {
     customDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
     dialogBinding.textviewTitle.text = title
+    dialogBinding.textviewOk.text = okString
 
     dialogBinding.textviewCancel.setOnClickListener {
         customDialog.dismiss()

@@ -1,8 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.GumiLifeProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.GumiLifeProject" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/main_color</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -148,7 +149,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
->>>>>>> develop
+
     <!-- Board -->
     <style name="BoardWriteTitleHintTextStyle">
         <item name="android:textSize">16sp</item>
@@ -166,4 +167,10 @@
         <item name="android:fontFamily">@font/noto_sans_kr_bold</item>
     </style>
 
+    <!-- Report -->
+    <style name="BottomSheetReportTypeTextStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/noto_sans_kr_regular</item>
+    </style>
 </resources>
