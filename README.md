@@ -6,7 +6,7 @@
 > 10기들을 위한 싸피 가이드 모바일 애플리케이션
 > 
 
-<img width="827" alt="image" src="https://github.com/Gumi-Life-Project/GLP_Android/assets/52189097/409faef9-1a84-46dd-a92d-890f46928913">
+![Section 2](https://github.com/Gumi-Life-Project/GLP_Android/assets/123930169/6eb052de-69a6-4fcf-88b7-7eedb51c4c13)
 
 ## 버전 정보
 1.0.1
@@ -32,12 +32,18 @@
 - 날씨 정보 기능 버그 수정
 - 홈 화면에 식단표 정보 제공
 
+2.0.0
+- 구미인사이더 ver2 출시
+- 카카오 계정으로 로그인 추가
+- 게시글, 댓글, 대댓글에 관련된 기능 추가
+- 다양한 버그 수정
+
 ## 안드로이드 담당 팀원
 | 팀원 | 역할 |
 |-----|-----
-|[오희주](https://github.com/noion0511)| 신호등 관련 기능
-|[김도연](https://github.com/DodoKim0425)| 셔틀버스 관련 기능
-|[김진영](https://github.com/jinyoungMango)| 스플래쉬, 날씨, 팁 관련 기능
+|[오희주](https://github.com/noion0511)| 신호등 관련 기능, 식단표 정보 기능, 게시글 관련 기능
+|[김도연](https://github.com/DodoKim0425)| 셔틀버스 관련 기능, 게시글 관련 기능, 신고 기능
+|[김진영](https://github.com/jinyoungMango)| 스플래시, 날씨, 팁 관련 기능, 로그인 기능, 유저 관련 기능
 
 ## 기술 스택
 | Category | Stack |
