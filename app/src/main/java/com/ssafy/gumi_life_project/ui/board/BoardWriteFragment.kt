@@ -1,6 +1,7 @@
 package com.ssafy.gumi_life_project.ui.board
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -8,6 +9,7 @@ import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.model.BoardWriteItem
 import com.ssafy.gumi_life_project.data.model.BoardWriteResponseType
 import com.ssafy.gumi_life_project.databinding.FragmentBoardWriteBinding
+import com.ssafy.gumi_life_project.util.DebouncingClickListener
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,15 +43,19 @@ class BoardWriteFragment : BaseFragment<FragmentBoardWriteBinding>(
     }
 
     private fun initListener() {
-        bindingNonNull.buttonWrite.setOnClickListener {
-            val title = bindingNonNull.edittextTitle.text.toString()
-            val content = bindingNonNull.edittextContent.text.toString()
-            if (title != "" && content != "") {
-                viewModel.writeBoard(BoardWriteItem(title, content))
-            } else {
-                showToast(getString(R.string.board_write_toast_message))
+        bindingNonNull.buttonWrite.setOnClickListener(
+            object : DebouncingClickListener() {
+                override fun onDebouncedClick(v: View) {
+                    val title = bindingNonNull.edittextTitle.text.toString()
+                    val content = bindingNonNull.edittextContent.text.toString()
+                    if (title != "" && content != "") {
+                        viewModel.writeBoard(BoardWriteItem(title, content))
+                    } else {
+                        showToast(getString(R.string.board_write_toast_message))
+                    }
+                }
             }
-        }
+        )
     }
 
     private fun initObserver() {
