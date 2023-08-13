@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.gumi_life_project.R
 import com.ssafy.gumi_life_project.data.local.AppPreferences
-import com.ssafy.gumi_life_project.data.model.*
+import com.ssafy.gumi_life_project.data.model.BoardItem
+import com.ssafy.gumi_life_project.data.model.Comment
+import com.ssafy.gumi_life_project.data.model.CommentDto
+import com.ssafy.gumi_life_project.data.model.ReplyDto
 import com.ssafy.gumi_life_project.databinding.FragmentBoardDetailBinding
 import com.ssafy.gumi_life_project.ui.board.comment.CommentAdapter
-import com.ssafy.gumi_life_project.ui.main.LoadingDialog
+import com.ssafy.gumi_life_project.util.DebouncingClickListener
 import com.ssafy.gumi_life_project.util.showDialog
 import com.ssafy.gumi_life_project.util.template.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,18 +71,22 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
 
         commentAdapter.onReportClick = {
             viewModel.setReport(it)
-            val bottomSheetReport =ReportBottomSheet()
+            val bottomSheetReport = ReportBottomSheet()
             bottomSheetReport.show(childFragmentManager, "ReportBottomSheet")
         }
 
-        bindingNonNull.imageviewHeart.setOnClickListener {
-            if (boardItem.boardNo.isBlank()) return@setOnClickListener
-            if (likeStatus) {
-                viewModel.deleteLike(boardItem.boardNo)
-            } else {
-                viewModel.updateLike(boardItem.boardNo)
+        bindingNonNull.imageviewHeart.setOnClickListener(object : DebouncingClickListener() {
+            override fun onDebouncedClick(v: View) {
+                if (boardItem.boardNo.isBlank()) return
+                if (likeStatus) {
+                    viewModel.deleteLike(boardItem.boardNo)
+                } else {
+                    viewModel.updateLike(boardItem.boardNo)
+                }
             }
-        }
+        })
+
+        initCreateCommentButton()
     }
 
 
@@ -130,7 +137,11 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                         true
                     }
                     R.id.button_board_delete -> {
-                        showDialog(requireContext(), getString(R.string.board_delete_notice), getString(R.string.board_delete_ok)) {
+                        showDialog(
+                            requireContext(),
+                            getString(R.string.board_delete_notice),
+                            getString(R.string.board_delete_ok)
+                        ) {
                             viewModel.deleteBoard(boardItem.boardNo, boardItem.writerId.toString())
                         }
                         true
@@ -146,18 +157,23 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
         }
     }
 
-    fun writeComment(boardNo: String) {
-        val comment = bindingNonNull.edittextComment.text.toString()
-        if (comment == "") {
-            showToast(getString(R.string.board_write_textview_content_hint))
-            return
-        }
-        if (selectedCommentId != null) {
-            viewModel.writeReply(ReplyDto(boardNo, selectedCommentId!!, comment))
-            deselectComment()
-        } else {
-            viewModel.writeComment(CommentDto(boardNo, comment))
-        }
+    private fun initCreateCommentButton() {
+        bindingNonNull.imgPostComment.setOnClickListener(object : DebouncingClickListener() {
+            override fun onDebouncedClick(v: View) {
+                if(boardItem.boardNo.isBlank()) return
+                val comment = bindingNonNull.edittextComment.text.toString()
+                if (comment == "") {
+                    showToast(getString(R.string.board_write_textview_content_hint))
+                    return
+                }
+                if (selectedCommentId != null) {
+                    viewModel.writeReply(ReplyDto(boardItem.boardNo, selectedCommentId!!, comment))
+                    deselectComment()
+                } else {
+                    viewModel.writeComment(CommentDto(boardItem.boardNo, comment))
+                }
+            }
+        })
     }
 
     private fun initObserver() {
@@ -167,7 +183,10 @@ class BoardDetailFragment : BaseFragment<FragmentBoardDetailBinding>(
                     showToast(it)
                     if (it == getString(R.string.board_delete_notice_success)) {
                         findNavController().navigate(R.id.action_boardDetailFragment_to_boardListFragment)
-                    } else if(it == getString(R.string.comment_delete_notice_success) || it == getString(R.string.reply_delete_notice_success)) {
+                    } else if (it == getString(R.string.comment_delete_notice_success) || it == getString(
+                            R.string.reply_delete_notice_success
+                        )
+                    ) {
                         viewModel.boardDetail.value?.boardDetail?.let { viewModel.getBoardDetail(it.boardNo) }
                     }
                 }
